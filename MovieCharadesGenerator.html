@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List</title>
+  <meta name="description"
+    content="Find the best movies for charades with our fun guess-the-movie game list! Includes classic films, blockbusters, and funny movie ideas perfect for party games and family game night.">
+  <meta name="keywords"
+    content="Movies for Charades, movie charades ideas, guess the movie game, classic movie charades, funny movie charades, blockbuster charades, family movie charades, charades movie list, best movie ideas for charades, how to play movie charades">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="charades-vocabulary-database.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gray-50">
+  <!-- Navigation Bar -->
+  <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center">
+        <div class="flex items-center space-x-3">
+          <div
+            class="bg-gradient-to-r from-blue-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-lg">C</span>
+          </div>
+          <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+            class="text-2xl font-bold text-gray-800">Charades Generator</a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex space-x-8 ml-auto">
+          <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+          <a href="AdultCharadesGenerator.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Ideas for Adults</a>
+          <a href="KidsCharadesGenerator.html" title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Generator for Kids</a>
+          <a href="MovieCharadesGenerator.html"
+            title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
+            class="text-blue-600 font-semibold">Movies for
+            Charades</a>
+          <a href="AnimalCharadesGenerator.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Animal
+            Charades Game</a>
+          <a href="ChristmasCharadesGenerator.html"
+            title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Christmas
+            Charades</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden ml-auto p-2">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-gray-200">
+        <div class="flex flex-col space-y-3 pt-4">
+          <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+          <a href="AdultCharadesGenerator.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Ideas for Adults</a>
+          <a href="KidsCharadesGenerator.html" title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Generator for Kids</a>
+          <a href="MovieCharadesGenerator.html"
+            title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
+            class="text-blue-600 font-semibold">Movies for
+            Charades</a>
+          <a href="AnimalCharadesGenerator.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Animal
+            Charades Game</a>
+          <a href="ChristmasCharadesGenerator.html"
+            title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Christmas
+            Charades</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  </nav>
+
+  <!-- Page Title -->
+  <div class="bg-gradient-to-r from-red-500 to-purple-600 text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">Movies for Charades</h1>
+      <p class="text-xl md:text-2xl mb-8">Discover fun and creative movie charades ideas for all ages. <br>From classic
+        films to modern blockbusters, find the perfect movie titles to act out and guess at your next party, family game
+        night, or team event.
+      </p>
+    </div>
+  </div>
+
+  <!-- Quick Start Game Section -->
+  <section id="quick-start-game" class="container mx-auto px-4 py-16">
+    <!-- Genre Selection -->
+    <div class="text-center mb-8">
+      <h3 class="text-2xl font-bold text-gray-800 mb-6">🎬 Select Movie Genre</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <button onclick="selectGenre('action')" id="action-btn"
+          class="h-20 bg-red-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-red-600">
+          💥 Action
+        </button>
+        <button onclick="selectGenre('animation')" id="animation-btn"
+          class="h-20 bg-purple-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-purple-600">
+          🎬 Animation
+        </button>
+        <button onclick="selectGenre('comedy')" id="comedy-btn"
+          class="h-20 bg-yellow-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-yellow-600">
+          😂 Comedy
+        </button>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto text-center">
+      <h3 class="text-2xl font-bold text-gray-800 mb-4">🎭 Your Movie Charade</h3>
+
+      <!-- Genre Notice -->
+      <div id="genre-notice" class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <p class="text-blue-800 font-medium">🎯 Optional: Select a genre above, or click "Start Game" to begin with all
+          genres mixed!</p>
+      </div>
+
+      <!-- Charade Display Area -->
+      <div id="charade-display" class="mb-6">
+        <div id="charade-content"
+          class="text-3xl md:text-4xl font-bold text-blue-600 mb-6 p-6 bg-blue-50 rounded-lg min-h-[120px] flex items-center justify-center">
+          Click "Start Game" to begin!
+        </div>
+
+        <!-- Movie Image Display -->
+        <div id="movie-image-container" class="mb-4 hidden">
+          <div class="relative max-w-md mx-auto">
+            <img id="movie-image" src="" alt="Movie poster" class="w-full h-64 object-cover rounded-lg shadow-lg"
+              style="display: none;">
+            <div id="image-loading" class="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+              <div class="text-gray-500">🎬 Generating movie image...</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="movie-info" class="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg hidden">
+          <p><strong>Year:</strong> <span id="movie-year">-</span></p>
+          <p><strong>Genre:</strong> <span id="movie-genre">-</span></p>
+        </div>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div id="countdown-timer" class="mb-6 hidden">
+        <div class="text-2xl font-bold text-red-600 mb-2">⏱️ Time Remaining:</div>
+        <div id="timer-display"
+          class="text-4xl font-bold text-red-600 bg-red-50 p-4 rounded-lg border-2 border-red-200">
+          <span id="minutes">0</span>:<span id="seconds">00</span>
+        </div>
+      </div>
+
+      <!-- Game Controls -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <button onclick="startGame()" id="start-game-btn"
+          class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
+          🚀 Start Game
+        </button>
+        <button onclick="nextCharade()" id="next-charade-btn"
+          class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors hidden">
+          ➡️ Next Movie
+        </button>
+        <button onclick="showHint()" id="hint-btn"
+          class="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors hidden">
+          💡 Hint
+        </button>
+        <button onclick="pauseGame()" id="pause-game-btn"
+          class="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition-colors hidden">
+          ⏸️ Pause
+        </button>
+        <button onclick="resetGame()" id="reset-game-btn"
+          class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors hidden">
+          🔄 Reset
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Movie Genres Section -->
+  <section class="container mx-auto px-4 py-16 bg-white">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">🎬 Movie Genres for Charades</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Browse our curated list of movie genres to find the perfect charades ideas. Whether you love action-packed
+        blockbusters, heartwarming animations, or laugh-out-loud comedies, we’ve got the best titles to act out at your
+        next game night.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl shadow-lg p-6 text-center">
+        <div class="text-5xl mb-4">💥</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Action Movies</h3>
+        <p class="text-gray-700 mb-4">
+          Explosive stunts, daring heroes, and adrenaline-filled adventures that keep everyone guessing.
+        </p>
+        <div class="text-sm text-gray-600">
+          <p><strong>Examples:</strong> Die Hard, Mission Impossible, The Matrix</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-lg p-6 text-center">
+        <div class="text-5xl mb-4">🎬</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Animation Movies</h3>
+        <p class="text-gray-700 mb-4">
+          Colorful, imaginative films from timeless Disney classics to modern CGI hits.
+        </p>
+        <div class="text-sm text-gray-600">
+          <p><strong>Examples:</strong> Toy Story, Frozen, Spirited Away</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg p-6 text-center">
+        <div class="text-5xl mb-4">😂</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Comedy Movies</h3>
+        <p class="text-gray-700 mb-4">
+          From clever one-liners to outrageous slapstick, these comedies bring endless laughs.
+        </p>
+        <div class="text-sm text-gray-600">
+          <p><strong>Examples:</strong> The Hangover, Bridesmaids, Anchorman</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Charades Section -->
+  <section class="container mx-auto px-4 py-16 bg-white">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">🎭 What is Charades?</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Discover the classic party game loved by adults and families — from movie charades to action charades —
+        and learn the simple rules that make it fun for everyone.
+
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <!-- What is Charades -->
+      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-8">
+        <div class="text-4xl mb-4 text-center">🎬</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">What is Charades?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Charades is a timeless guessing game where one player acts out a word or phrase without speaking,
+          while others try to guess it before time runs out. Our adult charades generator offers challenging variations
+          including movie charades, action charades, book charades, and themed adult charades for sophisticated players.
+        </p>
+        <p class="text-gray-700 leading-relaxed mt-4">
+          Players use only body language, facial expressions, and gestures to communicate.
+          It's a perfect activity for adult game nights, holiday gatherings, corporate events, and team building —
+          with endless ideas available through our free charades generator for adults with easy, medium, and hard
+          difficulty levels.
+
+        </p>
+      </div>
+
+      <!-- Game Rules -->
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl shadow-lg p-8">
+        <div class="text-4xl mb-4 text-center">📋</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Simple Charades Rules</h3>
+        <div class="space-y-4 text-gray-700">
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">1.</span>
+            <p><strong>No Talking:</strong> The actor cannot speak, make sounds, or mouth words — only gestures and
+              movements are allowed.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">2.</span>
+            <p><strong>Time Limit:</strong> Most rounds last 60–90 seconds. Shorter times add challenge, while longer
+              rounds are great for beginners or complex charades.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">3.</span>
+            <p><strong>Guessing:</strong> Teammates can shout guesses at any time. The round ends when the correct
+              answer is given or time runs out.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">4.</span>
+            <p><strong>Scoring:</strong> Award points for correct answers, bonus points for quick guesses, and extra
+              credit for creative acting.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">5.</span>
+            <p><strong>Categories:</strong> Choose from popular sets like movies, books, actions, holiday
+              themes, or even hard charades for experts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-6">
+        <h3 class="text-2xl font-bold mb-4">Charades Game Ideas & Generator</h3>
+        <p class="text-gray-300 text-sm max-w-3xl mx-auto"> Play free charades games online with our Charades Generator.
+          Discover hundreds of fun game ideas for kids, adults, and families — including movie charades, Christmas party
+          games, animal acting ideas, and more. Perfect for parties, classroom activities, and family game nights.
+        </p>
+      </div>
+      <div class="flex flex-col items-center gap-4 text-sm">
+        <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+          class="text-gray-300 hover:text-white transition-colors">Home</a>
+        <a href="AdultCharadesGenerator.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
+          class="text-gray-300 hover:text-white transition-colors">Charades
+          Ideas for Adults</a>
+        <a href="KidsCharadesGenerator.html" title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
+          class="text-gray-300 hover:text-white transition-colors">Charades
+          Generator for Kids</a>
+        <a href="MovieCharadesGenerator.html" title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
+          class="text-blue-600 font-semibold">Movies for
+          Charades</a>
+        <a href="AnimalCharadesGenerator.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
+          class="text-gray-300 hover:text-white transition-colors">Animal
+          Charades Game</a>
+        <a href="ChristmasCharadesGenerator.html"
+          title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
+          class="text-gray-300 hover:text-white transition-colors">Christmas
+          Charades</a>
+      </div>
+      <div class="border-t border-gray-700 mt-6 pt-4 text-center">
+        <p class="text-gray-400 text-sm">&copy; 2024 Charades Generator – The best free charades ideas and game lists
+          for all ages. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Game state variables
+    let selectedGenre = null;
+    let gameActive = false;
+    let gameTimer = null;
+    let timeLeft = 120;
+    let currentCharade = '';
+    let charadeList = [];
+    let movieData = {};
+
+    // Genre selection
+    function selectGenre(genre) {
+      selectedGenre = genre;
+
+      // Reset all button highlights
+      document.querySelectorAll('#action-btn, #animation-btn, #comedy-btn').forEach(btn => {
+        btn.classList.remove('ring-4', 'ring-blue-300');
+      });
+
+      // Highlight selected button
+      const selectedBtn = document.getElementById(`${genre}-btn`);
+      if (selectedBtn) {
+        selectedBtn.classList.add('ring-4', 'ring-blue-300');
+      }
+
+      // Update notice text
+      document.getElementById('genre-notice').innerHTML = `<p class="text-blue-800 font-medium">Selected: <strong>${genre.charAt(0).toUpperCase() + genre.slice(1)}</strong> movies. Ready to start!</p>`;
+
+      // Load movies for selected genre
+      loadMoviesForGenre(genre);
+    }
+
+    // Load movies based on genre
+    function loadMoviesForGenre(genre) {
+      // Convert vocabulary database to movie format with years
+      const genreData = {};
+
+      // Map genres to vocabulary database
+      if (genre === 'action') {
+        genreData.action = CHARADES_VOCABULARY.movies.action.map(title => ({ title, year: 'Various' }));
+      } else if (genre === 'animation') {
+        genreData.animation = CHARADES_VOCABULARY.movies.animation.map(title => ({ title, year: 'Various' }));
+      } else if (genre === 'comedy') {
+        genreData.comedy = CHARADES_VOCABULARY.movies.comedy.map(title => ({ title, year: 'Various' }));
+      }
+
+      charadeList = genreData[genre] || [];
+      movieData = genreData;
+    }
+
+    // Load all genres mixed
+    function loadAllGenres() {
+      const allData = {
+        action: CHARADES_VOCABULARY.movies.action.map(title => ({ title, year: 'Various' })),
+        animation: CHARADES_VOCABULARY.movies.animation.map(title => ({ title, year: 'Various' })),
+        comedy: CHARADES_VOCABULARY.movies.comedy.map(title => ({ title, year: 'Various' }))
+      };
+
+      // Combine all genres into one array
+      charadeList = [];
+      Object.values(allData).forEach(genreItems => {
+        charadeList = charadeList.concat(genreItems);
+      });
+
+      selectedGenre = 'mixed';
+    }
+
+    // Start the game
+    function startGame() {
+      // Auto-load mixed genres if none selected
+      if (!selectedGenre || charadeList.length === 0) {
+        loadAllGenres();
+        document.getElementById('genre-notice').innerHTML = `<p class="text-green-800 font-medium">Started with <strong>Mixed Genres</strong> - Action, Animation & Comedy combined!</p>`;
+      }
+
+      if (gameTimer) {
+        clearInterval(gameTimer);
+        gameTimer = null;
+      }
+
+      gameActive = true;
+      timeLeft = 120;
+
+      // Show game controls
+      document.getElementById('start-game-btn').classList.add('hidden');
+      document.getElementById('next-charade-btn').classList.remove('hidden');
+      document.getElementById('hint-btn').classList.remove('hidden');
+      document.getElementById('pause-game-btn').classList.remove('hidden');
+      document.getElementById('reset-game-btn').classList.remove('hidden');
+      document.getElementById('countdown-timer').classList.remove('hidden');
+
+      // Generate first charade
+      generateRandomCharade();
+      startTimer();
+    }
+
+    // Generate random charade
+    function generateRandomCharade() {
+      if (charadeList.length > 0) {
+        const randomIndex = Math.floor(Math.random() * charadeList.length);
+        const movie = charadeList[randomIndex];
+        currentCharade = movie.title;
+        document.getElementById('charade-content').textContent = currentCharade;
+
+        // Update movie info
+        document.getElementById('movie-year').textContent = movie.year;
+        document.getElementById('movie-genre').textContent = selectedGenre.charAt(0).toUpperCase() + selectedGenre.slice(1);
+
+        // Generate and display movie image
+        generateMovieImage(movie.title, selectedGenre);
+      }
+    }
+
+    // Generate movie image with multiple fallback options for real movie posters
+    function generateMovieImage(movieTitle, genre) {
+      const imageContainer = document.getElementById('movie-image-container');
+      const movieImage = document.getElementById('movie-image');
+      const imageLoading = document.getElementById('image-loading');
+
+      // Show image container
+      imageContainer.classList.remove('hidden');
+      movieImage.style.display = 'none';
+      imageLoading.style.display = 'flex';
+
+      // Try multiple movie poster APIs with fallback chain
+      setTimeout(() => {
+        tryMoviePosterAPIs(movieTitle, genre);
+      }, 500);
+    }
+
+    // Pre-mapped movie posters database for reliable access
+    const moviePostersDB = {
+      // Action Movies
+      'Die Hard': 'https://m.media-amazon.com/images/M/MV5BZjRlNDUxZjAtOGQ4OC00OTNlLTgxNmQtYTBmMDgwZmNmNjkxXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
+      'Mission Impossible': 'https://m.media-amazon.com/images/M/MV5BMTc3NjI2MjU0Nl5BMl5BanBnXkFtZTgwNDk3ODYxMTE@._V1_.jpg',
+      'The Matrix': 'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg',
+      'Mad Max Fury Road': 'https://m.media-amazon.com/images/M/MV5BN2EwM2I5OWMtMGQyMi00Zjg1LWJkNTctZTdjYTA4OGUwZjMyXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
+      'John Wick': 'https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_.jpg',
+      'Fast and Furious': 'https://m.media-amazon.com/images/M/MV5BNzlkNzVjMDMtOTdhZC00MGE1LTkxODctMzFmMjkwZmMxZjFhXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg',
+      'The Avengers': 'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
+      'Terminator': 'https://m.media-amazon.com/images/M/MV5BYTViNzMxZjEtZGEwNy00MDNiLWIzNGQtZDY2MjQ1OWViZjFmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
+      'Predator': 'https://m.media-amazon.com/images/M/MV5BY2QwYmFmZjktN2Y4Yi00ZGY4LWIwZjAtMGYzZjE0MjdmYjZjXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
+      'Speed': 'https://m.media-amazon.com/images/M/MV5BYmQ0NDA3NmQtZDRhOC00MmM3LTgxZDItZWRhZThjODM4NGU2XkEyXkFqcGdeQXVyNTI4MjkwNjA@._V1_.jpg',
+
+      // Animation Movies
+      'Toy Story': 'https://m.media-amazon.com/images/M/MV5BMDU2ZWJlMjktMTRhMy00ZTA5LWEzNDgtYmNmZTEwZTViZWJkXkEyXkFqcGdeQXVyNDQ2OTk4MzI@._V1_.jpg',
+      'Frozen': 'https://m.media-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_.jpg',
+      'The Lion King': 'https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_.jpg',
+      'Finding Nemo': 'https://m.media-amazon.com/images/M/MV5BZjMxYzQxYzQtOGI4YS00ZWY2LTk4ZGYtMGI1NGE2ZjY4YmEyXkEyXkFqcGdeQXVyNjE2MjQwNjc@._V1_.jpg',
+      'Spirited Away': 'https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
+      'Up': 'https://m.media-amazon.com/images/M/MV5BMTk3NDE2NzI4NF5BMl5BanBnXkFtZTgwNzE1MzEyMTE@._V1_.jpg',
+      'Coco': 'https://m.media-amazon.com/images/M/MV5BYjQ5NjM0Y2YtNjZkNC00ZDhkLWJjMWItN2QyNzFkMDE3ZjAxXkEyXkFqcGdeQXVyODIxMzk5NjA@._V1_.jpg',
+      'Inside Out': 'https://m.media-amazon.com/images/M/MV5BOTgxMDQwMDk0OF5BMl5BanBnXkFtZTgwNjU5OTg2NDE@._V1_.jpg',
+      'Shrek': 'https://m.media-amazon.com/images/M/MV5BOGZhM2FhNTItODAzNi00YjA0LWEyN2UtNjJlYWQzYzU1MDg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg',
+      'Moana': 'https://m.media-amazon.com/images/M/MV5BMjI4MzU5NTExNF5BMl5BanBnXkFtZTgwNzY1MTEwMDI@._V1_.jpg',
+
+      // Comedy Movies
+      'The Hangover': 'https://m.media-amazon.com/images/M/MV5BNGQwZjg5YmYtY2VkNC00NzliLTljYTctNzI5NmU3MjE2ODQzXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg',
+      'Bridesmaids': 'https://m.media-amazon.com/images/M/MV5BMjAyOTMyMzUxNl5BMl5BanBnXkFtZTcwODI4MzE0NQ@@._V1_.jpg',
+      'Superbad': 'https://m.media-amazon.com/images/M/MV5BY2VkMDg4ZTYtN2M3Yy00NWZiLWE2ODEtMWFlODYyNGY4ODNhXkEyXkFqcGdeQXVyODY5Njk4Njc@._V1_.jpg',
+      'Anchorman': 'https://m.media-amazon.com/images/M/MV5BMTQ0Nzc4MzIzOV5BMl5BanBnXkFtZTcwNzMxMzIzMw@@._V1_.jpg',
+      'Ghostbusters': 'https://m.media-amazon.com/images/M/MV5BMTkxMjYyNzgwMl5BMl5BanBnXkFtZTgwMTE3MjYyMTE@._V1_.jpg',
+      'Dumb and Dumber': 'https://m.media-amazon.com/images/M/MV5BZDQwMjNiMTQtY2UwYy00NjhiLTk0ZWEtZWM5ZWMzNGFjNTExXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg',
+      'Coming to America': 'https://m.media-amazon.com/images/M/MV5BMTExNzc3ZjQtZDBjYi00MzY0LWE1Y2MtYTMzN2MxNjRkZGExXkEyXkFqcGdeQXVyNjMwMjk0MTQ@._V1_.jpg',
+      'Mrs Doubtfire': 'https://m.media-amazon.com/images/M/MV5BMTMzMzk1MDQtMzY3NS00YThmLTlmOWMtOGYxN2NiMzA5ZGY2XkEyXkFqcGdeQXVyNTI4MjkwNjA@._V1_.jpg',
+      'The Mask': 'https://m.media-amazon.com/images/M/MV5BOTdjMDU0MDYtNGFkYy00N2Y4LTgwZGQtYTNiNDc2ZGNmMjYyXkEyXkFqcGdeQXVyNTI4MjkwNjA@._V1_.jpg',
+      'Home Alone': 'https://m.media-amazon.com/images/M/MV5BMzFkM2YwOTQtYzk2Mi00N2VlLWE3NTItN2YwNDg1YmY0ZDNmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg',
+
+      // Romance Movies  
+      'Titanic': 'https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg',
+      'The Notebook': 'https://m.media-amazon.com/images/M/MV5BMTk3OTM5Njg5M15BMl5BanBnXkFtZTYwMzA0ODI3._V1_.jpg',
+      'La La Land': 'https://m.media-amazon.com/images/M/MV5BMzUzNDM2NzM2MV5BMl5BanBnXkFtZTgwNTM3NTg4OTE@._V1_.jpg',
+      'Casablanca': 'https://m.media-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_.jpg',
+      'Gone with the Wind': 'https://m.media-amazon.com/images/M/MV5BYWQwOWVkMGItMzI2YS00MzM5LWE2MzEtZmY1ZDMzZGVjNjk3XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_.jpg'
+    };
+
+    // Try multiple sources for movie posters
+    async function tryMoviePosterAPIs(movieTitle, genre) {
+      const movieImage = document.getElementById('movie-image');
+      const imageLoading = document.getElementById('image-loading');
+
+      // Method 1: Check pre-mapped database first (fastest and most reliable)
+      if (moviePostersDB[movieTitle]) {
+        const mappedUrl = moviePostersDB[movieTitle];
+        if (await testImageUrl(mappedUrl)) {
+          loadMovieImage(mappedUrl, movieTitle);
+          return;
+        }
+      }
+
+      // Method 2: Try OMDb API for real posters
+      try {
+        const omdbResponse = await fetch(`https://www.omdbapi.com/?t=${encodeURIComponent(movieTitle)}&apikey=trilogy`);
+        if (omdbResponse.ok) {
+          const omdbData = await omdbResponse.json();
+          if (omdbData.Poster && omdbData.Poster !== 'N/A') {
+            if (await testImageUrl(omdbData.Poster)) {
+              loadMovieImage(omdbData.Poster, movieTitle);
+              return;
+            }
+          }
+        }
+      } catch (error) {
+        console.log('OMDb API failed:', error);
+      }
+
+      // Method 3: Try TheMovieDB API
+      try {
+        const tmdbResponse = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=8265bd1679663a7ea12ac168da84d2e8&query=${encodeURIComponent(movieTitle)}`);
+        if (tmdbResponse.ok) {
+          const tmdbData = await tmdbResponse.json();
+          if (tmdbData.results && tmdbData.results[0] && tmdbData.results[0].poster_path) {
+            const tmdbImageUrl = `https://image.tmdb.org/t/p/w500${tmdbData.results[0].poster_path}`;
+            if (await testImageUrl(tmdbImageUrl)) {
+              loadMovieImage(tmdbImageUrl, movieTitle);
+              return;
+            }
+          }
+        }
+      } catch (error) {
+        console.log('TMDb API failed:', error);
+      }
+
+      // Method 4: Create a professional-looking movie poster using Canvas
+      createMoviePosterCanvas(movieTitle, genre);
+    }
+
+    // Test if an image URL is accessible
+    function testImageUrl(url) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
+
+        // Timeout after 5 seconds
+        setTimeout(() => resolve(false), 5000);
+      });
+    }
+
+    // Load the successful movie image
+    function loadMovieImage(imageUrl, movieTitle) {
+      const movieImage = document.getElementById('movie-image');
+      const imageLoading = document.getElementById('image-loading');
+
+      movieImage.src = imageUrl;
+      movieImage.alt = `${movieTitle} Movie Poster`;
+
+      movieImage.onload = () => {
+        imageLoading.style.display = 'none';
+        movieImage.style.display = 'block';
+      };
+
+      movieImage.onerror = () => {
+        // If the image fails to load even after testing, show text poster
+        showTextPoster(movieTitle, selectedGenre);
+      };
+    }
+
+    // Create movie poster using HTML5 Canvas (local generation)
+    function createMoviePosterCanvas(movieTitle, genre) {
+      const imageContainer = document.getElementById('movie-image-container');
+      const movieImage = document.getElementById('movie-image');
+      const imageLoading = document.getElementById('image-loading');
+
+      // Create canvas element
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Set canvas dimensions
+      canvas.width = 300;
+      canvas.height = 400;
+
+      // Genre-based color schemes
+      const genreColors = {
+        action: { bg: '#DC2626', accent: '#FEF2F2', text: '#FFFFFF' },
+        animation: { bg: '#7C3AED', accent: '#F3E8FF', text: '#FFFFFF' },
+        comedy: { bg: '#F59E0B', accent: '#FEF3C7', text: '#FFFFFF' },
+        romance: { bg: '#EC4899', accent: '#FDF2F8', text: '#FFFFFF' },
+        thriller: { bg: '#374151', accent: '#F9FAFB', text: '#FFFFFF' },
+        scifi: { bg: '#0EA5E9', accent: '#E0F2FE', text: '#FFFFFF' },
+        mixed: { bg: '#6366F1', accent: '#EEF2FF', text: '#FFFFFF' }
+      };
+
+      const colors = genreColors[genre] || genreColors.mixed;
+
+      // Create gradient background
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, colors.bg);
+      gradient.addColorStop(1, adjustBrightness(colors.bg, -0.3));
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Add border
+      ctx.strokeStyle = colors.accent;
+      ctx.lineWidth = 4;
+      ctx.strokeRect(2, 2, canvas.width - 4, canvas.height - 4);
+
+      // Add movie icon
+      ctx.fillStyle = colors.text;
+      ctx.font = 'bold 60px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('🎬', canvas.width / 2, 100);
+
+      // Add genre label
+      ctx.fillStyle = colors.accent;
+      ctx.font = 'bold 16px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText(genre.toUpperCase(), canvas.width / 2, 140);
+
+      // Add movie title (word wrap)
+      ctx.fillStyle = colors.text;
+      ctx.font = 'bold 24px Arial';
+      ctx.textAlign = 'center';
+
+      // Word wrapping for long titles
+      const words = movieTitle.split(' ');
+      const lines = [];
+      let currentLine = '';
+
+      words.forEach(word => {
+        const testLine = currentLine + (currentLine ? ' ' : '') + word;
+        const metrics = ctx.measureText(testLine);
+
+        if (metrics.width > canvas.width - 40 && currentLine) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = testLine;
+        }
+      });
+      lines.push(currentLine);
+
+      // Draw text lines
+      const startY = 200;
+      const lineHeight = 35;
+      lines.forEach((line, index) => {
+        ctx.fillText(line, canvas.width / 2, startY + (index * lineHeight));
+      });
+
+      // Add decorative elements
+      ctx.fillStyle = colors.accent + '40'; // Semi-transparent
+      for (let i = 0; i < 20; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = Math.random() * 6 + 2;
+
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Convert canvas to image
+      try {
+        const dataURL = canvas.toDataURL('image/png');
+        movieImage.src = dataURL;
+        movieImage.onload = () => {
+          imageLoading.style.display = 'none';
+          movieImage.style.display = 'block';
+        };
+      } catch (error) {
+        // Fallback to styled text display if canvas fails
+        showTextPoster(movieTitle, genre);
+      }
+    }
+
+    // Utility function to adjust color brightness
+    function adjustBrightness(hex, percent) {
+      // Remove # if present
+      hex = hex.replace(/^#/, '');
+
+      // Parse r, g, b values
+      const r = parseInt(hex.substr(0, 2), 16);
+      const g = parseInt(hex.substr(2, 2), 16);
+      const b = parseInt(hex.substr(4, 2), 16);
+
+      // Adjust brightness
+      const newR = Math.round(Math.min(255, Math.max(0, r + (r * percent))));
+      const newG = Math.round(Math.min(255, Math.max(0, g + (g * percent))));
+      const newB = Math.round(Math.min(255, Math.max(0, b + (b * percent))));
+
+      // Convert back to hex
+      return `#${newR.toString(16).padStart(2, '0')}${newG.toString(16).padStart(2, '0')}${newB.toString(16).padStart(2, '0')}`;
+    }
+
+    // Fallback text-based poster
+    function showTextPoster(movieTitle, genre) {
+      const imageLoading = document.getElementById('image-loading');
+      const movieImage = document.getElementById('movie-image');
+
+      // Genre-based styling
+      const genreStyles = {
+        action: 'bg-red-600 text-white',
+        animation: 'bg-purple-600 text-white',
+        comedy: 'bg-yellow-500 text-white',
+        romance: 'bg-pink-600 text-white',
+        thriller: 'bg-gray-700 text-white',
+        scifi: 'bg-blue-600 text-white',
+        mixed: 'bg-indigo-600 text-white'
+      };
+
+      const styleClass = genreStyles[genre] || genreStyles.mixed;
+
+      imageLoading.innerHTML = `
+        <div class="w-full h-64 ${styleClass} rounded-lg flex flex-col items-center justify-center p-4 border-4 border-opacity-50 border-white relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10">
+            <div class="text-6xl animate-pulse">🎬</div>
+          </div>
+          <div class="text-4xl mb-4 z-10">🎬</div>
+          <div class="text-xs font-bold mb-2 z-10 opacity-75">${genre.toUpperCase()}</div>
+          <div class="text-lg font-bold text-center z-10 leading-tight">${movieTitle}</div>
+          <div class="absolute bottom-2 right-2 text-xs opacity-50">MOVIE POSTER</div>
+        </div>
+      `;
+
+      movieImage.style.display = 'none';
+      imageLoading.style.display = 'flex';
+    }
+
+    // Show hint
+    function showHint() {
+      const movieInfo = document.getElementById('movie-info');
+      if (movieInfo.classList.contains('hidden')) {
+        movieInfo.classList.remove('hidden');
+        // Update genre display for mixed mode
+        if (selectedGenre === 'mixed') {
+          document.getElementById('movie-genre').textContent = 'Mixed (Action + Animation + Comedy)';
+        }
+        document.getElementById('hint-btn').textContent = '🔍 Hide Info';
+      } else {
+        movieInfo.classList.add('hidden');
+        document.getElementById('hint-btn').textContent = '💡 Hint';
+      }
+    }
+
+    // Next charade
+    function nextCharade() {
+      generateRandomCharade();
+      timeLeft = 120;
+      updateTimerDisplay();
+      document.getElementById('movie-info').classList.add('hidden');
+      document.getElementById('hint-btn').textContent = '💡 Hint';
+
+      if (gameActive) {
+        startTimer();
+      }
+    }
+
+    // Pause game
+    function pauseGame() {
+      if (gameActive) {
+        gameActive = false;
+        if (gameTimer) {
+          clearInterval(gameTimer);
+          gameTimer = null;
+        }
+        document.getElementById('pause-game-btn').textContent = '▶️ Resume';
+      } else {
+        gameActive = true;
+        startTimer();
+        document.getElementById('pause-game-btn').textContent = '⏸️ Pause';
+      }
+    }
+
+    // Reset game
+    function resetGame() {
+      gameActive = false;
+      if (gameTimer) {
+        clearInterval(gameTimer);
+        gameTimer = null;
+      }
+
+      document.getElementById('start-game-btn').classList.remove('hidden');
+      document.getElementById('next-charade-btn').classList.add('hidden');
+      document.getElementById('hint-btn').classList.add('hidden');
+      document.getElementById('pause-game-btn').classList.add('hidden');
+      document.getElementById('reset-game-btn').classList.add('hidden');
+      document.getElementById('countdown-timer').classList.add('hidden');
+      document.getElementById('movie-info').classList.add('hidden');
+      document.getElementById('movie-image-container').classList.add('hidden');
+      document.getElementById('charade-content').textContent = 'Click "Start Game" to begin!';
+      document.getElementById('pause-game-btn').textContent = '⏸️ Pause';
+      document.getElementById('hint-btn').textContent = '💡 Hint';
+    }
+
+    // Start timer
+    function startTimer() {
+      if (gameTimer) {
+        clearInterval(gameTimer);
+      }
+
+      gameTimer = setInterval(() => {
+        if (gameActive && timeLeft > 0) {
+          timeLeft--;
+          updateTimerDisplay();
+        } else if (timeLeft <= 0) {
+          endGame();
+        }
+      }, 1000);
+    }
+
+    // Update timer display
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // End game
+    function endGame() {
+      gameActive = false;
+      if (gameTimer) {
+        clearInterval(gameTimer);
+        gameTimer = null;
+      }
+      alert('Time\'s up! The movie was: ' + currentCharade);
+      resetGame();
+    }
+
+    // Handle URL parameters on page load
+    window.addEventListener('DOMContentLoaded', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const genreFromUrl = urlParams.get('genre');
+
+      if (genreFromUrl && ['action', 'animation', 'comedy'].includes(genreFromUrl)) {
+        // Automatically select the genre from URL
+        selectGenre(genreFromUrl);
+      }
+    });
+  </script>
+</body>
+
+</html>

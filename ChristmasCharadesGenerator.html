@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends</title>
+  <meta name="description"
+    content="Bring festive cheer to your holiday gatherings with our Christmas Charades Generator! Get hundreds of Christmas-themed words, from classic holiday movies to winter activities, perfect for family parties, kids, and adults.">
+  <meta name="keywords"
+    content="Christmas charades, holiday charades, festive party games, Christmas game ideas, winter charades, family Christmas games, holiday word guessing game, Christmas activities for kids and adults">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="charades-vocabulary-database.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-gray-50">
+  <!-- Navigation Bar -->
+  <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center">
+        <div class="flex items-center space-x-3">
+          <div
+            class="bg-gradient-to-r from-blue-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-lg">C</span>
+          </div>
+          <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+            class="text-2xl font-bold text-gray-800">Charades Generator</a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex space-x-8 ml-auto">
+          <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+          <a href="AdultCharadesGenerator.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Ideas for Adults</a>
+          <a href="KidsCharadesGenerator.html" title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Generator for Kids</a>
+          <a href="MovieCharadesGenerator.html"
+            title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Movies for
+            Charades</a>
+          <a href="AnimalCharadesGenerator.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Animal
+            Charades Game</a>
+          <a href="ChristmasCharadesGenerator.html"
+            title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
+            class="text-blue-600 font-semibold">Christmas
+            Charades</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden ml-auto p-2">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-gray-200">
+        <div class="flex flex-col space-y-3 pt-4">
+          <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+          <a href="AdultCharadesGenerator.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Ideas for Adults</a>
+          <a href="KidsCharadesGenerator.html" title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Generator for Kids</a>
+          <a href="MovieCharadesGenerator.html"
+            title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Movies for
+            Charades</a>
+          <a href="AnimalCharadesGenerator.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Animal
+            Charades Game</a>
+          <a href="ChristmasCharadesGenerator.html"
+            title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
+            class="text-blue-600 font-semibold">Christmas
+            Charades</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Title -->
+  <div class="bg-gradient-to-r from-red-500 to-green-600 text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">Christmas Charades Generator</h1>
+      <p class="text-xl md:text-2xl mb-8">🎄 Make your holiday gatherings unforgettable with our Christmas Charades
+        Generator! <br>🎅 Enjoy festive word guessing games inspired by Christmas movies, traditions, and winter fun —
+        perfect for family, kids, and friends.
+      </p>
+    </div>
+  </div>
+
+  <!-- Quick Start Game Section -->
+  <section id="quick-start-game" class="container mx-auto px-4 py-16">
+    <div class="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto text-center">
+      <h3 class="text-2xl font-bold text-gray-800 mb-4">🎭 Your Christmas Charade</h3>
+
+      <!-- Charade Display Area -->
+      <div id="charade-display" class="mb-6">
+        <div id="charade-content"
+          class="text-3xl md:text-4xl font-bold text-blue-600 mb-6 p-6 bg-blue-50 rounded-lg min-h-[120px] flex items-center justify-center">
+          Click "Start Game" to begin!
+        </div>
+        <div id="christmas-info" class="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg hidden">
+          <p><strong>Theme:</strong> <span id="christmas-theme">-</span></p>
+          <p><strong>Category:</strong> <span id="christmas-category">-</span></p>
+        </div>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div id="countdown-timer" class="mb-6 hidden">
+        <div class="text-2xl font-bold text-red-600 mb-2">⏱️ Time Remaining:</div>
+        <div id="timer-display"
+          class="text-4xl font-bold text-red-600 bg-red-50 p-4 rounded-lg border-2 border-red-200">
+          <span id="minutes">0</span>:<span id="seconds">00</span>
+        </div>
+      </div>
+
+      <!-- Game Controls -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <button onclick="startGame()" id="start-game-btn"
+          class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
+          🚀 Start Game
+        </button>
+        <button onclick="nextCharade()" id="next-charade-btn"
+          class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors hidden">
+          ➡️ Next
+        </button>
+        <button onclick="showHint()" id="hint-btn"
+          class="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors hidden">
+          💡 Hint
+        </button>
+        <button onclick="pauseGame()" id="pause-game-btn"
+          class="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition-colors hidden">
+          ⏸️ Pause
+        </button>
+        <button onclick="resetGame()" id="reset-game-btn"
+          class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors hidden">
+          🔄 Reset
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Christmas Themes Section -->
+  <section class="container mx-auto px-4 py-16 bg-white">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">🎄 Christmas Charades Themes</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Discover fun and festive Christmas charades ideas inspired by popular holiday themes — perfect for family
+        gatherings, kids’ parties, and office celebrations.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl shadow-lg p-6 text-center">
+        <div class="text-5xl mb-4">🎬</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Christmas Movie Charades</h3>
+        <p class="text-gray-700 mb-4">
+          Act out classic holiday films and modern Christmas favorites that everyone loves to watch during the festive
+          season.
+        </p>
+        <div class="text-sm text-gray-600">
+          <p><strong>Examples:</strong> Home Alone, Elf, The Polar Express</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl shadow-lg p-6 text-center">
+        <div class="text-5xl mb-4">🎁</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Holiday Tradition Charades</h3>
+        <p class="text-gray-700 mb-4">
+          Guess and act out festive customs, Christmas decorations, and family activities that make the holidays
+          special.
+        </p>
+        <div class="text-sm text-gray-600">
+          <p><strong>Examples:</strong> Decorating Tree, Gift Wrapping, Christmas Stockings</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl shadow-lg p-6 text-center">
+        <div class="text-5xl mb-4">🎵</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Christmas Song Charades</h3>
+        <p class="text-gray-700 mb-4">
+          Bring the music to life by acting out beloved carols and holiday hits that fill the season with cheer.
+        </p>
+        <div class="text-sm text-gray-600">
+          <p><strong>Examples:</strong> Jingle Bells, Silent Night, White Christmas</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-lg p-6 text-center">
+        <div class="text-5xl mb-4">❄️</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Winter Activity Charades</h3>
+        <p class="text-gray-700 mb-4">
+          Act out exciting winter and Christmas activities that families enjoy during snowy days.
+        </p>
+        <div class="text-sm text-gray-600">
+          <p><strong>Examples:</strong> Building Snowman, Ice Skating, Sledding</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl shadow-lg p-6 text-center">
+        <div class="text-5xl mb-4">🎅</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Christmas Character Charades</h3>
+        <p class="text-gray-700 mb-4">
+          Play as magical characters from Christmas stories and bring the holiday magic to life.
+        </p>
+        <div class="text-sm text-gray-600">
+          <p><strong>Examples:</strong> Santa Claus, Rudolph, Grinch</p>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-pink-50 to-red-50 rounded-xl shadow-lg p-6 text-center">
+        <div class="text-5xl mb-4">🍪</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Christmas Food Charades</h3>
+        <p class="text-gray-700 mb-4">
+          Guess delicious holiday treats and traditional Christmas foods that make festive meals unforgettable.
+        </p>
+        <div class="text-sm text-gray-600">
+          <p><strong>Examples:</strong> Christmas Cookies, Eggnog, Candy Canes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is Charades Section -->
+  <section class="container mx-auto px-4 py-16 bg-white">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">🎭 What is Charades?</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Discover the classic party game loved by adults and families — from movie charades to action charades —
+        and learn the simple rules that make it fun for everyone.
+
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <!-- What is Charades -->
+      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-8">
+        <div class="text-4xl mb-4 text-center">🎬</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">What is Charades?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Charades is a timeless guessing game where one player acts out a word or phrase without speaking,
+          while others try to guess it before time runs out. Our adult charades generator offers challenging variations
+          including movie charades, action charades, book charades, and themed adult charades for sophisticated players.
+        </p>
+        <p class="text-gray-700 leading-relaxed mt-4">
+          Players use only body language, facial expressions, and gestures to communicate.
+          It's a perfect activity for adult game nights, holiday gatherings, corporate events, and team building —
+          with endless ideas available through our free charades generator for adults with easy, medium, and hard
+          difficulty levels.
+
+        </p>
+      </div>
+
+      <!-- Game Rules -->
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl shadow-lg p-8">
+        <div class="text-4xl mb-4 text-center">📋</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Simple Charades Rules</h3>
+        <div class="space-y-4 text-gray-700">
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">1.</span>
+            <p><strong>No Talking:</strong> The actor cannot speak, make sounds, or mouth words — only gestures and
+              movements are allowed.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">2.</span>
+            <p><strong>Time Limit:</strong> Most rounds last 60–90 seconds. Shorter times add challenge, while longer
+              rounds are great for beginners or complex charades.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">3.</span>
+            <p><strong>Guessing:</strong> Teammates can shout guesses at any time. The round ends when the correct
+              answer is given or time runs out.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">4.</span>
+            <p><strong>Scoring:</strong> Award points for correct answers, bonus points for quick guesses, and extra
+              credit for creative acting.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">5.</span>
+            <p><strong>Categories:</strong> Choose from popular sets like movies, books, actions, holiday
+              themes, or even hard charades for experts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-6">
+        <h3 class="text-2xl font-bold mb-4">Charades Game Ideas & Generator</h3>
+        <p class="text-gray-300 text-sm max-w-3xl mx-auto">Play free charades games online with our Charades Generator.
+          Discover hundreds of fun game ideas for kids, adults, and families — including movie charades, Christmas party
+          games, animal acting ideas, and more. Perfect for parties, classroom activities, and family game nights.
+        </p>
+      </div>
+      <div class="flex flex-col items-center gap-4 text-sm">
+        <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+          class="text-gray-300 hover:text-white transition-colors">Home</a>
+        <a href="AdultCharadesGenerator.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
+          class="text-gray-300 hover:text-white transition-colors">Charades
+          Ideas for Adults</a>
+        <a href="KidsCharadesGenerator.html" title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
+          class="text-gray-300 hover:text-white transition-colors">Charades
+          Generator for Kids</a>
+        <a href="MovieCharadesGenerator.html" title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
+          class="text-gray-300 hover:text-white transition-colors">Movies for
+          Charades</a>
+        <a href="AnimalCharadesGenerator.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
+          class="text-gray-300 hover:text-white transition-colors">Animal
+          Charades Game</a>
+        <a href="ChristmasCharadesGenerator.html"
+          title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
+          class="text-blue-600 font-semibold">Christmas
+          Charades</a>
+      </div>
+      <div class="border-t border-gray-700 mt-6 pt-4 text-center">
+        <p class="text-gray-400 text-sm">&copy; 2024 Charades Generator – The best free charades ideas and game lists
+          for all ages. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Game state variables
+    let selectedTheme = null;
+    let gameActive = false;
+    let gameTimer = null;
+    let timeLeft = 120;
+    let currentCharade = '';
+    let charadeList = [];
+    let christmasData = {};
+
+    // Theme selection
+    function selectTheme(theme) {
+      selectedTheme = theme;
+
+      // Reset all button highlights
+      document.querySelectorAll('#movies-btn, #traditions-btn, #songs-btn, #activities-btn, #characters-btn, #food-btn').forEach(btn => {
+        btn.classList.remove('ring-4', 'ring-blue-300');
+      });
+
+      // Highlight selected button
+      const selectedBtn = document.getElementById(`${theme}-btn`);
+      if (selectedBtn) {
+        selectedBtn.classList.add('ring-4', 'ring-blue-300');
+      }
+
+      // Show game controls
+      document.getElementById('theme-notice').classList.add('hidden');
+      document.getElementById('charade-display').classList.remove('hidden');
+      document.getElementById('start-game-btn').classList.remove('hidden');
+
+      // Load Christmas items for selected theme
+      loadChristmasForTheme(theme);
+    }
+
+    // Load Christmas items based on theme
+    function loadChristmasForTheme(theme) {
+      // Use comprehensive Christmas vocabulary database
+      charadeList = CHARADES_VOCABULARY.christmas.map(item => ({ name: item, category: 'Christmas Item' }));
+      christmasData = { christmas: charadeList };
+    }
+
+    // Load all Christmas themes
+    function loadAllChristmasThemes() {
+      // Use comprehensive Christmas vocabulary database
+      charadeList = CHARADES_VOCABULARY.christmas.map(item => ({ name: item, category: 'Christmas Item' }));
+      selectedTheme = 'mixed';
+    }
+
+    // Start the game
+    function startGame() {
+      // Auto-load all Christmas themes if none selected
+      if (!selectedTheme || charadeList.length === 0) {
+        loadAllChristmasThemes();
+      }
+
+      if (gameTimer) {
+        clearInterval(gameTimer);
+        gameTimer = null;
+      }
+
+      gameActive = true;
+      timeLeft = 120;
+
+      // Show game controls
+      document.getElementById('start-game-btn').classList.add('hidden');
+      document.getElementById('next-charade-btn').classList.remove('hidden');
+      document.getElementById('hint-btn').classList.remove('hidden');
+      document.getElementById('pause-game-btn').classList.remove('hidden');
+      document.getElementById('reset-game-btn').classList.remove('hidden');
+      document.getElementById('countdown-timer').classList.remove('hidden');
+
+      // Generate first charade
+      generateRandomCharade();
+      startTimer();
+    }
+
+    // Generate random charade
+    function generateRandomCharade() {
+      if (charadeList.length > 0) {
+        const randomIndex = Math.floor(Math.random() * charadeList.length);
+        const christmas = charadeList[randomIndex];
+        currentCharade = christmas.name;
+        document.getElementById('charade-content').textContent = currentCharade;
+
+        // Update Christmas info
+        document.getElementById('christmas-theme').textContent = selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1);
+        document.getElementById('christmas-category').textContent = christmas.category;
+      }
+    }
+
+    // Show hint
+    function showHint() {
+      const christmasInfo = document.getElementById('christmas-info');
+      if (christmasInfo.classList.contains('hidden')) {
+        christmasInfo.classList.remove('hidden');
+        document.getElementById('hint-btn').textContent = '🔍 Hide Info';
+      } else {
+        christmasInfo.classList.add('hidden');
+        document.getElementById('hint-btn').textContent = '💡 Hint';
+      }
+    }
+
+    // Next charade
+    function nextCharade() {
+      generateRandomCharade();
+      timeLeft = 120;
+      updateTimerDisplay();
+      document.getElementById('christmas-info').classList.add('hidden');
+      document.getElementById('hint-btn').textContent = '💡 Hint';
+
+      if (gameActive) {
+        startTimer();
+      }
+    }
+
+    // Pause game
+    function pauseGame() {
+      if (gameActive) {
+        gameActive = false;
+        if (gameTimer) {
+          clearInterval(gameTimer);
+          gameTimer = null;
+        }
+        document.getElementById('pause-game-btn').textContent = '▶️ Resume';
+      } else {
+        gameActive = true;
+        startTimer();
+        document.getElementById('pause-game-btn').textContent = '⏸️ Pause';
+      }
+    }
+
+    // Reset game
+    function resetGame() {
+      gameActive = false;
+      if (gameTimer) {
+        clearInterval(gameTimer);
+        gameTimer = null;
+      }
+
+      document.getElementById('start-game-btn').classList.remove('hidden');
+      document.getElementById('next-charade-btn').classList.add('hidden');
+      document.getElementById('hint-btn').classList.add('hidden');
+      document.getElementById('pause-game-btn').classList.add('hidden');
+      document.getElementById('reset-game-btn').classList.add('hidden');
+      document.getElementById('countdown-timer').classList.add('hidden');
+      document.getElementById('christmas-info').classList.add('hidden');
+      document.getElementById('charade-content').textContent = 'Click "Start Game" to begin!';
+      document.getElementById('pause-game-btn').textContent = '⏸️ Pause';
+      document.getElementById('hint-btn').textContent = '💡 Hint';
+    }
+
+    // Start timer
+    function startTimer() {
+      if (gameTimer) {
+        clearInterval(gameTimer);
+      }
+
+      gameTimer = setInterval(() => {
+        if (gameActive && timeLeft > 0) {
+          timeLeft--;
+          updateTimerDisplay();
+        } else if (timeLeft <= 0) {
+          endGame();
+        }
+      }, 1000);
+    }
+
+    // Update timer display
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    // End game
+    function endGame() {
+      gameActive = false;
+      if (gameTimer) {
+        clearInterval(gameTimer);
+        gameTimer = null;
+      }
+      alert('Time\'s up! The Christmas charade was: ' + currentCharade);
+      resetGame();
+    }
+  </script>
+</body>
+
+</html>

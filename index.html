@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charades Generator – Fun Ideas for Adults, Kids, Movies, Christmas & Animals</title>
+  <meta name="description"
+    content="Play free Charades Generator with hundreds of fun ideas for adults, kids, movies, Christmas, and animal themes. Get rules, tips, and game ideas for every occasion.">
+  <meta name="keywords"
+    content="charades generator, charades generator for kids, movie charades generator, Disney charades, animal charades, action charades, guess word game, fun party game ideas">
+  <meta name="author" content="Charades Generator">
+  <meta name="robots" content="index, follow">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Charades Generator",
+        "description": "Free charades generator for kids and adults with movie charades, Disney charades, animal charades and action charades",
+        "url": "https://charadesgenerator.com"
+    }
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-purple-100 min-h-screen">
+  <!-- Header -->
+  <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center">
+        <div class="flex items-center space-x-3">
+          <div
+            class="bg-gradient-to-r from-blue-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-lg">C</span>
+          </div>
+          <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+            class="text-2xl font-bold text-gray-800">Charades Generator</a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex space-x-8 ml-auto">
+          <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+            class="text-blue-600 font-semibold">Home</a>
+          <a href="AdultCharadesGenerator.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Ideas for Adults</a>
+          <a href="KidsCharadesGenerator.html" title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Generator for Kids</a>
+          <a href="MovieCharadesGenerator.html"
+            title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Movies for
+            Charades</a>
+          <a href="AnimalCharadesGenerator.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Animal
+            Charades Game</a>
+          <a href="ChristmasCharadesGenerator.html"
+            title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Christmas
+            Charades</a>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-blue-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-gray-200">
+        <div class="flex flex-col space-y-3 pt-4">
+          <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+            class="text-blue-600 font-semibold">Home</a>
+          <a href="AdultCharadesGenerator.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Ideas for Adults</a>
+          <a href="KidsCharadesGenerator.html" title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
+            Generator for Kids</a>
+          <a href="MovieCharadesGenerator.html"
+            title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Movies for
+            Charades</a>
+          <a href="AnimalCharadesGenerator.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Animal
+            Charades Game</a>
+          <a href="ChristmasCharadesGenerator.html"
+            title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
+            class="text-gray-600 hover:text-blue-600 transition-colors">Christmas
+            Charades</a>
+        </div>
+      </div>
+  </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="container mx-auto px-4 py-16 text-center">
+    <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+      Charades Generator
+    </h1>
+    <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+      Enjoy endless fun with our free charades generator. Explore hundreds of ideas for kids, adults, and families —
+      from movie charades and Christmas themes to animal charades and more. Perfect for family nights, holidays,
+      schools, and parties.
+    </p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <button onclick="scrollToSection('quick-start')"
+        class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
+        🎭 Quick Start Game
+      </button>
+      <button onclick="scrollToSection('adult-charades')"
+        class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 transition-all border-2 border-blue-600">
+        🎯 Browse Categories
+      </button>
+    </div>
+  </section>
+
+  <!-- Quick Start Charades Game Section -->
+  <section id="quick-start" class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">🎮 Quick Start Charades Game – Free Generator</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Play instantly with our free charades generator for kids, adults, and families.
+        Get ideas for movies, Disney, animals, actions, hard charades, and trending social media terms, with a timer and
+        simple rules for endless
+        fun.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto text-center">
+      <h3 class="text-2xl font-bold text-gray-800 mb-4">🎭 Your Charade</h3>
+      <div id="quick-charade-content"
+        class="text-4xl md:text-5xl font-bold text-blue-600 mb-6 p-6 bg-blue-50 rounded-lg min-h-[120px] flex items-center justify-center">
+        Click "Start Game" to begin!
+      </div>
+
+      <!-- Hint Display Area -->
+      <div id="quick-hint-area" class="mb-6 hidden">
+        <div class="text-lg font-semibold text-gray-700 mb-2">💡 Hint:</div>
+        <div id="quick-hint-content"
+          class="text-base text-gray-600 p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+          No hint available yet
+        </div>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div id="quick-countdown-timer" class="mb-6 hidden">
+        <div class="text-2xl font-bold text-red-600 mb-2">⏱️ Time Remaining:</div>
+        <div id="quick-timer-display"
+          class="text-4xl font-bold text-red-600 bg-red-50 p-4 rounded-lg border-2 border-red-200">
+          <span id="quick-minutes">0</span>:<span id="quick-seconds">00</span>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        <button onclick="startQuickGame()" id="start-quick-game-btn"
+          class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
+          🚀 Start Game
+        </button>
+        <button onclick="nextQuickCharade()" id="next-charade-btn"
+          class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors hidden">
+          ➡️ Next
+        </button>
+        <button onclick="showQuickHint()" id="hint-btn"
+          class="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600 transition-colors hidden">
+          💡 Hint
+        </button>
+        <button onclick="pauseQuickGame()" id="pause-game-btn"
+          class="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition-colors hidden">
+          ⏸️ Pause
+        </button>
+        <button onclick="resetQuickGame()" id="reset-game-btn"
+          class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors hidden">
+          🔄 Reset
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Adult Charades Section -->
+  <section id="adult-charades" class="container mx-auto px-4 py-16 bg-white">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        <a href="AdultCharadesGenerator.html" title='Funny Charades Ideas for Adults'
+          class="hover:text-blue-600 transition-colors">Adult Charades Generator – Fun & Challenging Ideas</a>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Part of our main Charades Generator, the adult charades version offers fun and challenging prompts designed for
+        parties and game nights.
+        Enjoy movies, books, actions, and tricky topics that make gameplay more exciting for adults.
+      </p>
+      <div class="mt-6">
+        <a href="AdultCharadesGenerator.html" title='Adult Charades Game'
+          class="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-lg">
+          🚀 Quick Start
+        </a>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-blue-500"
+        onclick="window.location.href='AdultCharadesGenerator.html?difficulty=easy#quick-start-game'">
+        <div class="text-4xl mb-4">🟢</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Charades Generator Easy</h3>
+        <p class="text-gray-600">Simple and fun charades for beginners</p>
+      </div>
+      <div
+        class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-green-500"
+        onclick="window.location.href='AdultCharadesGenerator.html?difficulty=medium#quick-start-game'">
+        <div class="text-4xl mb-4">🟡</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Charades Generator Medium</h3>
+        <p class="text-gray-600">Moderate difficulty for experienced players</p>
+      </div>
+      <div
+        class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-purple-500"
+        onclick="window.location.href='AdultCharadesGenerator.html?difficulty=hard#quick-start-game'">
+        <div class="text-4xl mb-4">🔴</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Charades Generator Hard</h3>
+        <p class="text-gray-600">Challenging charades for experts</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kids Charades Section -->
+  <section id="kids-charades" class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        <a href="KidsCharadesGenerator.html" title='Charades Generator for Kids Disney'
+          class="hover:text-blue-600 transition-colors">Kids Charades Generator – Fun & Educational Ideas</a>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Part of our main Charades Generator, the kids version offers fun and educational prompts perfect for classrooms,
+        family game nights, and playdates.
+        Enjoy simple words, familiar concepts, and age-appropriate challenges across movies, books, actions, and more to
+        keep children entertained and learning.
+      </p>
+      <div class="mt-6">
+        <a href="KidsCharadesGenerator.html" title='Halloween Charades for Kids'
+          class="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-lg">
+          🚀 Quick Start
+        </a>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-yellow-500"
+        onclick="window.location.href='KidsCharadesGenerator.html?theme=disney#quick-start-game'">
+        <div class="text-4xl mb-4">🎬</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Charades Generator for Kids Disney</h3>
+        <p class="text-gray-600">Fun and simple Disney-themed charades designed for young children aged 6 to 11, perfect
+          for family game nights and classroom activities.</p>
+      </div>
+      <div
+        class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-orange-500"
+        onclick="window.location.href='KidsCharadesGenerator.html?theme=halloween#quick-start-game'">
+        <div class="text-4xl mb-4">🎃</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Halloween Charades for Kids</h3>
+        <p class="text-gray-600">Engaging Halloween-themed charades with moderate difficulty, ideal for children aged 11
+          to 14 to boost creativity and critical thinking.</p>
+      </div>
+      <div
+        class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-red-500"
+        onclick="window.location.href='KidsCharadesGenerator.html?theme=kids#quick-start-game'">
+        <div class="text-4xl mb-4">🎭</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Charades ideas for Kids</h3>
+        <p class="text-gray-600">Challenging and advanced charades designed for teenagers aged 14 to 18, perfect for
+          developing quick thinking and teamwork skills.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Movie Charades Section -->
+  <section id="movie-charades" class="container mx-auto px-4 py-16 bg-white">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        <a href="MovieCharadesGenerator.html" title='Charades Game Movies'
+          class="hover:text-blue-600 transition-colors">Movie Charades Generator – Genre-Based Fun</a>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        A special section of our Charades Generator dedicated to movies, organized by genre and studio for the ultimate
+        cinematic guessing game.
+        Play with prompts from romance, action, animation, comedy, thriller, sci-fi, and family films — perfect for
+        movie nights and film fans.
+
+      </p>
+      <div class="mt-6">
+        <a href="MovieCharadesGenerator.html" title='Films for Charades'
+          class="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-lg">
+          🚀 Quick Start
+        </a>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div
+        class="relative rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-red-500 bg-cover bg-center min-h-[200px]"
+        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('image/action.jpg') "
+        title='charades ideas movies' onclick="selectMovieGenre('action')">
+        <div class="relative z-10 text-white">
+          <div class="text-4xl mb-4">💥</div>
+          <h3 class="text-xl font-semibold mb-2">Action Movies for Charades</h3>
+          <p class="text-gray-200">Thrilling blockbusters and adventures</p>
+        </div>
+      </div>
+      <div
+        class="relative rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-purple-500 bg-cover bg-center min-h-[200px]"
+        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('image/lion.jpeg')"
+        title='dumb charades movies' onclick="selectMovieGenre('animation')">
+        <div class="relative z-10 text-white">
+          <div class="text-4xl mb-4">🎬</div>
+          <h3 class="text-xl font-semibold mb-2">Animation Movies for Charades</h3>
+          <p class="text-gray-200">Animated films and cartoons</p>
+        </div>
+      </div>
+      <div
+        class="relative rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-yellow-500 bg-cover bg-center min-h-[200px]"
+        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('image/fun.jpg')"
+        title='good movies for charades' onclick="selectMovieGenre('comedy')">
+        <div class="relative z-10 text-white">
+          <div class="text-4xl mb-4">😂</div>
+          <h3 class="text-xl font-semibold mb-2">Comedy Movies for Charades</h3>
+          <p class="text-gray-200">Hilarious films and comedies</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Animal Charades Section -->
+  <section id="animal-charades" class="container mx-auto px-4 py-16">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">
+        <a href="AnimalCharadesGenerator.html" title='Animal Charades Generator'
+          class="hover:text-blue-600 transition-colors">Animal Charades Generator – Wild & Fun Prompts</a>
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Part of our Charades Generator, the animal charades category brings nature to life with prompts for land
+        animals, marine creatures, amphibians, birds, insects, and reptiles.
+        Ideal for nature lovers, wildlife enthusiasts, and educational play.
+
+      </p>
+      <div class="mt-6">
+        <a href="AnimalCharadesGenerator.html" title='Animal Charades'
+          class="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-lg">
+          🚀 Quick Start
+        </a>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div
+        class="relative rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-orange-500 bg-cover bg-center min-h-[200px]"
+        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1474511320723-9a56873867b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"
+        onclick="selectAnimalHabitat('land')">
+        <div class="relative z-10 text-white">
+          <div class="text-4xl mb-4">🦁</div>
+          <h3 class="text-xl font-semibold mb-2">Land Animals for Charades</h3>
+          <p class="text-gray-200">Mammals, reptiles, and terrestrial creatures</p>
+        </div>
+      </div>
+      <div
+        class="relative rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-blue-500 bg-cover bg-center min-h-[200px]"
+        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"
+        onclick="selectAnimalHabitat('marine')">
+        <div class="relative z-10 text-white">
+          <div class="text-4xl mb-4">🐋</div>
+          <h3 class="text-xl font-semibold mb-2">Marine Animals for Charades</h3>
+          <p class="text-gray-200">Ocean dwellers and sea creatures</p>
+        </div>
+      </div>
+      <div
+        class="relative rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-purple-500 bg-cover bg-center min-h-[200px]"
+        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1444464666168-49d633b86797?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"
+        onclick="selectAnimalHabitat('birds')">
+        <div class="relative z-10 text-white">
+          <div class="text-4xl mb-4">🦅</div>
+          <h3 class="text-xl font-semibold mb-2">Birds for Charades</h3>
+          <p class="text-gray-200">Flying creatures and avian species</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Christmas Charades Section -->
+  <section id="christmas-charades" class="container mx-auto px-4 py-16 bg-white">
+    <div class="text-center mb-12">
+      <h2 a href="ChristmasCharadesGenerator.html" title='Christmas Charades'
+        class="text-4xl font-bold text-gray-800 mb-4">Christmas Charades Generator – Festive Party Ideas</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        A seasonal favorite in our Charades Generator, Christmas charades bring holiday cheer to family gatherings,
+        school events, and festive parties.
+        Play with prompts inspired by holiday traditions, songs, movies, and seasonal activities.
+
+      </p>
+    </div>
+
+    <div class="text-center">
+      <button onclick="window.location.href='ChristmasCharadesGenerator.html'" title="Christmas Charades Ideas"
+        class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-12 py-6 rounded-xl text-2xl font-bold hover:from-purple-600 hover:to-blue-600 transition-all transform hover:scale-105 shadow-xl">
+        🎄 Generate Holiday Charades Game 🎅
+      </button>
+    </div>
+  </section>
+
+  <!-- What is Charades Section -->
+  <section class="container mx-auto px-4 py-16 ">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">🎭 What is Charades?</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Discover the classic party game loved by kids, adults, and families — from movie charades to Christmas charades
+        —
+        and learn the simple rules that make it fun for everyone.
+
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <!-- What is Charades -->
+      <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-8">
+        <div class="text-4xl mb-4 text-center">🎬</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">What is Charades?</h3>
+        <p class="text-gray-700 leading-relaxed">
+          Charades is a timeless guessing game where one player acts out a word or phrase without speaking,
+          while others try to guess it before time runs out. Popular variations include charades for kids,
+          adult charades, animal charades, action charades, movie charades, and festive Christmas charades.
+        </p>
+        <p class="text-gray-700 leading-relaxed mt-4">
+          Players use only body language, facial expressions, and gestures to communicate.
+          It’s a perfect activity for family game nights, holiday gatherings, school events, and team building —
+          with endless ideas available through our free charades generator for kids, adults, and themed categories.
+
+        </p>
+      </div>
+
+      <!-- Game Rules -->
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl shadow-lg p-8">
+        <div class="text-4xl mb-4 text-center">📋</div>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Simple Charades Rules</h3>
+        <div class="space-y-4 text-gray-700">
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">1.</span>
+            <p><strong>No Talking:</strong> The actor cannot speak, make sounds, or mouth words — only gestures and
+              movements are allowed.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">2.</span>
+            <p><strong>Time Limit:</strong> Most rounds last 60–90 seconds. Shorter times add challenge, while longer
+              rounds are great for beginners or kids.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">3.</span>
+            <p><strong>Guessing:</strong> Teammates can shout guesses at any time. The round ends when the correct
+              answer is given or time runs out.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">4.</span>
+            <p><strong>Scoring:</strong> Award points for correct answers, bonus points for quick guesses, and extra
+              credit for creative acting.</p>
+          </div>
+          <div class="flex items-start space-x-3">
+            <span class="text-blue-600 font-bold text-lg">5.</span>
+            <p><strong>Categories:</strong> Choose from popular sets like movies, books, animals, actions, holiday
+              themes, or even hard charades for experts.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Game Tips Section -->
+  <section class="container mx-auto px-4 py-16 bg-white">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800 mb-4">Charades Tips, Tricks & Winning Strategies</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Master the game of charades with expert tips for actors and guessers.
+        Learn strategies to win family game nights, party challenges, and competitive charades.
+
+      </p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+        <div class="text-4xl mb-4 text-center">🎯</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">Charades Acting Tips</h3>
+        <ul class="space-y-2 text-gray-600">
+          <li>• Use clear and exaggerated gestures for better guessing</li>
+          <li>• Break complex words or phrases into smaller parts</li>
+          <li>• Incorporate universal symbols and signs</li>
+          <li>• Stay fully in character to keep the clue alive</li>
+          <li>• Use expressive facial movements for clarity</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+        <div class="text-4xl mb-4 text-center">🧠</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">Charades Guessing Strategies</h3>
+        <ul class="space-y-2 text-gray-600">
+          <li>• Focus on body language and expressions</li>
+          <li>• Think of common phrases, idioms, and pop culture references</li>
+          <li>• Use context from earlier rounds to guide guesses</li>
+          <li>• Make quick, multiple guesses to narrow options</li>
+          <li>• Collaborate effectively with teammates</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow">
+        <div class="text-4xl mb-4 text-center">🌟</div>
+        <h3 class="text-xl font-semibold text-gray-800 mb-4 text-center">Advanced Charades Techniques</h3>
+        <ul class="space-y-2 text-gray-600">
+          <li>• Use hand signals to indicate categories like movie, book, or song</li>
+          <li>• Develop a custom sign system with your team</li>
+          <li>• Practice charades regularly for faster recall</li>
+          <li>• Analyze challenges from past rounds to improve</li>
+          <li>• Build unique team communication cues</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-6">
+        <h3 class="text-2xl font-bold mb-4">Charades Game Ideas & Generator</h3>
+        <p class="text-gray-300 text-sm max-w-3xl mx-auto">Play free charades games online with our Charades Generator.
+          Discover hundreds of fun game ideas for kids, adults, and families — including movie charades, Christmas party
+          games, animal acting ideas, and more. Perfect for parties, classroom activities, and family game nights.
+        </p>
+      </div>
+      <div class="flex flex-col items-center gap-4 text-sm">
+        <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
+          class="text-blue-600 font-semibold">Home</a>
+        <a href="AdultCharadesGenerator.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
+          class="text-gray-300 hover:text-white transition-colors">Charades
+          Ideas for Adults</a>
+        <a href="KidsCharadesGenerator.html" title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
+          class="text-gray-300 hover:text-white transition-colors">Charades
+          Generator for Kids</a>
+        <a href="MovieCharadesGenerator.html" title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
+          class="text-gray-300 hover:text-white transition-colors">Movies for
+          Charades</a>
+        <a href="AnimalCharadesGenerator.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
+          class="text-gray-300 hover:text-white transition-colors">Animal
+          Charades Game</a>
+        <a href="ChristmasCharadesGenerator.html"
+          title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
+          class="text-gray-300 hover:text-white transition-colors">Christmas
+          Charades</a>
+      </div>
+      <div class="border-t border-gray-700 mt-6 pt-4 text-center">
+        <p class="text-gray-400 text-sm">&copy; 2024 Charades Generator – The best free charades ideas and game lists
+          for all ages. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Navigation functions for category selection
+    function selectMovieGenre(genre) {
+      window.location.href = `MovieCharadesGenerator.html?genre=${genre}#quick-start-game`;
+    }
+
+    function selectAnimalHabitat(habitat) {
+      window.location.href = `AnimalCharadesGenerator.html?habitat=${habitat}#quick-start-game`;
+    }
+  </script>
+  <script src="charades-vocabulary-database.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
