@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- 首页 -->
+  <url>
+    <loc>https://charades-generator.org.html</loc>
+    <lastmod>2025-08-30</lastmod>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <!-- 子页面示例 -->
+  <url>
+    <loc>https://charades-generator.org/Charades-Ideas-for-Adults.html</loc>
+    <lastmod>2025-08-30</lastmod>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/Charades-Generator-for-Kids.html</loc>
+    <lastmod>2025-08-30</lastmod>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/Movies-for-Charades.html</loc>
+    <lastmod>2025-08-30</lastmod>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/Animal-Charades-Game.html</loc>
+    <lastmod>2025-08-30</lastmod>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/Christmas-Charades.html</loc>
+    <lastmod>2025-08-30</lastmod>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+</urlset>
