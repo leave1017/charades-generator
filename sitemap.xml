@@ -3,7 +3,7 @@
 
   <!-- 首页 -->
   <url>
-    <loc>https://charades-generator.org.html</loc>
+    <loc>https://charades-generator.org</loc>
     <lastmod>2025-08-30</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
@@ -11,35 +11,35 @@
 
   <!-- 子页面示例 -->
   <url>
-    <loc>https://charades-generator.org/Charades-Ideas-for-Adults.html</loc>
+    <loc>https://charades-generator.org/Charades-Ideas-for-Adults</loc>
     <lastmod>2025-08-30</lastmod>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://charades-generator.org/Charades-Generator-for-Kids.html</loc>
+    <loc>https://charades-generator.org/Charades-Generator-for-Kids</loc>
     <lastmod>2025-08-30</lastmod>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://charades-generator.org/Movies-for-Charades.html</loc>
+    <loc>https://charades-generator.org/Movies-for-Charades</loc>
     <lastmod>2025-08-30</lastmod>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://charades-generator.org/Animal-Charades-Game.html</loc>
+    <loc>https://charades-generator.org/Animal-Charades-Game</loc>
     <lastmod>2025-08-30</lastmod>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
 
   <url>
-    <loc>https://charades-generator.org/Christmas-Charades.html</loc>
+    <loc>https://charades-generator.org/Christmas-Charades</loc>
     <lastmod>2025-08-30</lastmod>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
