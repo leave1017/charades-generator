@@ -10,19 +10,11 @@
   <link rel="canonical" href="https://www.charades-generator.org/Charades-Ideas-for-Adults">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="charades-vocabulary-database.js"></script>
+  <script src="game-ui.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17617716104');
-</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4601450349641821"
-     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-17617716104');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4601450349641821" crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-gray-50">
@@ -31,74 +23,38 @@
     <div class="container mx-auto px-4">
       <div class="flex items-center">
         <div class="flex items-center space-x-3">
-          <div
-            class="bg-gradient-to-r from-blue-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center">
+          <div class="bg-gradient-to-r from-blue-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center">
             <span class="text-white font-bold text-lg">C</span>
           </div>
           <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
             class="text-2xl font-bold text-gray-800">Charades Generator</a>
         </div>
-
-        <!-- Desktop Navigation -->
         <div class="hidden md:flex space-x-8 ml-auto">
-          <a href="/" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
-            class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
-          <a href="Charades-Ideas-for-Adults.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
-            class="text-blue-600 font-semibold">Charades
-            Ideas for Adults</a>
-          <a href="Charades-Generator-for-Kids.html"
-            title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
-            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
-            Generator for Kids</a>
-          <a href="Movies-for-Charades.html" title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
-            class="text-gray-600 hover:text-blue-600 transition-colors">Movies for
-            Charades</a>
-          <a href="Animal-Charades-Game.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
-            class="text-gray-600 hover:text-blue-600 transition-colors">Animal
-            Charades Game</a>
-          <a href="Christmas-Charades.html"
-            title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
-            class="text-gray-600 hover:text-blue-600 transition-colors">Christmas
-            Charades</a>
+          <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+          <a href="Charades-Ideas-for-Adults.html" class="text-blue-600 font-semibold">Charades Ideas for Adults</a>
+          <a href="Charades-Generator-for-Kids.html" class="text-gray-600 hover:text-blue-600 transition-colors">Charades Generator for Kids</a>
+          <a href="Movies-for-Charades.html" class="text-gray-600 hover:text-blue-600 transition-colors">Movies for Charades</a>
+          <a href="Animal-Charades-Game.html" class="text-gray-600 hover:text-blue-600 transition-colors">Animal Charades Game</a>
+          <a href="Christmas-Charades.html" class="text-gray-600 hover:text-blue-600 transition-colors">Christmas Charades</a>
         </div>
-
-        <!-- Mobile Menu Button -->
         <button id="mobile-menu-btn" class="md:hidden ml-auto p-2">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
       </div>
-
-      <!-- Mobile Navigation -->
       <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-gray-200">
         <div class="flex flex-col space-y-3 pt-4">
-          <a href="/" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
-            class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
-          <a href="Charades-Ideas-for-Adults.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
-            class="text-blue-600 font-semibold">Charades
-            Ideas for Adults</a>
-          <a href="Charades-Generator-for-Kids.html"
-            title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
-            class="text-gray-600 hover:text-blue-600 transition-colors">Charades
-            Generator for Kids</a>
-          <a href="Movies-for-Charades.html" title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
-            class="text-gray-600 hover:text-blue-600 transition-colors">Movies for
-            Charades</a>
-          <a href="Animal-Charades-Game.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
-            class="text-gray-600 hover:text-blue-600 transition-colors">Animal
-            Charades Game</a>
-          <a href="Christmas-Charades.html"
-            title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
-            class="text-gray-600 hover:text-blue-600 transition-colors">Christmas
-            Charades</a>
+          <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+          <a href="Charades-Ideas-for-Adults.html" class="text-blue-600 font-semibold">Charades Ideas for Adults</a>
+          <a href="Charades-Generator-for-Kids.html" class="text-gray-600 hover:text-blue-600 transition-colors">Charades Generator for Kids</a>
+          <a href="Movies-for-Charades.html" class="text-gray-600 hover:text-blue-600 transition-colors">Movies for Charades</a>
+          <a href="Animal-Charades-Game.html" class="text-gray-600 hover:text-blue-600 transition-colors">Animal Charades Game</a>
+          <a href="Christmas-Charades.html" class="text-gray-600 hover:text-blue-600 transition-colors">Christmas Charades</a>
         </div>
       </div>
     </div>
   </nav>
-
-
-
 
   <!-- Page Title -->
   <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-16">
@@ -111,7 +67,6 @@
 
   <!-- Quick Start Game Section -->
   <section id="quick-start-game" class="container mx-auto px-4 py-16">
-    <!-- Difficulty Selection -->
     <div class="text-center mb-8">
       <h3 class="text-2xl font-bold text-gray-800 mb-6">🎯 Select Difficulty Level</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
@@ -132,36 +87,25 @@
 
     <div class="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto text-center">
       <h3 class="text-2xl font-bold text-gray-800 mb-4">🎭 Your Charade</h3>
-
-      <!-- Difficulty Notice -->
       <div id="difficulty-notice" class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-        <p class="text-blue-800 font-medium">🎯 Optional: Select a difficulty level above, or click "Start Game" to
-          begin with mixed difficulty!</p>
+        <p class="text-blue-800 font-medium">🎯 Optional: Select a difficulty level above, or click "Start Game" to begin with mixed difficulty!</p>
       </div>
-
-      <!-- Charade Display Area -->
       <div id="charade-display" class="mb-6">
         <div id="charade-content"
-          class="text-3xl md:text-4xl font-bold text-blue-600 mb-6 p-6 bg-blue-50 rounded-lg min-h-[120px] flex items-center justify-center">
+          class="text-3xl md:text-4xl font-bold text-blue-600 mb-6 p-6 bg-blue-50 rounded-lg min-h-[120px] flex items-center justify-center transition-transform duration-200">
           Click "Start Game" to begin!
         </div>
-
         <div id="difficulty-info" class="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg hidden">
           <p><strong>Difficulty:</strong> <span id="current-difficulty">-</span></p>
           <p><strong>Type:</strong> Adult Charades</p>
         </div>
       </div>
-
-      <!-- Countdown Timer -->
       <div id="countdown-timer" class="mb-6 hidden">
         <div class="text-2xl font-bold text-red-600 mb-2">⏱️ Time Remaining:</div>
-        <div id="timer-display"
-          class="text-4xl font-bold text-red-600 bg-red-50 p-4 rounded-lg border-2 border-red-200">
-          <span id="minutes">0</span>:<span id="seconds">00</span>
+        <div id="timer-display" class="text-4xl font-bold text-red-600 bg-red-50 p-4 rounded-lg border-2 border-red-200">
+          <span id="minutes">2</span>:<span id="seconds">00</span>
         </div>
       </div>
-
-      <!-- Game Controls -->
       <div class="flex flex-wrap justify-center gap-4">
         <button onclick="startGame()" id="start-game-btn"
           class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
@@ -192,47 +136,28 @@
     <div class="text-center mb-12">
       <h2 class="text-4xl font-bold text-gray-800 mb-4">🎯 Choose Your Charades Challenge Level for Adults</h2>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-        Explore three fun charades difficulty levels made for adults. <br>From easy and lighthearted clues to hard and
+        Explore three fun charades difficulty levels made for adults. From easy and lighthearted clues to hard and
         competitive challenges, find the perfect party game ideas for your next game night.
       </p>
     </div>
-
     <div class="grid md:grid-cols-3 gap-6">
       <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl shadow-lg p-8 text-center">
         <div class="text-5xl mb-4">🟢</div>
         <h3 class="text-2xl font-semibold text-gray-800 mb-4">Easy Charades for Adults</h3>
-        <p class="text-gray-700 mb-4">
-          Simple and fun charades ideas for adults, perfect for beginners or casual players. Includes everyday words,
-          familiar actions, and easy clues that keep the game light and enjoyable.
-        </p>
-        <div class="text-sm text-gray-600">
-          <p><strong>Best for:</strong> Family gatherings, mixed-age party games, warm-up rounds</p>
-        </div>
+        <p class="text-gray-700 mb-4">Simple and fun charades ideas for adults, perfect for beginners or casual players. Includes everyday words, familiar actions, and easy clues that keep the game light and enjoyable.</p>
+        <div class="text-sm text-gray-600"><p><strong>Best for:</strong> Family gatherings, mixed-age party games, warm-up rounds</p></div>
       </div>
-
       <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg p-8 text-center">
         <div class="text-5xl mb-4">🟡</div>
         <h3 class="text-2xl font-semibold text-gray-800 mb-4">Medium Charades for Adults</h3>
-        <p class="text-gray-700 mb-4">
-          Balanced charades ideas for adults with a mix of moderately challenging clues. Features pop culture
-          references,
-          clever wordplay, and fun phrases that keep party games engaging and competitive.
-        </p>
-        <div class="text-sm text-gray-600">
-          <p><strong>Best for:</strong> Game night with friends, small parties, friendly competitions</p>
-        </div>
+        <p class="text-gray-700 mb-4">Balanced charades ideas for adults with a mix of moderately challenging clues. Features pop culture references, clever wordplay, and fun phrases that keep party games engaging and competitive.</p>
+        <div class="text-sm text-gray-600"><p><strong>Best for:</strong> Game night with friends, small parties, friendly competitions</p></div>
       </div>
-
       <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl shadow-lg p-8 text-center">
         <div class="text-5xl mb-4">🔴</div>
         <h3 class="text-2xl font-semibold text-gray-800 mb-4">Hard Charades for Adults</h3>
-        <p class="text-gray-700 mb-4">
-          Challenging charades ideas for adults who love brain teasers. Includes abstract concepts, tricky phrases, and
-          sophisticated vocabulary for an intense and exciting game night.
-        </p>
-        <div class="text-sm text-gray-600">
-          <p><strong>Best for:</strong> Expert players, competitive party games, advanced challenges</p>
-        </div>
+        <p class="text-gray-700 mb-4">Challenging charades ideas for adults who love brain teasers. Includes abstract concepts, tricky phrases, and sophisticated vocabulary for an intense and exciting game night.</p>
+        <div class="text-sm text-gray-600"><p><strong>Best for:</strong> Expert players, competitive party games, advanced challenges</p></div>
       </div>
     </div>
   </section>
@@ -241,62 +166,22 @@
   <section class="container mx-auto px-4 py-16 bg-white">
     <div class="text-center mb-12">
       <h2 class="text-4xl font-bold text-gray-800 mb-4">🎭 What is Charades?</h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-        Discover the classic party game loved by adults and families — from movie charades to action charades —
-        and learn the simple rules that make it fun for everyone.
-
-      </p>
     </div>
-
     <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-      <!-- What is Charades -->
       <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-8">
         <div class="text-4xl mb-4 text-center">🎬</div>
         <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">What is Charades?</h3>
-        <p class="text-gray-700 leading-relaxed">
-          Charades is a timeless guessing game where one player acts out a word or phrase without speaking,
-          while others try to guess it before time runs out. Our adult charades generator offers challenging variations
-          including movie charades, action charades, book charades, and themed adult charades for sophisticated players.
-        </p>
-        <p class="text-gray-700 leading-relaxed mt-4">
-          Players use only body language, facial expressions, and gestures to communicate.
-          It's a perfect activity for adult game nights, holiday gatherings, corporate events, and team building —
-          with endless ideas available through our free charades generator for adults with easy, medium, and hard
-          difficulty levels.
-
-        </p>
+        <p class="text-gray-700 leading-relaxed">Charades is a timeless guessing game where one player acts out a word or phrase without speaking, while others try to guess it before time runs out. Our adult charades generator offers challenging variations including movie charades, action charades, book charades, and themed adult charades for sophisticated players.</p>
       </div>
-
-      <!-- Game Rules -->
       <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl shadow-lg p-8">
         <div class="text-4xl mb-4 text-center">📋</div>
         <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Simple Charades Rules</h3>
         <div class="space-y-4 text-gray-700">
-          <div class="flex items-start space-x-3">
-            <span class="text-blue-600 font-bold text-lg">1.</span>
-            <p><strong>No Talking:</strong> The actor cannot speak, make sounds, or mouth words — only gestures and
-              movements are allowed.</p>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-blue-600 font-bold text-lg">2.</span>
-            <p><strong>Time Limit:</strong> Most rounds last 60–90 seconds. Shorter times add challenge, while longer
-              rounds are great for beginners or complex charades.</p>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-blue-600 font-bold text-lg">3.</span>
-            <p><strong>Guessing:</strong> Teammates can shout guesses at any time. The round ends when the correct
-              answer is given or time runs out.</p>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-blue-600 font-bold text-lg">4.</span>
-            <p><strong>Scoring:</strong> Award points for correct answers, bonus points for quick guesses, and extra
-              credit for creative acting.</p>
-          </div>
-          <div class="flex items-start space-x-3">
-            <span class="text-blue-600 font-bold text-lg">5.</span>
-            <p><strong>Categories:</strong> Choose from popular sets like movies, books, actions, holiday
-              themes, or even hard charades for experts.</p>
-          </div>
+          <div class="flex items-start space-x-3"><span class="text-blue-600 font-bold text-lg">1.</span><p><strong>No Talking:</strong> Only gestures and movements are allowed.</p></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-600 font-bold text-lg">2.</span><p><strong>Time Limit:</strong> Most rounds last 60–90 seconds.</p></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-600 font-bold text-lg">3.</span><p><strong>Guessing:</strong> Teammates can shout guesses at any time.</p></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-600 font-bold text-lg">4.</span><p><strong>Scoring:</strong> Award points for correct answers.</p></div>
+          <div class="flex items-start space-x-3"><span class="text-blue-600 font-bold text-lg">5.</span><p><strong>Categories:</strong> Movies, books, actions, holiday themes, and more.</p></div>
         </div>
       </div>
     </div>
@@ -307,287 +192,170 @@
     <div class="container mx-auto px-4">
       <div class="text-center mb-6">
         <h3 class="text-2xl font-bold mb-4">Charades Game Ideas & Generator</h3>
-        <p class="text-gray-300 text-sm max-w-3xl mx-auto">Play free charades games online with our Charades Generator.
-          Discover hundreds of fun game ideas for kids, adults, and families — including movie charades, Christmas party
-          games, animal acting ideas, and more. Perfect for parties, classroom activities, and family game nights.
-        </p>
+        <p class="text-gray-300 text-sm max-w-3xl mx-auto">Play free charades games online with our Charades Generator. Discover hundreds of fun game ideas for kids, adults, and families.</p>
       </div>
       <div class="flex flex-col items-center gap-4 text-sm">
-        <a href="/" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
-          class="text-gray-300 hover:text-white transition-colors">Home</a>
-        <a href="Charades-Ideas-for-Adults.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
-          class="text-blue-600 font-semibold">Charades
-          Ideas for Adults</a>
-        <a href="Charades-Generator-for-Kids.html"
-          title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
-          class="text-gray-300 hover:text-white transition-colors">Charades
-          Generator for Kids</a>
-        <a href="Movies-for-Charades.html" title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
-          class="text-gray-300 hover:text-white transition-colors">Movies for
-          Charades</a>
-        <a href="Animal-Charades-Game.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
-          class="text-gray-300 hover:text-white transition-colors">Animal
-          Charades Game</a>
-        <a href="Christmas-Charades.html"
-          title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
-          class="text-gray-300 hover:text-white transition-colors">Christmas
-          Charades</a>
+        <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
+        <a href="Charades-Ideas-for-Adults.html" class="text-blue-400 font-semibold">Charades Ideas for Adults</a>
+        <a href="Charades-Generator-for-Kids.html" class="text-gray-300 hover:text-white transition-colors">Charades Generator for Kids</a>
+        <a href="Movies-for-Charades.html" class="text-gray-300 hover:text-white transition-colors">Movies for Charades</a>
+        <a href="Animal-Charades-Game.html" class="text-gray-300 hover:text-white transition-colors">Animal Charades Game</a>
+        <a href="Christmas-Charades.html" class="text-gray-300 hover:text-white transition-colors">Christmas Charades</a>
       </div>
       <div class="border-t border-gray-700 mt-6 pt-4 text-center">
-        <p class="text-gray-400 text-sm">&copy; 2024 Charades Generator – The best free charades ideas and game lists
-          for all ages. All rights reserved.</p>
+        <p class="text-gray-400 text-sm">&copy; 2024 Charades Generator – The best free charades ideas and game lists for all ages. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Mobile menu toggle
-    document.getElementById('mobile-menu-btn').addEventListener('click', function () {
+    // ── Mobile menu ──────────────────────────────────────────
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
 
-    // Smooth scrolling to sections
-    function scrollToSection(sectionId) {
-      document.getElementById(sectionId).scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
-
-    // Game state variables
+    // ── Game state ───────────────────────────────────────────
     let selectedDifficulty = null;
-    let gameActive = false;
-    let gameTimer = null;
-    let timeLeft = 120; // 90 seconds default
-    let currentCharade = '';
+    let gameActive  = false;
+    let gamePaused  = false;
+    let timeLeft    = 120;
     let charadeList = [];
+    let currentWord = '';
 
-    // Difficulty selection
-    function selectDifficulty(difficulty) {
-      selectedDifficulty = difficulty;
-
-      // Reset all button highlights
-      document.querySelectorAll('#easy-btn, #medium-btn, #hard-btn').forEach(btn => {
-        btn.classList.remove('ring-4', 'ring-blue-300');
+    // ── Difficulty selection ─────────────────────────────────
+    function selectDifficulty(d) {
+      selectedDifficulty = d;
+      ['easy','medium','hard'].forEach(x => {
+        document.getElementById(x+'-btn').classList.remove('ring-4','ring-blue-300');
       });
-
-      // Highlight selected button
-      const selectedBtn = document.getElementById(`${difficulty}-btn`);
-      if (selectedBtn) {
-        selectedBtn.classList.add('ring-4', 'ring-blue-300');
-      }
-
-      // Update notice text
-      document.getElementById('difficulty-notice').innerHTML = `<p class="text-blue-800 font-medium">Selected: <strong>${difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}</strong> difficulty. Ready to start!</p>`;
-
-      // Load charades for selected difficulty
-      loadCharadesForDifficulty(difficulty);
+      document.getElementById(d+'-btn').classList.add('ring-4','ring-blue-300');
+      document.getElementById('difficulty-notice').innerHTML =
+        `<p class="text-blue-800 font-medium">Selected: <strong>${d.charAt(0).toUpperCase()+d.slice(1)}</strong> difficulty. Ready to start!</p>`;
+      charadeList = (CHARADES_VOCABULARY?.adult?.[d] || []);
     }
 
-
-    // Load charades based on difficulty
-    function loadCharadesForDifficulty(difficulty) {
-      // Use the comprehensive vocabulary database
-      const difficultyData = CHARADES_VOCABULARY.adult;
-
-      charadeList = difficultyData[difficulty] || [];
-      console.log(`Loaded ${charadeList.length} charades for ${difficulty} difficulty`);
-    }
-
-    // Check URL hash and parameters on page load to auto-select difficulty
-    function checkUrlHash() {
-      const hash = window.location.hash;
-      const urlParams = new URLSearchParams(window.location.search);
-      const difficulty = urlParams.get('difficulty');
-
-      if (hash === '#quick-start-game') {
-        // Auto-scroll to quick start section
-        setTimeout(() => {
-          scrollToSection('quick-start-game');
-
-          // Auto-select difficulty if provided in URL
-          if (difficulty && ['easy', 'medium', 'hard'].includes(difficulty)) {
-            selectDifficulty(difficulty);
-          }
-        }, 100);
-      }
-    }
-
-    // Initialize page
-    document.addEventListener('DOMContentLoaded', function () {
-      checkUrlHash();
-    });
-
-    // Load all difficulties mixed
-    function loadAllDifficulties() {
-      const allData = CHARADES_VOCABULARY.adult;
-
-      // Combine all difficulties into one array
-      charadeList = [];
-      Object.values(allData).forEach(difficultyItems => {
-        charadeList = charadeList.concat(difficultyItems);
-      });
-
-      selectedDifficulty = 'mixed';
-    }
-
-    // Start the game
+    // ── Start ────────────────────────────────────────────────
     function startGame() {
-      // Auto-load mixed difficulties if none selected
       if (!selectedDifficulty || charadeList.length === 0) {
-        loadAllDifficulties();
-        document.getElementById('difficulty-notice').innerHTML = `<p class="text-green-800 font-medium">Started with <strong>Mixed Difficulty</strong> - Easy, Medium & Hard combined!</p>`;
+        // Mix all difficulties
+        const v = CHARADES_VOCABULARY?.adult || {};
+        charadeList = [...(v.easy||[]), ...(v.medium||[]), ...(v.hard||[])];
+        selectedDifficulty = 'mixed';
+        document.getElementById('difficulty-notice').innerHTML =
+          `<p class="text-green-800 font-medium">Started with <strong>Mixed Difficulty</strong>!</p>`;
       }
-
-      // Ensure any existing timer is cleared
-      if (gameTimer) {
-        clearInterval(gameTimer);
-        gameTimer = null;
-      }
-
-      gameActive = true;
-      timeLeft = 120; // Reset timer
-
-      // Show game controls
-      document.getElementById('start-game-btn').classList.add('hidden');
-      document.getElementById('next-charade-btn').classList.remove('hidden');
-      document.getElementById('hint-btn').classList.remove('hidden');
-      document.getElementById('pause-game-btn').classList.remove('hidden');
-      document.getElementById('reset-game-btn').classList.remove('hidden');
-
-      // Show timer
+      SafeTimer.stop('adult');   // clear any stale timer
+      gameActive  = true;
+      gamePaused  = false;
+      timeLeft    = 120;
+      _setButtons(true);
       document.getElementById('countdown-timer').classList.remove('hidden');
-
-      // Generate first charade
-      generateRandomCharade();
-
-      // Start countdown
-      startTimer();
+      _nextWord();
+      _startTimer();
     }
 
-    // Generate random charade
-    function generateRandomCharade() {
-      if (charadeList.length > 0) {
-        const randomIndex = Math.floor(Math.random() * charadeList.length);
-        currentCharade = charadeList[randomIndex];
-        document.getElementById('charade-content').textContent = currentCharade;
-      }
-    }
-
-    // Next charade
-    function nextCharade() {
-      generateRandomCharade();
-      timeLeft = 120;
-      updateTimerDisplay();
-      document.getElementById('difficulty-info').classList.add('hidden');
-      document.getElementById('hint-btn').textContent = '💡 Hint';
-
-      if (gameActive) {
-        startTimer();
-      }
-    }
-
-    // Pause game
-    function pauseGame() {
-      if (gameActive) {
-        gameActive = false;
-        if (gameTimer) {
-          clearInterval(gameTimer);
-          gameTimer = null;
-        }
-        document.getElementById('pause-game-btn').textContent = '▶️ Resume';
-      } else {
-        gameActive = true;
-        startTimer();
-        document.getElementById('pause-game-btn').textContent = '⏸️ Pause';
-      }
-    }
-
-    // Reset game
-    function resetGame() {
-      gameActive = false;
-      if (gameTimer) {
-        clearInterval(gameTimer);
-        gameTimer = null;
-      }
-
-      document.getElementById('start-game-btn').classList.remove('hidden');
-      document.getElementById('next-charade-btn').classList.add('hidden');
-      document.getElementById('hint-btn').classList.add('hidden');
-      document.getElementById('pause-game-btn').classList.add('hidden');
-      document.getElementById('reset-game-btn').classList.add('hidden');
-      document.getElementById('countdown-timer').classList.add('hidden');
-      document.getElementById('difficulty-info').classList.add('hidden');
-      document.getElementById('charade-content').textContent = 'Click "Start Game" to begin!';
-      document.getElementById('pause-game-btn').textContent = '⏸️ Pause';
-      document.getElementById('hint-btn').textContent = '💡 Hint';
-    }
-
-    // Start timer
-    function startTimer() {
-      // Clear any existing timer first
-      if (gameTimer) {
-        clearInterval(gameTimer);
-      }
-
-      gameTimer = setInterval(() => {
-        if (gameActive && timeLeft > 0) {
-          timeLeft--;
-          updateTimerDisplay();
-        } else if (timeLeft <= 0) {
-          endGame();
+    // ── Timer ────────────────────────────────────────────────
+    function _startTimer() {
+      SafeTimer.start('adult', () => {
+        if (gamePaused) return;
+        timeLeft--;
+        _renderTimer();
+        if (timeLeft <= 0) {
+          SafeTimer.stop('adult');
+          showTimeUpOverlay(currentWord, () => {
+            timeLeft = 120;
+            _renderTimer();
+            _nextWord();
+            gamePaused = false;
+            _startTimer();
+          });
         }
       }, 1000);
     }
 
-    // Update timer display
-    function updateTimerDisplay() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById('minutes').textContent = minutes;
-      document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    function _renderTimer() {
+      document.getElementById('minutes').textContent = Math.floor(timeLeft/60);
+      document.getElementById('seconds').textContent = String(timeLeft%60).padStart(2,'0');
     }
 
-    // Show hint
+    // ── Word ─────────────────────────────────────────────────
+    function _nextWord() {
+      currentWord = charadeList[Math.floor(Math.random()*charadeList.length)] || '';
+      const el = document.getElementById('charade-content');
+      el.textContent = currentWord;
+      el.style.transform = 'scale(1.04)';
+      setTimeout(() => { el.style.transform = ''; }, 200);
+      document.getElementById('difficulty-info').classList.add('hidden');
+    }
+
+    function nextCharade() {
+      if (!gameActive || gamePaused) return;
+      timeLeft = 120;
+      _renderTimer();
+      _nextWord();
+    }
+
+    // ── Pause ────────────────────────────────────────────────
+    function pauseGame() {
+      if (!gameActive) return;
+      gamePaused = !gamePaused;
+      const btn = document.getElementById('pause-game-btn');
+      btn.textContent = gamePaused ? '▶️ Resume' : '⏸️ Pause';
+    }
+
+    // ── Reset ────────────────────────────────────────────────
+    function resetGame() {
+      gameActive = false;
+      gamePaused = false;
+      SafeTimer.stop('adult');
+      document.getElementById('charade-content').textContent = 'Click "Start Game" to begin!';
+      document.getElementById('countdown-timer').classList.add('hidden');
+      document.getElementById('difficulty-info').classList.add('hidden');
+      _setButtons(false);
+    }
+
+    // ── Hint ─────────────────────────────────────────────────
     function showHint() {
-      const difficultyInfo = document.getElementById('difficulty-info');
-      if (difficultyInfo.classList.contains('hidden')) {
-        difficultyInfo.classList.remove('hidden');
-        let difficultyText = selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1);
-        if (selectedDifficulty === 'mixed') {
-          difficultyText = 'Mixed (Easy + Medium + Hard)';
-        }
-        document.getElementById('current-difficulty').textContent = difficultyText;
+      const info = document.getElementById('difficulty-info');
+      const isHidden = info.classList.contains('hidden');
+      if (isHidden) {
+        document.getElementById('current-difficulty').textContent =
+          selectedDifficulty === 'mixed' ? 'Mixed (Easy + Medium + Hard)'
+          : (selectedDifficulty?.charAt(0).toUpperCase() + selectedDifficulty?.slice(1) || '—');
+        info.classList.remove('hidden');
         document.getElementById('hint-btn').textContent = '🔍 Hide Info';
       } else {
-        difficultyInfo.classList.add('hidden');
+        info.classList.add('hidden');
         document.getElementById('hint-btn').textContent = '💡 Hint';
       }
     }
 
-    // End game
-    function endGame() {
-      gameActive = false;
-      if (gameTimer) {
-        clearInterval(gameTimer);
-        gameTimer = null;
+    // ── Button state ─────────────────────────────────────────
+    function _setButtons(active) {
+      const show = active
+        ? ['next-charade-btn','hint-btn','pause-game-btn','reset-game-btn']
+        : ['start-game-btn'];
+      const hide = active
+        ? ['start-game-btn']
+        : ['next-charade-btn','hint-btn','pause-game-btn','reset-game-btn'];
+      show.forEach(id => document.getElementById(id)?.classList.remove('hidden'));
+      hide.forEach(id => document.getElementById(id)?.classList.add('hidden'));
+      if (active) {
+        const p = document.getElementById('pause-game-btn');
+        if (p) p.textContent = '⏸️ Pause';
       }
-      alert('Time\'s up! The answer was: ' + currentCharade);
-      resetGame();
     }
+
+    // ── URL auto-select ──────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      const d = new URLSearchParams(location.search).get('difficulty');
+      if (d && ['easy','medium','hard'].includes(d)) selectDifficulty(d);
+    });
   </script>
 
-  <div style="display: none;">
-    <!-- Google tag (gtag.js) -->
+  <div style="display:none;">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9TKDY0SV6"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-
-      gtag('config', 'G-M9TKDY0SV6');
-    </script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-M9TKDY0SV6');</script>
   </div>
-
 </body>
-
 </html>

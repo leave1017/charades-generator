@@ -1,31 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Charades Generator for Kids – Easy Words Ages 5-12, Play Free Now</title>
-  <meta name="description"
-    content="Kid-friendly charades words ready in one click. Disney, animals, actions & more. Built-in timer, no reading required. Free to play, no signup.">
+  <meta name="description" content="Kid-friendly charades words ready in one click. Disney, animals, actions & more. Built-in timer, no reading required. Free to play, no signup.">
   <link rel="canonical" href="https://www.charades-generator.org/Charades-Generator-for-Kids">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="charades-vocabulary-database.js"></script>
+  <script src="game-ui.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'AW-17617716104');
-</script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4601450349641821"
-     crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-17617716104');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4601450349641821" crossorigin="anonymous"></script>
 </head>
 
-<!-- Navigation Bar -->
 <nav class="bg-white shadow-lg sticky top-0 z-50">
   <div class="container mx-auto px-4">
     <div class="flex items-center">
@@ -33,82 +22,44 @@
         <div class="bg-gradient-to-r from-blue-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center">
           <span class="text-white font-bold text-lg">C</span>
         </div>
-        <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
-          class="text-2xl font-bold text-gray-800">Charades Generator</a>
+        <a href="index.html" class="text-2xl font-bold text-gray-800">Charades Generator</a>
       </div>
-
-      <!-- Desktop Navigation -->
       <div class="hidden md:flex space-x-8 ml-auto">
-        <a href="/" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
-          class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
-        <a href="Charades-Ideas-for-Adults.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
-          class="text-gray-600 hover:text-blue-600 transition-colors">Charades
-          Ideas for Adults</a>
-        <a href="Charades-Generator-for-Kids.html"
-          title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
-          class="text-blue-600 font-semibold">Charades
-          Generator for Kids</a>
-        <a href="Movies-for-Charades.html" title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
-          class="text-gray-600 hover:text-blue-600 transition-colors">Movies for
-          Charades</a>
-        <a href="Animal-Charades-Game.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
-          class="text-gray-600 hover:text-blue-600 transition-colors">Animal
-          Charades Game</a>
-        <a href="Christmas-Charades.html"
-          title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
-          class="text-gray-600 hover:text-blue-600 transition-colors">Christmas
-          Charades</a>
+        <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+        <a href="Charades-Ideas-for-Adults.html" class="text-gray-600 hover:text-blue-600 transition-colors">Charades Ideas for Adults</a>
+        <a href="Charades-Generator-for-Kids.html" class="text-blue-600 font-semibold">Charades Generator for Kids</a>
+        <a href="Movies-for-Charades.html" class="text-gray-600 hover:text-blue-600 transition-colors">Movies for Charades</a>
+        <a href="Animal-Charades-Game.html" class="text-gray-600 hover:text-blue-600 transition-colors">Animal Charades Game</a>
+        <a href="Christmas-Charades.html" class="text-gray-600 hover:text-blue-600 transition-colors">Christmas Charades</a>
       </div>
-
-      <!-- Mobile Menu Button -->
       <button id="mobile-menu-btn" class="md:hidden ml-auto p-2">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </div>
-
-    <!-- Mobile Navigation -->
     <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-gray-200">
       <div class="flex flex-col space-y-3 pt-4">
-        <a href="/" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
-          class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
-        <a href="Charades-Ideas-for-Adults.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
-          class="text-gray-600 hover:text-blue-600 transition-colors">Charades
-          Ideas for Adults</a>
-        <a href="Charades-Generator-for-Kids.html"
-          title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
-          class="text-blue-600 font-semibold">Charades
-          Generator for Kids</a>
-        <a href="Movies-for-Charades.html" title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
-          class="text-gray-600 hover:text-blue-600 transition-colors">Movies for
-          Charades</a>
-        <a href="Animal-Charades-Game.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
-          class="text-gray-600 hover:text-blue-600 transition-colors">Animal
-          Charades Game</a>
-        <a href="Christmas-Charades.html"
-          title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
-          class="text-gray-600 hover:text-blue-600 transition-colors">Christmas
-          Charades</a>
+        <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+        <a href="Charades-Ideas-for-Adults.html" class="text-gray-600 hover:text-blue-600 transition-colors">Charades Ideas for Adults</a>
+        <a href="Charades-Generator-for-Kids.html" class="text-blue-600 font-semibold">Charades Generator for Kids</a>
+        <a href="Movies-for-Charades.html" class="text-gray-600 hover:text-blue-600 transition-colors">Movies for Charades</a>
+        <a href="Animal-Charades-Game.html" class="text-gray-600 hover:text-blue-600 transition-colors">Animal Charades Game</a>
+        <a href="Christmas-Charades.html" class="text-gray-600 hover:text-blue-600 transition-colors">Christmas Charades</a>
       </div>
     </div>
   </div>
-  </div>
 </nav>
 
-<!-- Page Title -->
 <div class="bg-gradient-to-r from-green-500 to-blue-600 text-white py-16">
   <div class="container mx-auto px-4 text-center">
     <h1 class="text-4xl md:text-6xl font-bold mb-6">Charades Generator for Kids</h1>
     <p class="text-xl md:text-2xl mb-8">Explore the ultimate Charades Generator for Kids, featuring easy charades,
-      Disney themes, and family-friendly party games. <br>Perfect for kids of all ages, classrooms,
-      and fun game nights.</p>
+      Disney themes, and family-friendly party games.</p>
   </div>
 </div>
 
-<!-- Quick Start Game Section -->
 <section id="quick-start-game" class="container mx-auto px-4 py-16">
-  <!-- Theme Selection -->
   <div class="text-center mb-8">
     <h3 class="text-2xl font-bold text-gray-800 mb-6">🎯 Select Theme</h3>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
@@ -129,17 +80,12 @@
 
   <div class="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto text-center">
     <h3 class="text-2xl font-bold text-gray-800 mb-4">🎭 Your Charade</h3>
-
-    <!-- Theme Notice -->
     <div id="theme-notice" class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-      <p class="text-blue-800 font-medium">🎯 Optional: Select a theme above, or click "Start Game" to begin with all
-        themes mixed!</p>
+      <p class="text-blue-800 font-medium">🎯 Optional: Select a theme above, or click "Start Game" to begin with all themes mixed!</p>
     </div>
-
-    <!-- Charade Display Area -->
     <div id="charade-display" class="mb-6">
       <div id="charade-content"
-        class="text-3xl md:text-4xl font-bold text-blue-600 mb-6 p-6 bg-blue-50 rounded-lg min-h-[120px] flex items-center justify-center">
+        class="text-3xl md:text-4xl font-bold text-blue-600 mb-6 p-6 bg-blue-50 rounded-lg min-h-[120px] flex items-center justify-center transition-transform duration-200">
         Click "Start Game" to begin!
       </div>
       <div id="theme-info" class="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg hidden">
@@ -147,16 +93,12 @@
         <p><strong>Type:</strong> Kids Charades</p>
       </div>
     </div>
-
-    <!-- Countdown Timer -->
     <div id="countdown-timer" class="mb-6 hidden">
       <div class="text-2xl font-bold text-red-600 mb-2">⏱️ Time Remaining:</div>
       <div id="timer-display" class="text-4xl font-bold text-red-600 bg-red-50 p-4 rounded-lg border-2 border-red-200">
-        <span id="minutes">0</span>:<span id="seconds">00</span>
+        <span id="minutes">2</span>:<span id="seconds">00</span>
       </div>
     </div>
-
-    <!-- Game Controls -->
     <div class="flex flex-wrap justify-center gap-4">
       <button onclick="startGame()" id="start-game-btn"
         class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
@@ -182,475 +124,185 @@
   </div>
 </section>
 
-<!-- Benefits of Charades for Kids Section -->
+<!-- Benefits Section -->
 <section class="container mx-auto px-4 py-16">
   <div class="text-center mb-12">
     <h2 class="text-4xl font-bold text-gray-800 mb-4">🌟 Why Charades is Great for Kids</h2>
-    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-      Discover the benefits of playing charades for kids and how this fun party game helps children learn, stay active,
-      and
-      connect with family and friends. From easy picture charades to Disney-themed clues, these activities combine
-      entertainment with valuable life skills.
-    </p>
+    <p class="text-xl text-gray-600 max-w-3xl mx-auto">Discover the benefits of playing charades for kids and how this fun party game helps children learn, stay active, and connect with family and friends.</p>
   </div>
-
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl shadow-lg p-8 text-center">
       <div class="text-5xl mb-4">🧠</div>
       <h3 class="text-2xl font-semibold text-gray-800 mb-4">Boosts Creativity</h3>
-      <p class="text-gray-700">
-        Playing charades for kids encourages creative thinking by acting out clues through gestures and body language.
-        Picture charades and themed games like Disney charades inspire imagination and storytelling skills.
-      </p>
+      <p class="text-gray-700">Playing charades for kids encourages creative thinking by acting out clues through gestures and body language.</p>
     </div>
-
     <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl shadow-lg p-8 text-center">
       <div class="text-5xl mb-4">💬</div>
       <h3 class="text-2xl font-semibold text-gray-800 mb-4">Improves Communication</h3>
-      <p class="text-gray-700">
-        Charades teaches children to express ideas without words, improving non-verbal communication. These easy
-        charades
-        games help kids understand gestures, emotions, and teamwork.
-      </p>
+      <p class="text-gray-700">Charades teaches children to express ideas without words, improving non-verbal communication.</p>
     </div>
-
     <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-lg p-8 text-center">
       <div class="text-5xl mb-4">🤝</div>
       <h3 class="text-2xl font-semibold text-gray-800 mb-4">Builds Confidence</h3>
-      <p class="text-gray-700">
-        Acting out charades in front of others helps shy kids gain confidence. Family game nights create a safe
-        environment for children to perform and enjoy the spotlight.
-      </p>
+      <p class="text-gray-700">Acting out charades in front of others helps shy kids gain confidence in a safe, fun environment.</p>
     </div>
-
     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl shadow-lg p-8 text-center">
       <div class="text-5xl mb-4">🏃‍♂️</div>
-      <h3 class="text-2xl font-semibold text-gray-800 mb-4">Encourages Physical Activity</h3>
-      <p class="text-gray-700">
-        Charades keeps kids active while improving coordination and motor skills. This fun party game gets children
-        moving
-        and provides healthy, screen-free entertainment.
-      </p>
+      <h3 class="text-2xl font-semibold text-gray-800 mb-4">Encourages Activity</h3>
+      <p class="text-gray-700">Charades keeps kids active while improving coordination and motor skills.</p>
     </div>
-
     <div class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl shadow-lg p-8 text-center">
       <div class="text-5xl mb-4">👥</div>
       <h3 class="text-2xl font-semibold text-gray-800 mb-4">Develops Social Skills</h3>
-      <p class="text-gray-700">
-        Kids learn patience, teamwork, and turn-taking while playing charades. These skills are essential for building
-        friendships and working together during group games.
-      </p>
+      <p class="text-gray-700">Kids learn patience, teamwork, and turn-taking while playing charades.</p>
     </div>
-
     <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl shadow-lg p-8 text-center">
       <div class="text-5xl mb-4">📚</div>
       <h3 class="text-2xl font-semibold text-gray-800 mb-4">Enhances Learning</h3>
-      <p class="text-gray-700">
-        Charades improves vocabulary, memory, and critical thinking. Using themed sets like animal charades or Disney
-        charades makes learning new concepts more fun and memorable.
-      </p>
+      <p class="text-gray-700">Charades improves vocabulary, memory, and critical thinking in a fun way.</p>
     </div>
   </div>
 </section>
 
-<!-- What is Charades Section -->
-<section class="container mx-auto px-4 py-16 bg-white">
-  <div class="text-center mb-12">
-    <h2 class="text-4xl font-bold text-gray-800 mb-4">🎭 What is Charades?</h2>
-    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-      Discover the fun guessing game loved by children and families — from simple actions to favorite characters —
-      and learn the easy rules that make it perfect for kids of all ages.
-    </p>
-  </div>
-  <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-    <!-- What is Charades -->
-    <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl shadow-lg p-8">
-      <div class="text-4xl mb-4 text-center">🎬</div>
-      <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">What is Charades?</h3>
-      <p class="text-gray-700 leading-relaxed">
-        Charades is a fun guessing game where one player acts out a word or phrase without speaking,
-        while others try to guess it before time runs out. Our kids charades generator offers age-appropriate
-        variations
-        including simple actions, favorite characters, animals, and themed charades for children.
-      </p>
-      <p class="text-gray-700 leading-relaxed mt-4">
-        Players use only body language, facial expressions, and gestures to communicate.
-        It's a perfect activity for family game nights, birthday parties, school events, and playdates —
-        with endless kid-friendly ideas available through our free charades generator for children with primary
-        school, middle school, and high school difficulty levels.
-      </p>
-    </div>
-    <!-- Game Rules -->
-    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl shadow-lg p-8">
-      <div class="text-4xl mb-4 text-center">📋</div>
-      <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">Simple Charades Rules</h3>
-      <div class="space-y-4 text-gray-700">
-        <div class="flex items-start space-x-3">
-          <span class="text-blue-600 font-bold text-lg">1.</span>
-          <p><strong>No Talking:</strong> The actor cannot speak, make sounds, or mouth words — only gestures and
-            movements are allowed.</p>
-        </div>
-        <div class="flex items-start space-x-3">
-          <span class="text-blue-600 font-bold text-lg">2.</span>
-          <p><strong>Time Limit:</strong> Most rounds last 60–90 seconds. Shorter times add challenge, while longer
-            rounds are great for beginners or complex charades.</p>
-        </div>
-        <div class="flex items-start space-x-3">
-          <span class="text-blue-600 font-bold text-lg">3.</span>
-          <p><strong>Guessing:</strong> Teammates can shout guesses at any time. The round ends when the correct
-            answer is given or time runs out.</p>
-        </div>
-        <div class="flex items-start space-x-3">
-          <span class="text-blue-600 font-bold text-lg">4.</span>
-          <p><strong>Scoring:</strong> Award points for correct answers, bonus points for quick guesses, and extra
-            credit for creative acting.</p>
-        </div>
-        <div class="flex items-start space-x-3">
-          <span class="text-blue-600 font-bold text-lg">5.</span>
-          <p><strong>Categories:</strong> Choose from popular sets like animals, actions, characters, holiday
-            themes, or even challenging charades for older kids.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
 <footer class="bg-gray-800 text-white py-8">
   <div class="container mx-auto px-4">
     <div class="text-center mb-6">
       <h3 class="text-2xl font-bold mb-4">Charades Game Ideas & Generator</h3>
-      <p class="text-gray-300 text-sm max-w-3xl mx-auto">Play free charades games online with our Charades Generator.
-        Discover hundreds of fun game ideas for kids, adults, and families — including movie charades, Christmas party
-        games, animal acting ideas, and more. Perfect for parties, classroom activities, and family game nights.
-      </p>
+      <p class="text-gray-300 text-sm max-w-3xl mx-auto">Play free charades games online with our Charades Generator.</p>
     </div>
     <div class="flex flex-col items-center gap-4 text-sm">
-      <a href="/" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
-        class="text-gray-300 hover:text-white transition-colors">Home</a>
-      <a href="Charades-Ideas-for-Adults.html" title='Charades Ideas for Adults – Funny, Hard & Movie Game Themes'
-        class="text-gray-300 hover:text-white transition-colors">Charades
-        Ideas for Adults</a>
-      <a href="Charades-Generator-for-Kids.html"
-        title='Charades Generator for Kids – Easy & Fun Game Ideas for All Ages'
-        class="text-blue-600 font-semibold">Charades
-        Generator for Kids</a>
-      <a href="Movies-for-Charades.html" title='Movies for Charades – Best Movie Ideas & Guess-the-Movie Game List'
-        class="text-gray-300 hover:text-white transition-colors">Movies for
-        Charades</a>
-      <a href="Animal-Charades-Game.html" title='Animal Charades Game – Fun Animal Acting Ideas for All Ages'
-        class="text-gray-300 hover:text-white transition-colors">Animal
-        Charades Game</a>
-      <a href="Christmas-Charades.html"
-        title='Christmas Charades Generator – Fun Holiday Game Ideas for Family & Friends'
-        class="text-gray-300 hover:text-white transition-colors">Christmas
-        Charades</a>
+      <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
+      <a href="Charades-Ideas-for-Adults.html" class="text-gray-300 hover:text-white transition-colors">Charades Ideas for Adults</a>
+      <a href="Charades-Generator-for-Kids.html" class="text-blue-400 font-semibold">Charades Generator for Kids</a>
+      <a href="Movies-for-Charades.html" class="text-gray-300 hover:text-white transition-colors">Movies for Charades</a>
+      <a href="Animal-Charades-Game.html" class="text-gray-300 hover:text-white transition-colors">Animal Charades Game</a>
+      <a href="Christmas-Charades.html" class="text-gray-300 hover:text-white transition-colors">Christmas Charades</a>
     </div>
     <div class="border-t border-gray-700 mt-6 pt-4 text-center">
-      <p class="text-gray-400 text-sm">&copy; 2024 Charades Generator – The best free charades ideas and game lists for
-        all ages. All rights reserved.
-      </p>
+      <p class="text-gray-400 text-sm">&copy; 2024 Charades Generator – All rights reserved.</p>
     </div>
   </div>
 </footer>
 
 <script>
-  // Global variables
+  document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+
   let selectedTheme = null;
-  let gameActive = false;
-  let gameTimer = null;
-  let timeLeft = 120;
-  let currentCharade = '';
-  let charadeList = [];
+  let gameActive    = false;
+  let gamePaused    = false;
+  let timeLeft      = 120;
+  let charadeList   = [];
+  let currentWord   = '';
 
-  // Check URL hash and parameters on page load
-  function checkUrlHash() {
-    const hash = window.location.hash;
-    const urlParams = new URLSearchParams(window.location.search);
-    const theme = urlParams.get('theme');
-
-    if (hash === '#quick-start-game') {
-      // Auto-scroll to quick start section
-      setTimeout(() => {
-        scrollToSection('quick-start-game');
-
-        // Auto-select theme if provided in URL
-        if (theme && ['disney', 'halloween', 'kids'].includes(theme)) {
-          selectTheme(theme);
-        }
-      }, 100);
-    }
+  function selectTheme(t) {
+    selectedTheme = t;
+    ['disney','halloween','kids'].forEach(x =>
+      document.getElementById(x+'-btn').classList.remove('ring-4','ring-blue-300'));
+    document.getElementById(t+'-btn').classList.add('ring-4','ring-blue-300');
+    document.getElementById('theme-notice').innerHTML =
+      `<p class="text-blue-800 font-medium">Selected: <strong>${t.charAt(0).toUpperCase()+t.slice(1)}</strong> theme. Ready to start!</p>`;
+    charadeList = CHARADES_VOCABULARY?.kids?.[t] || [];
   }
 
-  // Theme selection
-  function selectTheme(theme) {
-    selectedTheme = theme;
-
-    // Reset all button highlights
-    document.querySelectorAll('#disney-btn, #halloween-btn, #kids-btn').forEach(btn => {
-      btn.classList.remove('ring-4', 'ring-blue-300');
-    });
-
-    // Highlight selected button
-    const selectedBtn = document.getElementById(`${theme}-btn`);
-    if (selectedBtn) {
-      selectedBtn.classList.add('ring-4', 'ring-blue-300');
-    }
-
-    // Update notice text
-    document.getElementById('theme-notice').innerHTML = `<p class="text-blue-800 font-medium">Selected: <strong>${theme.charAt(0).toUpperCase() + theme.slice(1)}</strong> theme. Ready to start!</p>`;
-
-    // Load charades for selected theme
-    loadCharadesForTheme(theme);
-  }
-
-  // 提示系统数据
-  const hintsData = {
-    // Disney level hints
-    "Mickey Mouse": "Famous mouse character with big round ears",
-    "Elsa": "Ice queen from Frozen who sings 'Let It Go'",
-    "Simba": "Young lion prince from The Lion King",
-    "Buzz Lightyear": "Space ranger toy from Toy Story",
-    "Ariel": "Mermaid princess with red hair",
-    "Belle": "Beauty from Beauty and the Beast",
-    "Aladdin": "Prince who rides on a magic carpet",
-    "Mulan": "Brave Chinese warrior princess",
-    "Moana": "Island princess who sails across the ocean",
-    "Frozen": "Movie about two sisters, ice and snow",
-    "Cinderella": "Princess who lost her glass slipper",
-    "Snow White": "Princess who lived with seven dwarfs",
-    "Tinker Bell": "Small fairy who helps Peter Pan",
-    "Finding Nemo": "Movie about a lost clown fish",
-    "Toy Story": "Movie about toys that come to life",
-
-    // Halloween level hints
-    "Pumpkin": "Orange vegetable carved for Halloween",
-    "Ghost": "Spooky white spirit that says 'Boo!'",
-    "Witch": "Person who flies on a broomstick",
-    "Spider": "Eight-legged creature that spins webs",
-    "Bat": "Flying mammal that comes out at night",
-    "Black Cat": "Dark colored feline, Halloween symbol",
-    "Skeleton": "Bones of a body, Halloween decoration",
-    "Vampire": "Person who drinks blood and has fangs",
-    "Monster": "Scary creature from your nightmares",
-    "Candy": "Sweet treats collected on Halloween",
-    "Trick or Treat": "What kids say when asking for candy",
-    "Halloween Costume": "Special outfit worn on October 31st",
-    "Jack-o-lantern": "Carved pumpkin with a candle inside",
-    "Haunted House": "Scary house with ghosts inside",
-    "Zombie": "Walking dead person from horror movies",
-
-    // Kids level hints
-    "Playing Soccer": "Kicking a ball into a goal",
-    "Riding Bicycle": "Pedaling on two wheels",
-    "Flying Kite": "Making a colorful object soar in the sky",
-    "Building Sandcastle": "Making structures at the beach",
-    "Playing Piano": "Making music with black and white keys",
-    "Drawing Picture": "Creating art with crayons or pencils",
-    "Brushing Teeth": "Cleaning your mouth before bed",
-    "Doing Homework": "School work done at home",
-    "Playing Video Games": "Using a controller to play on screen",
-    "Eating Ice Cream": "Enjoying a cold, sweet frozen treat",
-    "Going to School": "Walking to learn with teachers",
-    "Playing with Friends": "Having fun together with others",
-    "Reading Story": "Looking at words and pictures in a book",
-    "Watching Cartoon": "Looking at animated shows on TV",
-    "Playing Hide and Seek": "Game where you find hidden friends",
-
-    // Default hint
-    "default": "Think about the category and use gestures to act it out!"
-  };
-
-  // Load charades for selected theme
-  function loadCharadesForTheme(theme) {
-    // Use comprehensive kids vocabulary database
-    if (theme === 'disney') {
-      charadeList = CHARADES_VOCABULARY.kids.disney;
-    } else if (theme === 'halloween') {
-      charadeList = CHARADES_VOCABULARY.kids.halloween;
-    } else if (theme === 'kids') {
-      charadeList = CHARADES_VOCABULARY.kids.kids;
-    }
-  }
-
-  // Show hint
-  function showHint() {
-    const themeInfo = document.getElementById('theme-info');
-    if (themeInfo.classList.contains('hidden')) {
-      themeInfo.classList.remove('hidden');
-      let themeText = selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1);
-      if (selectedTheme === 'mixed') {
-        themeText = 'Mixed (Disney + Halloween + Kids)';
-      }
-      document.getElementById('current-theme').textContent = themeText;
-      document.getElementById('hint-btn').textContent = '🔍 Hide Info';
-    } else {
-      themeInfo.classList.add('hidden');
-      document.getElementById('hint-btn').textContent = '💡 Hint';
-    }
-  }
-
-  // Load all themes mixed
-  function loadAllThemes() {
-    const allData = CHARADES_VOCABULARY.kids;
-
-    // Combine all themes into one array
-    charadeList = [];
-    Object.values(allData).forEach(themeItems => {
-      charadeList = charadeList.concat(themeItems);
-    });
-
-    selectedTheme = 'mixed';
-  }
-
-  // Start the game
   function startGame() {
-    // Auto-load mixed themes if none selected
     if (!selectedTheme || charadeList.length === 0) {
-      loadAllThemes();
-      document.getElementById('theme-notice').innerHTML = `<p class="text-green-800 font-medium">Started with <strong>Mixed Themes</strong> - Disney, Halloween & Kids combined!</p>`;
+      const k = CHARADES_VOCABULARY?.kids || {};
+      charadeList = [...(k.disney||[]), ...(k.halloween||[]), ...(k.kids||[])];
+      selectedTheme = 'mixed';
+      document.getElementById('theme-notice').innerHTML =
+        `<p class="text-green-800 font-medium">Started with <strong>Mixed Themes</strong>!</p>`;
     }
-
-    if (gameTimer) {
-      clearInterval(gameTimer);
-      gameTimer = null;
-    }
-
+    SafeTimer.stop('kids');
     gameActive = true;
-    timeLeft = 120;
-
-    // Show game controls
-    document.getElementById('start-game-btn').classList.add('hidden');
-    document.getElementById('next-charade-btn').classList.remove('hidden');
-    document.getElementById('hint-btn').classList.remove('hidden');
-    document.getElementById('pause-game-btn').classList.remove('hidden');
-    document.getElementById('reset-game-btn').classList.remove('hidden');
+    gamePaused = false;
+    timeLeft   = 120;
+    _setButtons(true);
     document.getElementById('countdown-timer').classList.remove('hidden');
-
-    // Generate first charade
-    generateRandomCharade();
-    startTimer();
+    _nextWord();
+    _startTimer();
   }
 
-  // Start timer
-  function startTimer() {
-    if (gameTimer) {
-      clearInterval(gameTimer);
-    }
-
-    gameTimer = setInterval(() => {
-      if (gameActive && timeLeft > 0) {
-        timeLeft--;
-        updateTimerDisplay();
-      } else if (timeLeft <= 0) {
-        endGame();
+  function _startTimer() {
+    SafeTimer.start('kids', () => {
+      if (gamePaused) return;
+      timeLeft--;
+      _renderTimer();
+      if (timeLeft <= 0) {
+        SafeTimer.stop('kids');
+        showTimeUpOverlay(currentWord, () => {
+          timeLeft = 120; _renderTimer(); _nextWord(); gamePaused = false; _startTimer();
+        });
       }
     }, 1000);
   }
 
-  // Update timer display
-  function updateTimerDisplay() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    document.getElementById('minutes').textContent = minutes;
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+  function _renderTimer() {
+    document.getElementById('minutes').textContent = Math.floor(timeLeft/60);
+    document.getElementById('seconds').textContent = String(timeLeft%60).padStart(2,'0');
   }
 
-  // Generate random charade
-  function generateRandomCharade() {
-    if (charadeList.length > 0) {
-      const randomIndex = Math.floor(Math.random() * charadeList.length);
-      currentCharade = charadeList[randomIndex];
-      document.getElementById('charade-content').textContent = currentCharade;
-    }
-  }
-
-  // Next charade
-  function nextCharade() {
-    generateRandomCharade();
-    timeLeft = 120;
-    updateTimerDisplay();
+  function _nextWord() {
+    currentWord = charadeList[Math.floor(Math.random()*charadeList.length)] || '';
+    const el = document.getElementById('charade-content');
+    el.textContent = currentWord;
+    el.style.transform = 'scale(1.04)';
+    setTimeout(() => { el.style.transform = ''; }, 200);
     document.getElementById('theme-info').classList.add('hidden');
     document.getElementById('hint-btn').textContent = '💡 Hint';
-
-    if (gameActive) {
-      startTimer();
-    }
   }
 
-  // Pause game
+  function nextCharade() {
+    if (!gameActive || gamePaused) return;
+    timeLeft = 120; _renderTimer(); _nextWord();
+  }
+
   function pauseGame() {
-    if (gameActive) {
-      gameActive = false;
-      if (gameTimer) {
-        clearInterval(gameTimer);
-        gameTimer = null;
-      }
-      document.getElementById('pause-game-btn').textContent = '▶️ Resume';
-    } else {
-      gameActive = true;
-      document.getElementById('pause-game-btn').textContent = '⏸️ Pause';
-      startTimer();
-    }
+    if (!gameActive) return;
+    gamePaused = !gamePaused;
+    document.getElementById('pause-game-btn').textContent = gamePaused ? '▶️ Resume' : '⏸️ Pause';
   }
 
-  // Reset game
   function resetGame() {
-    gameActive = false;
-    if (gameTimer) {
-      clearInterval(gameTimer);
-      gameTimer = null;
-    }
-
-    document.getElementById('start-game-btn').classList.remove('hidden');
-    document.getElementById('next-charade-btn').classList.add('hidden');
-    document.getElementById('hint-btn').classList.add('hidden');
-    document.getElementById('pause-game-btn').classList.add('hidden');
-    document.getElementById('reset-game-btn').classList.add('hidden');
+    gameActive = false; gamePaused = false;
+    SafeTimer.stop('kids');
+    document.getElementById('charade-content').textContent = 'Click "Start Game" to begin!';
     document.getElementById('countdown-timer').classList.add('hidden');
     document.getElementById('theme-info').classList.add('hidden');
-    document.getElementById('charade-content').textContent = 'Click "Start Game" to begin!';
-    document.getElementById('pause-game-btn').textContent = '⏸️ Pause';
-    document.getElementById('hint-btn').textContent = '💡 Hint';
+    _setButtons(false);
   }
 
-  // End game
-  function endGame() {
-    gameActive = false;
-    if (gameTimer) {
-      clearInterval(gameTimer);
-      gameTimer = null;
-    }
-    alert('Time\'s up! The charade was: ' + currentCharade);
-    resetGame();
-  }
-
-  // Utility function for smooth scrolling
-  function scrollToSection(sectionId) {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  function showHint() {
+    const info = document.getElementById('theme-info');
+    const hidden = info.classList.contains('hidden');
+    if (hidden) {
+      document.getElementById('current-theme').textContent =
+        selectedTheme === 'mixed' ? 'Mixed Themes' : (selectedTheme?.charAt(0).toUpperCase()+selectedTheme?.slice(1) || '—');
+      info.classList.remove('hidden');
+      document.getElementById('hint-btn').textContent = '🔍 Hide Info';
+    } else {
+      info.classList.add('hidden');
+      document.getElementById('hint-btn').textContent = '💡 Hint';
     }
   }
 
-  // Initialize on page load
-  document.addEventListener('DOMContentLoaded', function () {
-    checkUrlHash();
+  function _setButtons(active) {
+    const show = active ? ['next-charade-btn','hint-btn','pause-game-btn','reset-game-btn'] : ['start-game-btn'];
+    const hide = active ? ['start-game-btn'] : ['next-charade-btn','hint-btn','pause-game-btn','reset-game-btn'];
+    show.forEach(id => document.getElementById(id)?.classList.remove('hidden'));
+    hide.forEach(id => document.getElementById(id)?.classList.add('hidden'));
+    if (active) document.getElementById('pause-game-btn').textContent = '⏸️ Pause';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const t = new URLSearchParams(location.search).get('theme');
+    if (t && ['disney','halloween','kids'].includes(t)) selectTheme(t);
   });
 </script>
 
-<div style="display: none;">
-  <!-- Google tag (gtag.js) -->
+<div style="display:none;">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9TKDY0SV6"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-M9TKDY0SV6');
-  </script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-M9TKDY0SV6');</script>
 </div>
-
-</body>
-
 </html>
