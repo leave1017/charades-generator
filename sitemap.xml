@@ -45,4 +45,25 @@
     <changefreq>weekly</changefreq>
   </url>
 
+  <url>
+    <loc>https://charades-generator.org/How-to-Play-Charades</loc>
+    <lastmod>2026-04-10</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/Halloween-Charades</loc>
+    <lastmod>2026-04-10</lastmod>
+    <priority>0.8</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/Charades-Ideas-for-Kids-List</loc>
+    <lastmod>2026-04-10</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
 </urlset>
