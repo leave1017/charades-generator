@@ -9,25 +9,29 @@ const CHARADES_VOCABULARY = {
   
   adult: {
     easy: [
-      // 基础动作和物品 (20个)
-      'Movie', 'Book', 'Action', 'Animal', 'Food', 'Sport', 'Job', 'Hobby', 'Place', 'Object',
-      'Dancing', 'Singing', 'Cooking', 'Reading', 'Writing', 'Painting', 'Swimming', 'Running', 'Jumping', 'Climbing',
-      
-      // 日常活动 (20个)
-      'Shopping', 'Driving', 'Walking', 'Sleeping', 'Eating', 'Drinking', 'Laughing', 'Crying', 'Talking', 'Listening',
-      'Watching', 'Playing', 'Working', 'Studying', 'Teaching', 'Learning', 'Helping', 'Cleaning', 'Building', 'Fixing',
-      
-      // 情绪和感受 (20个)
-      'Happy', 'Sad', 'Angry', 'Excited', 'Tired', 'Hungry', 'Thirsty', 'Cold', 'Hot', 'Scared',
-      'Brave', 'Calm', 'Nervous', 'Proud', 'Shy', 'Curious', 'Bored', 'Surprised', 'Confused', 'Relaxed',
-      
-      // 职业 (20个)
-      'Teacher', 'Doctor', 'Police', 'Firefighter', 'Chef', 'Artist', 'Musician', 'Farmer', 'Builder', 'Driver',
-      'Nurse', 'Lawyer', 'Engineer', 'Scientist', 'Writer', 'Actor', 'Singer', 'Dancer', 'Photographer', 'Designer',
-      
-      // 运动和游戏 (20个)
-      'Football', 'Basketball', 'Tennis', 'Golf', 'Baseball', 'Soccer', 'Hockey', 'Bowling', 'Fishing', 'Hiking',
-      'Skiing', 'Surfing', 'Cycling', 'Yoga', 'Chess', 'Cards', 'Puzzle', 'Board Game', 'Video Game', 'Karate'
+      // 日常动作 (20个)
+      'Brushing Teeth', 'Making Coffee', 'Taking a Selfie', 'Walking a Dog', 'Baking a Cake',
+      'Parallel Parking', 'Online Shopping', 'Video Call', 'Going to the Gym', 'Making a Sandwich',
+      'Doing Laundry', 'Wrapping a Present', 'Blowing out Candles', 'Opening a Jar', 'Falling Asleep',
+      'Waking Up Late', 'Missing the Bus', 'Waiting in Line', 'Checking the Phone', 'Taking Out Trash',
+
+      // 熟知电影 (20个)
+      'Titanic', 'The Lion King', 'Home Alone', 'Frozen', 'Shrek',
+      'Jurassic Park', 'Toy Story', 'The Avengers', 'Finding Nemo', 'Harry Potter',
+      'Spider-Man', 'Cinderella', 'Beauty and the Beast', 'Grease', 'Jaws',
+      'E.T.', 'Forrest Gump', 'The Wizard of Oz', 'Back to the Future', 'Ghostbusters',
+
+      // 熟知人物 (20个)
+      'Santa Claus', 'Superman', 'Sherlock Holmes', 'James Bond', 'Dracula',
+      'Tarzan', 'Romeo and Juliet', 'Pinocchio', 'Cinderella', 'Robin Hood',
+      'The Grinch', 'Frankenstein', 'Snow White', 'Zorro', 'Indiana Jones',
+      'Elvis Presley', 'Charlie Chaplin', 'Shakespeare', 'Cleopatra', 'Napoleon',
+
+      // 熟知场景/活动 (20个)
+      'Morning Commute', 'First Date', 'Job Interview', 'Birthday Party', 'Road Trip',
+      'Going to the Dentist', 'Barbecue', 'Camping Trip', 'Grocery Shopping', 'Black Friday',
+      'New Year Countdown', 'Wedding Proposal', 'Baby Shower', 'Moving House', 'Power Cut',
+      'Traffic Jam', 'Airport Security', 'Karaoke Night', 'Escape Room', 'Cooking Thanksgiving'
     ],
     
     medium: [

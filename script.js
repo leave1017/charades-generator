@@ -245,8 +245,19 @@ function showQuickHint() {
   const ha = document.getElementById('quick-hint-area');
   const hc = document.getElementById('quick-hint-content');
   if (!ha || !hc) return;
-  const word = document.getElementById('quick-charade-content')?.textContent || '';
-  hc.textContent = hintsData[word] || hintsData.default;
+  const word = document.getElementById('quick-charade-content')?.textContent?.trim() || '';
+  if (!word || word === 'Click "Start Game" to begin!') return;
+  // Use specific hint if available, otherwise show first-letter hint
+  if (hintsData[word]) {
+    hc.textContent = hintsData[word];
+  } else {
+    const firstLetter = word[0].toUpperCase();
+    const wordCount = word.trim().split(/\s+/).length;
+    const letterCount = word.replace(/\s/g, '').length;
+    hc.textContent = wordCount > 1
+      ? `Starts with "${firstLetter}" · ${wordCount} words · ${letterCount} letters total`
+      : `Starts with "${firstLetter}" · ${letterCount} letters`;
+  }
   ha.classList.remove('hidden');
   setTimeout(() => ha.classList.add('hidden'), 10000);
 }
