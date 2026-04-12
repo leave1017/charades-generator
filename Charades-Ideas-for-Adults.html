@@ -23,8 +23,9 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.charades-generator.org/"},{"@type":"ListItem","position":2,"name":"Charades Ideas for Adults","item":"https://www.charades-generator.org/Charades-Ideas-for-Adults"}]}
   </script>
+  <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="charades-vocabulary-database.js"></script>
   <script src="game-ui.js"></script>
@@ -40,9 +41,7 @@
     <div class="container mx-auto px-4">
       <div class="flex items-center">
         <div class="flex items-center space-x-3">
-          <div class="bg-gradient-to-r from-blue-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-lg">C</span>
-          </div>
+          <img src="/favicon.svg" alt="Charades Generator" class="w-10 h-10">
           <a href="index.html" title='Charades Generator – All Game Ideas for Adults, Kids, Movies & More'
             class="text-2xl font-bold text-gray-800">Charades Generator</a>
         </div>
@@ -88,29 +87,27 @@
 </nav>
 
   <!-- Page Title -->
-  <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-8">
+  <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3">
     <div class="container mx-auto px-4 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold mb-6">Charades Ideas for Adults</h1>
-      <p class="text-xl md:text-2xl mb-8">Explore hundreds of charades ideas for adults, including funny, hard, and
-        movie charades. <br>Perfect for party games, holiday gatherings, and team activities.</p>
+      <h1 class="text-2xl font-bold mb-0">Charades Ideas for Adults</h1>
     </div>
   </div>
 
   <!-- Quick Start Game Section -->
   <section id="quick-start-game" class="container mx-auto px-4 py-6">
-    <div class="text-center mb-8">
-      <h3 class="text-2xl font-bold text-gray-800 mb-6">🎯 Select Difficulty Level</h3>
+    <div class="text-center mb-3">
+      <h3 class="text-2xl font-bold text-gray-800 mb-2">🎯 Select Difficulty Level</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
         <button onclick="selectDifficulty('easy')" id="easy-btn"
-          class="h-20 bg-green-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-green-600">
+          class="h-10 bg-green-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-green-600">
           🟢 Easy
         </button>
         <button onclick="selectDifficulty('medium')" id="medium-btn"
-          class="h-20 bg-yellow-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-yellow-600">
+          class="h-10 bg-yellow-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-yellow-600">
           🟡 Medium
         </button>
         <button onclick="selectDifficulty('hard')" id="hard-btn"
-          class="h-20 bg-red-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-red-600">
+          class="h-10 bg-red-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-red-600">
           🔴 Hard
         </button>
       </div>

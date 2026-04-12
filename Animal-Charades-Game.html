@@ -21,8 +21,9 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.charades-generator.org/"},{"@type":"ListItem","position":2,"name":"Animal Charades Game","item":"https://www.charades-generator.org/Animal-Charades-Game"}]}
   </script>
+  <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="apple-touch-icon" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="charades-vocabulary-database.js"></script>
   <script src="game-ui.js"></script>
@@ -37,9 +38,7 @@
   <div class="container mx-auto px-4">
     <div class="flex items-center">
       <div class="flex items-center space-x-3">
-        <div class="bg-gradient-to-r from-blue-500 to-purple-600 w-10 h-10 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-lg">C</span>
-        </div>
+        <img src="/favicon.svg" alt="Charades Generator" class="w-10 h-10">
         <a href="/" class="text-2xl font-bold text-gray-800">Charades Generator</a>
       </div>
       <div class="hidden md:flex space-x-8 ml-auto">
@@ -83,27 +82,26 @@
   </div>
 </nav>
 
-<div class="bg-gradient-to-r from-green-500 to-blue-600 text-white py-8">
+<div class="bg-gradient-to-r from-green-500 to-blue-600 text-white py-3">
   <div class="container mx-auto px-4 text-center">
-    <h1 class="text-4xl md:text-6xl font-bold mb-6">Animal Charades Game</h1>
-    <p class="text-xl md:text-2xl mb-8">Play the Animal Charades Game with hundreds of fun animal prompts for all ages. Act like jungle, farm, or ocean animals!</p>
+    <h1 class="text-2xl font-bold mb-0">Animal Charades Game</h1>
   </div>
 </div>
 
 <section id="quick-start-game" class="container mx-auto px-4 py-6">
-  <div class="text-center mb-8">
-    <h3 class="text-2xl font-bold text-gray-800 mb-6">🦁 Select Animal Habitat</h3>
+  <div class="text-center mb-3">
+    <h3 class="text-2xl font-bold text-gray-800 mb-2">🦁 Select Animal Habitat</h3>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
       <button onclick="selectHabitat('land')" id="land-btn"
-        class="h-20 bg-orange-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-orange-600">
+        class="h-10 bg-orange-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-orange-600">
         🦁 Land Animals
       </button>
       <button onclick="selectHabitat('marine')" id="marine-btn"
-        class="h-20 bg-blue-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-blue-600">
+        class="h-10 bg-blue-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-blue-600">
         🐋 Marine Animals
       </button>
       <button onclick="selectHabitat('birds')" id="birds-btn"
-        class="h-20 bg-purple-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-purple-600">
+        class="h-10 bg-purple-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-purple-600">
         🦅 Birds
       </button>
     </div>
