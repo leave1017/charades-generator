@@ -1,8 +1,9 @@
 {
   "redirects": [
-    { "source": "/:page.html", "destination": "/:page", "permanent": true }
+    { "source": "/:page.html", "destination": "/:page/", "permanent": true },
+    { "source": "/:page", "destination": "/:page/", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/:page", "destination": "/:page.html" }
+    { "source": "/:page/", "destination": "/:page.html" }
   ]
 }
