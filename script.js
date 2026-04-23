@@ -1,274 +1,167 @@
-// ============================================================
-// script.js  –  homepage quick-start game (bug-fixed)
-// Fixes:
-//   • alert() → showTimeUpOverlay()
-//   • Timer concurrency: uses SafeTimer so only one interval runs
-//   • Removed duplicate clearInterval calls that could race
-// ============================================================
+// script.js — Charades Generator homepage game logic
 
-// ── Charades data (fallback if vocabulary DB not loaded) ─────
-const charadesData = {
-  adult: {
-    movies: ["The Godfather","Casablanca","Pulp Fiction","The Shawshank Redemption","Forrest Gump","The Matrix","Titanic","Avatar"],
-    actions: ["Rock climbing","Salsa dancing","Cooking a gourmet meal","Painting a masterpiece","Playing chess","Meditating","Writing a novel"],
-    animals: ["Elephant","Giraffe","Penguin","Dolphin","Eagle","Lion","Tiger","Bear","Wolf","Shark","Octopus","Butterfly"],
-    phrases: ["Actions speak louder than words","Don't judge a book by its cover","The early bird catches the worm","A picture is worth a thousand words"],
-    celebrities: ["Marilyn Monroe","Elvis Presley","Michael Jackson","Madonna","Brad Pitt","Leonardo DiCaprio","Johnny Depp"],
-    books: ["Pride and Prejudice","To Kill a Mockingbird","1984","The Great Gatsby","Lord of the Rings","Harry Potter","The Hobbit"]
-  },
-  kids: {
-    movies: ["Frozen","Toy Story","Finding Nemo","The Lion King","Cinderella","Beauty and the Beast","Aladdin","Moana","Coco","Inside Out"],
-    actions: ["Jumping","Running","Dancing","Singing","Drawing","Reading","Playing","Sleeping","Eating","Swimming"],
-    animals: ["Dog","Cat","Bird","Fish","Rabbit","Horse","Cow","Pig","Sheep","Duck","Chicken","Mouse"],
-    simple: ["Happy","Sad","Big","Small","Hot","Cold","Fast","Slow","Loud","Quiet"]
-  },
-  movies: {
-    disney: ["Snow White","Cinderella","Sleeping Beauty","Beauty and the Beast","The Little Mermaid","Aladdin","The Lion King","Mulan"],
-    pixar: ["Toy Story","Finding Nemo","The Incredibles","Up","Wall-E","Inside Out","Coco","Soul"],
-    romance: ["Titanic","The Notebook","La La Land","Casablanca","Gone with the Wind"],
-    action: ["Die Hard","Mission Impossible","The Matrix","Mad Max","John Wick","Fast and Furious"],
-    animation: ["Toy Story","Frozen","The Lion King","Finding Nemo","Spirited Away","Up","Coco","Inside Out"],
-    comedy: ["The Hangover","Bridesmaids","Superbad","Anchorman","Ghostbusters"]
-  },
-  christmas: ["Santa Claus","Christmas Tree","Gift Giving","Snowman","Reindeer","Christmas Carols","Mistletoe","Christmas Dinner"],
-  actions: ["Running","Jumping","Dancing","Swimming","Cooking","Reading","Writing","Painting","Singing","Playing"]
+// ── State ─────────────────────────────────────────────────────
+let activeCategory   = 'all';
+let activeDifficulty = 'all';
+let currentWord      = null;
+let timerInterval    = null;
+let timerSeconds     = 120;
+let timerRunning     = false;
+
+// ── Category filter → which word categories to include ───────
+const CATEGORY_MAP = {
+  all:       null,   // no filter
+  adults:    ['adults', 'famous', 'objects', 'food', 'sports', 'actions', 'tvshows'],
+  kids:      ['kids', 'animals', 'actions'],
+  movies:    ['movies', 'tvshows'],
+  animals:   ['animals'],
+  christmas: ['christmas'],
+  halloween: ['halloween'],
 };
 
-// ── Hint data ────────────────────────────────────────────────
-const hintsData = {
-  "Cat":"A furry pet that purrs and catches mice",
-  "Dog":"Man's best friend, barks and wags tail",
-  "Bird":"Has wings, can fly, chirps or sings",
-  "Rabbit":"Hops around, has long ears, eats carrots",
-  "Horse":"Large animal you can ride, says neigh",
-  "Running":"Moving fast with your legs",
-  "Jumping":"Leaving the ground with both feet",
-  "Dancing":"Moving rhythmically to music",
-  "Swimming":"Moving through water using arms and legs",
-  "Cooking":"Preparing food using heat and ingredients",
-  "Frozen":"Disney movie about two sisters, one with ice powers",
-  "Toy Story":"Pixar movie about toys that come to life",
-  "Finding Nemo":"Movie about a lost clownfish",
-  "The Lion King":"Disney movie about a lion prince named Simba",
-  "TikTok":"Popular short video app with dancing and trends",
-  "Selfie":"Photo you take of yourself",
-  "Meme":"Funny image or video that spreads online",
-  "ChatGPT":"AI chatbot that can answer questions",
-  "default":"Think about the category and use gestures to act it out!"
-};
+// ── Word selection ────────────────────────────────────────────
+function getFilteredWords() {
+  if (typeof CHARADES_WORDS === 'undefined' || !CHARADES_WORDS.length) return [];
+  const cats = CATEGORY_MAP[activeCategory];
+  let words = cats ? CHARADES_WORDS.filter(w => cats.includes(w.category)) : CHARADES_WORDS;
+  if (activeDifficulty !== 'all') {
+    words = words.filter(w => w.difficulty === activeDifficulty);
+  }
+  return words.length ? words : CHARADES_WORDS;
+}
 
-// ── Quick-game state ─────────────────────────────────────────
-let quickGameActive   = false;
-let quickGamePaused   = false;
-let quickGameTimeLeft = 0;
-let quickCharadeIndex = 0;
-let quickCharadeList  = [];
-let currentQuickWord  = '';
+function getRandomWord(excludeWord) {
+  const words = getFilteredWords();
+  if (!words.length) return null;
+  let pool = excludeWord ? words.filter(w => w.word !== excludeWord) : words;
+  if (!pool.length) pool = words;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
 
-const QUICK_ROUND_SECONDS = 120;
+// ── Display ───────────────────────────────────────────────────
+function showWord(wordObj) {
+  if (!wordObj) return;
+  currentWord = wordObj;
 
-// ── Build shuffled word list ──────────────────────────────────
-function generateQuickCharadeList() {
-  quickCharadeList = [];
+  const display = document.getElementById('word-display');
+  if (display) {
+    display.textContent = wordObj.word;
+    display.classList.remove('word-pop');
+    void display.offsetWidth;
+    display.classList.add('word-pop');
+  }
 
-  if (typeof CHARADES_VOCABULARY !== 'undefined') {
-    const v = CHARADES_VOCABULARY;
-    quickCharadeList.push(
-      ...v.adult.easy.slice(0,15),
-      ...v.adult.medium.slice(0,15),
-      ...v.adult.hard.slice(0,10),
-      ...v.kids.disney.slice(0,20),
-      ...v.kids.halloween.slice(0,15),
-      ...v.kids.kids.slice(0,15),
-      ...v.movies.action.slice(0,15),
-      ...v.movies.animation.slice(0,15),
-      ...v.movies.comedy.slice(0,10),
-      ...v.animals.land.slice(0,15),
-      ...v.animals.marine.slice(0,10),
-      ...v.animals.birds.slice(0,10),
-      ...v.christmas.slice(0,15),
-      ...v.trending.slice(0,25)
-    );
+  // Category badge
+  const catBadge = document.getElementById('cat-badge');
+  if (catBadge) catBadge.textContent = capitalize(wordObj.category);
+
+  // Difficulty badge
+  const diffBadge = document.getElementById('diff-badge');
+  if (diffBadge) {
+    diffBadge.textContent = capitalize(wordObj.difficulty);
+    diffBadge.className = 'text-xs font-semibold px-3 py-1 rounded-full';
+    if (wordObj.difficulty === 'easy')   diffBadge.classList.add('bg-green-100', 'text-green-700');
+    else if (wordObj.difficulty === 'medium') diffBadge.classList.add('bg-yellow-100', 'text-yellow-700');
+    else                                  diffBadge.classList.add('bg-red-100', 'text-red-700');
+  }
+
+  hideHint();
+}
+
+// ── Game controls ──────────────────────────────────────────────
+function nextWord() {
+  showWord(getRandomWord(currentWord?.word));
+  if (timerRunning) {
+    timerSeconds = 120;
+    renderTimer();
+  }
+}
+
+function toggleHint() {
+  const area = document.getElementById('hint-area');
+  const text = document.getElementById('hint-text');
+  if (!area || !text || !currentWord) return;
+  if (area.classList.contains('hidden')) {
+    text.textContent = currentWord.hint ||
+      `Starts with "${currentWord.word[0].toUpperCase()}" · ${currentWord.word.replace(/\s/g,'').length} letters`;
+    area.classList.remove('hidden');
   } else {
-    // fallback
-    [charadesData.adult, charadesData.kids, charadesData.movies].forEach(group => {
-      Object.values(group).forEach(arr => { if (Array.isArray(arr)) quickCharadeList.push(...arr); });
-    });
-    quickCharadeList.push(...charadesData.christmas, ...charadesData.actions);
-  }
-
-  // Shuffle
-  for (let i = quickCharadeList.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [quickCharadeList[i], quickCharadeList[j]] = [quickCharadeList[j], quickCharadeList[i]];
+    area.classList.add('hidden');
   }
 }
 
-// ── Timer helpers ────────────────────────────────────────────
-function _tickQuickTimer() {
-  if (quickGamePaused) return;
-  quickGameTimeLeft--;
-  _renderTimer();
-  if (quickGameTimeLeft <= 0) {
-    SafeTimer.stop('quick');
-    _onTimeUp();
-  }
+function hideHint() {
+  document.getElementById('hint-area')?.classList.add('hidden');
 }
 
-function _startQuickTimer() {
-  SafeTimer.start('quick', _tickQuickTimer, 1000);  // only ONE interval
+function toggleTimer() {
+  timerRunning ? stopTimer() : startTimer();
 }
 
-function _renderTimer() {
-  const m = Math.floor(quickGameTimeLeft / 60);
-  const s = quickGameTimeLeft % 60;
-  const mEl = document.getElementById('quick-minutes');
-  const sEl = document.getElementById('quick-seconds');
-  if (mEl) mEl.textContent = m;
-  if (sEl) sEl.textContent = String(s).padStart(2, '0');
-}
-
-// ── Game flow ─────────────────────────────────────────────────
-function startQuickGame() {
-  generateQuickCharadeList();
-  quickCharadeIndex = 0;
-  quickGameActive   = true;
-  quickGamePaused   = false;
-  quickGameTimeLeft = QUICK_ROUND_SECONDS;
-
-  _showCurrentWord();
-  _renderTimer();
-  document.getElementById('quick-countdown-timer').classList.remove('hidden');
-  _startQuickTimer();
-  _setButtonState(true);
-}
-
-function _showCurrentWord() {
-  currentQuickWord = quickCharadeList[quickCharadeIndex] || '';
-  const el = document.getElementById('quick-charade-content');
-  if (el) {
-    el.textContent = currentQuickWord || 'Game Complete! 🎉';
-    // Tiny pulse animation
-    el.style.transform = 'scale(1.04)';
-    setTimeout(() => { el.style.transform = ''; }, 200);
-  }
-  // Hide hint
-  const ha = document.getElementById('quick-hint-area');
-  if (ha) ha.classList.add('hidden');
-}
-
-function nextQuickCharade() {
-  if (!quickGameActive || quickGamePaused) return;
-  quickCharadeIndex++;
-  if (quickCharadeIndex >= quickCharadeList.length) {
-    _onGameComplete();
-    return;
-  }
-  quickGameTimeLeft = QUICK_ROUND_SECONDS;
-  _renderTimer();
-  _showCurrentWord();
-  // timer already running – no need to restart
-}
-
-function pauseQuickGame() {
-  if (!quickGameActive) return;
-  quickGamePaused = !quickGamePaused;
-  const btn = document.getElementById('pause-game-btn');
-  if (btn) {
-    btn.textContent = quickGamePaused ? '▶️ Resume' : '⏸️ Pause';
-    btn.className = btn.className
-      .replace(/bg-\w+-500|hover:bg-\w+-600/g, '')
-      .trim();
-    if (quickGamePaused) {
-      btn.classList.add('bg-green-500', 'hover:bg-green-600');
-    } else {
-      btn.classList.add('bg-yellow-500', 'hover:bg-yellow-600');
+function startTimer() {
+  timerSeconds  = 120;
+  timerRunning  = true;
+  document.getElementById('timer-wrap')?.classList.remove('hidden');
+  const btn = document.getElementById('timer-btn');
+  if (btn) btn.textContent = '⏱ Stop';
+  renderTimer();
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    renderTimer();
+    if (timerSeconds <= 0) {
+      stopTimer();
+      onTimerEnd();
     }
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  timerRunning  = false;
+  document.getElementById('timer-wrap')?.classList.add('hidden');
+  const btn = document.getElementById('timer-btn');
+  if (btn) btn.textContent = '⏱ Timer';
+}
+
+function renderTimer() {
+  const m  = Math.floor(timerSeconds / 60);
+  const s  = timerSeconds % 60;
+  const el = document.getElementById('timer-display');
+  if (el) el.textContent = `${m}:${String(s).padStart(2, '0')}`;
+}
+
+function onTimerEnd() {
+  if (typeof showTimeUpOverlay === 'function') {
+    showTimeUpOverlay(currentWord?.word || '', () => nextWord());
+  } else {
+    nextWord();
   }
 }
 
-function resetQuickGame() {
-  quickGameActive   = false;
-  quickGamePaused   = false;
-  SafeTimer.stop('quick');
-
-  const el = document.getElementById('quick-charade-content');
-  if (el) el.textContent = "Click 'Start Game' to begin!";
-  const ha = document.getElementById('quick-hint-area');
-  if (ha) ha.classList.add('hidden');
-  document.getElementById('quick-countdown-timer').classList.add('hidden');
-  _setButtonState(false);
-}
-
-function _onTimeUp() {
-  showTimeUpOverlay(currentQuickWord, () => {
-    // Play again = next word
-    quickCharadeIndex++;
-    if (quickCharadeIndex >= quickCharadeList.length) {
-      _onGameComplete();
-      return;
-    }
-    quickGameTimeLeft = QUICK_ROUND_SECONDS;
-    _renderTimer();
-    _showCurrentWord();
-    quickGamePaused = false;
-    _startQuickTimer();
+// ── Filters ───────────────────────────────────────────────────
+function setCategoryFilter(category) {
+  activeCategory = category;
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.category === category);
   });
+  showWord(getRandomWord());
 }
 
-function _onGameComplete() {
-  SafeTimer.stop('quick');
-  quickGameActive = false;
-  const el = document.getElementById('quick-charade-content');
-  if (el) el.textContent = 'Game Complete! 🎉';
-  _setButtonState(false);
+function setDifficultyFilter(difficulty) {
+  activeDifficulty = difficulty;
+  document.querySelectorAll('.diff-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.difficulty === difficulty);
+  });
+  showWord(getRandomWord());
 }
 
-function _setButtonState(active) {
-  const ids = ['start-quick-game-btn','next-charade-btn','pause-game-btn','reset-game-btn','hint-btn'];
-  const show = active ? ids.slice(1) : [ids[0]];
-  const hide = active ? [ids[0]] : ids.slice(1);
-  show.forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('hidden'); });
-  hide.forEach(id => { const el = document.getElementById(id); if (el) el.classList.add('hidden'); });
-
-  // Reset pause button appearance
-  const pauseBtn = document.getElementById('pause-game-btn');
-  if (pauseBtn && active) {
-    pauseBtn.textContent = '⏸️ Pause';
-    pauseBtn.classList.remove('bg-green-500','hover:bg-green-600');
-    pauseBtn.classList.add('bg-yellow-500','hover:bg-yellow-600');
-  }
+// ── Utilities ─────────────────────────────────────────────────
+function capitalize(str) {
+  return str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
 }
 
-// ── Hint ──────────────────────────────────────────────────────
-function showQuickHint() {
-  const ha = document.getElementById('quick-hint-area');
-  const hc = document.getElementById('quick-hint-content');
-  if (!ha || !hc) return;
-  const word = document.getElementById('quick-charade-content')?.textContent?.trim() || '';
-  if (!word || word === 'Click "Start Game" to begin!') return;
-  // Use specific hint if available, otherwise show first-letter hint
-  if (hintsData[word]) {
-    hc.textContent = hintsData[word];
-  } else {
-    const firstLetter = word[0].toUpperCase();
-    const wordCount = word.trim().split(/\s+/).length;
-    const letterCount = word.replace(/\s/g, '').length;
-    hc.textContent = wordCount > 1
-      ? `Starts with "${firstLetter}" · ${wordCount} words · ${letterCount} letters total`
-      : `Starts with "${firstLetter}" · ${letterCount} letters`;
-  }
-  ha.classList.remove('hidden');
-  setTimeout(() => ha.classList.add('hidden'), 10000);
-}
-
-// ── Utility ───────────────────────────────────────────────────
-function scrollToSection(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-}
-
-function navigateToCategory(cat) { showCategoryCharades(cat); }
-
+// ── Navigation helpers (kept for inner pages) ─────────────────
 function selectMovieGenre(genre) {
   window.location.href = `Movies-for-Charades.html?genre=${genre}#quick-start-game`;
 }
@@ -276,36 +169,37 @@ function selectAnimalHabitat(habitat) {
   window.location.href = `Animal-Charades-Game.html?habitat=${habitat}#quick-start-game`;
 }
 
-function showCategoryCharades(category) {
-  const map = {
-    'land-animals': charadesData.animals?.land || [],
-    'marine-animals': charadesData.animals?.marine || [],
-    'action-movies': charadesData.movies.action,
-    'animation-movies': charadesData.movies.animation,
-    'comedy-movies': charadesData.movies.comedy,
-    'christmas': charadesData.christmas,
-    'actions': charadesData.actions,
-  };
-  const list = map[category] || ['Coming soon!'];
-  const word = list[Math.floor(Math.random() * list.length)];
-  alert(`${category.replace(/-/g,' ')} charade: ${word}`);
-}
-
-// ── Mobile menu ───────────────────────────────────────────────
+// ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  if (btn && menu) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+  // Mobile menu
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const menu    = document.getElementById('mobile-menu');
+  if (menuBtn && menu) menuBtn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn =>
+    btn.addEventListener('click', () => setCategoryFilter(btn.dataset.category))
+  );
+  document.querySelectorAll('.diff-btn').forEach(btn =>
+    btn.addEventListener('click', () => setDifficultyFilter(btn.dataset.difficulty))
+  );
+
+  // Auto-show first word
+  showWord(getRandomWord());
 });
 
-// ── Expose globals ────────────────────────────────────────────
-window.startQuickGame      = startQuickGame;
-window.nextQuickCharade    = nextQuickCharade;
-window.pauseQuickGame      = pauseQuickGame;
-window.resetQuickGame      = resetQuickGame;
-window.showQuickHint       = showQuickHint;
-window.scrollToSection     = scrollToSection;
-window.navigateToCategory  = navigateToCategory;
+// ── Global exports ────────────────────────────────────────────
+window.nextWord            = nextWord;
+window.toggleHint          = toggleHint;
+window.toggleTimer         = toggleTimer;
+window.stopTimer           = stopTimer;
+window.setCategoryFilter   = setCategoryFilter;
+window.setDifficultyFilter = setDifficultyFilter;
 window.selectMovieGenre    = selectMovieGenre;
 window.selectAnimalHabitat = selectAnimalHabitat;
-window.generateRandomCharade = () => {};  // no-op placeholder (kept for safety)
+// Legacy no-ops (inner pages still reference these)
+window.startQuickGame   = nextWord;
+window.nextQuickCharade = nextWord;
+window.pauseQuickGame   = () => {};
+window.resetQuickGame   = () => {};
+window.showQuickHint    = toggleHint;

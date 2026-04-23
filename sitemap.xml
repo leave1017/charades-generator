@@ -66,4 +66,69 @@
     <changefreq>monthly</changefreq>
   </url>
 
+  <!-- Legal & About pages -->
+  <url>
+    <loc>https://charades-generator.org/privacy-policy.html</loc>
+    <lastmod>2026-04-17</lastmod>
+    <priority>0.4</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/terms-of-service.html</loc>
+    <lastmod>2026-04-17</lastmod>
+    <priority>0.4</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/about.html</loc>
+    <lastmod>2026-04-17</lastmod>
+    <priority>0.5</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+  <!-- Blog -->
+  <url>
+    <loc>https://charades-generator.org/blog/</loc>
+    <lastmod>2026-04-19</lastmod>
+    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/blog/best-charades-ideas-for-family-game-night.html</loc>
+    <lastmod>2026-04-01</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/blog/how-to-play-charades-rules-and-tips.html</loc>
+    <lastmod>2026-04-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/blog/christmas-charades-ideas-for-holiday-parties.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/blog/movie-charades-ideas-by-genre.html</loc>
+    <lastmod>2026-04-14</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/blog/charades-for-kids-classroom-activities.html</loc>
+    <lastmod>2026-04-19</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
 </urlset>

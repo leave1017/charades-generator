@@ -25,8 +25,9 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/charades-vocabulary-database.js"></script>
-  <script src="/game-ui.js"></script>
+  <script src="/charades-words.js"></script>
+  <script>window.PAGE_CATEGORIES=['movies'];window.PAGE_LABEL='Movies';</script>
+  <script src="/inner-game.js"></script>
   <link rel="stylesheet" href="/styles.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-17617716104');</script>
@@ -50,6 +51,7 @@
         <a href="/Christmas-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors" title="Christmas Charades Generator – 200+ Free Holiday Ideas">Christmas</a>
         <a href="/Halloween-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors" title="Halloween Charades – 100+ Ideas for Kids & Adults">Halloween</a>
         <a href="/How-to-Play-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors" title="How to Play Charades – Step by Step Rules & Tips">How to Play</a>
+          <a href="/blog/" class="text-blue-600 font-semibold">Blog</a>
       </div>
       <button id="mobile-menu-btn" class="md:hidden ml-auto p-2">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,6 +69,7 @@
         <a href="/Christmas-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors" title="Christmas Charades Generator – 200+ Free Holiday Ideas">Christmas</a>
         <a href="/Halloween-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors" title="Halloween Charades – 100+ Ideas for Kids & Adults">Halloween</a>
         <a href="/How-to-Play-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors" title="How to Play Charades – Step by Step Rules & Tips">How to Play</a>
+        <a href="/blog/" class="text-blue-600 font-semibold">Blog</a>
       </div>
     </div>
   </div>
@@ -82,78 +85,47 @@
   </div>
 </nav>
 
-<div class="bg-gradient-to-r from-red-500 to-purple-600 text-white py-3">
-  <div class="container mx-auto px-4 text-center">
-    <h1 class="text-2xl font-bold mb-0">Movies for Charades</h1>
-  </div>
-</div>
 
-<section id="quick-start-game" class="container mx-auto px-4 py-6">
-  <div class="text-center mb-3">
-    <h3 class="text-2xl font-bold text-gray-800 mb-2">🎬 Select Movie Genre</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-      <button onclick="selectGenre('action')" id="action-btn"
-        class="h-10 bg-red-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-red-600">
-        💥 Action
-      </button>
-      <button onclick="selectGenre('animation')" id="animation-btn"
-        class="h-10 bg-purple-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-purple-600">
-        🎬 Animation
-      </button>
-      <button onclick="selectGenre('comedy')" id="comedy-btn"
-        class="h-10 bg-yellow-500 text-white rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:bg-yellow-600">
-        😂 Comedy
-      </button>
-    </div>
-  </div>
+  <section id="game-section" class="container mx-auto px-4 py-6">
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 text-center mb-5">Movies for Charades</h1>
 
-  <div class="bg-white rounded-xl shadow-xl p-8 max-w-2xl mx-auto text-center">
-    <h3 class="text-2xl font-bold text-gray-800 mb-4">🎭 Your Movie Charade</h3>
-    <div id="genre-notice" class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-      <p class="text-blue-800 font-medium">🎯 Optional: Select a genre above, or click "Start Game" to begin with all genres mixed!</p>
+    <!-- Difficulty Filters -->
+    <div class="flex flex-wrap justify-center gap-2 mb-5" id="difficulty-filters">
+      <button class="diff-btn active" data-difficulty="all">All Levels</button>
+      <button class="diff-btn" data-difficulty="easy">🟢 Easy</button>
+      <button class="diff-btn" data-difficulty="medium">🟡 Medium</button>
+      <button class="diff-btn" data-difficulty="hard">🔴 Hard</button>
     </div>
 
-    <!-- Movie display: genre badge + title, NO external image API -->
-    <div id="charade-display" class="mb-6">
-      <!-- Genre badge -->
-      <div id="genre-badge" class="hidden mb-3">
-        <span id="genre-label"
-          class="inline-block px-4 py-1 rounded-full text-sm font-semibold bg-purple-100 text-purple-800">
-        </span>
+    <!-- Game Card -->
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl mx-auto overflow-hidden">
+      <div class="bg-gradient-to-r from-yellow-500 to-orange-500 px-5 py-3 flex justify-between items-center">
+        <span id="cat-badge" class="text-white text-xs font-semibold px-3 py-1 bg-white/20 rounded-full">Movies</span>
+        <span id="diff-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-700">Easy</span>
       </div>
-      <div id="charade-content"
-        class="text-3xl md:text-4xl font-bold text-blue-600 mb-6 p-6 bg-blue-50 rounded-lg min-h-[120px] flex items-center justify-center transition-transform duration-200">
-        Click "Start Game" to begin!
+      <div class="px-6 py-8 text-center">
+        <div id="word-display" class="word-display text-5xl md:text-6xl font-bold text-gray-800 mb-7 leading-tight min-h-[80px] flex items-center justify-center">--</div>
+        <div id="hint-area" class="hidden mb-5 p-4 bg-amber-50 border border-amber-200 rounded-xl text-left">
+          <p class="text-amber-700 text-xs font-bold uppercase mb-1">💡 Hint</p>
+          <p id="hint-text" class="text-gray-700 text-sm"></p>
+        </div>
+        <div id="timer-wrap" class="hidden mb-5 flex justify-center">
+          <div class="inline-flex items-center gap-4 bg-red-50 border-2 border-red-200 rounded-xl px-8 py-3">
+            <span id="timer-display" class="text-3xl font-bold text-red-600 tabular-nums">2:00</span>
+            <button onclick="stopTimer()" class="text-red-400 hover:text-red-600 text-xs font-semibold border border-red-200 rounded px-2 py-1 transition-colors">STOP</button>
+          </div>
+        </div>
+        <button onclick="nextWord()" class="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white text-2xl font-bold py-5 rounded-xl transition-all shadow-md hover:shadow-lg mb-4">
+          Next Word →
+        </button>
+        <div class="flex justify-center gap-2">
+          <button onclick="toggleHint()" class="flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">💡 Hint</button>
+          <button onclick="toggleTimer()" id="timer-btn" class="flex items-center gap-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">⏱ Timer</button>
+          <button onclick="nextWord()" class="flex items-center gap-1.5 bg-gray-50 hover:bg-gray-100 text-gray-600 border border-gray-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">↩ Skip</button>
+        </div>
       </div>
     </div>
-
-    <div id="countdown-timer" class="mb-6 hidden">
-      <div class="text-2xl font-bold text-red-600 mb-2">⏱️ Time Remaining:</div>
-      <div id="timer-display" class="text-4xl font-bold text-red-600 bg-red-50 p-4 rounded-lg border-2 border-red-200">
-        <span id="minutes">2</span>:<span id="seconds">00</span>
-      </div>
-    </div>
-
-    <div class="flex flex-wrap justify-center gap-4">
-      <button onclick="startGame()" id="start-game-btn"
-        class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
-        🚀 Start Game
-      </button>
-      <button onclick="nextCharade()" id="next-charade-btn"
-        class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors hidden">
-        ➡️ Next Movie
-      </button>
-      <button onclick="pauseGame()" id="pause-game-btn"
-        class="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition-colors hidden">
-        ⏸️ Pause
-      </button>
-      <button onclick="resetGame()" id="reset-game-btn"
-        class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-colors hidden">
-        🔄 Reset
-      </button>
-    </div>
-  </div>
-</section>
+  </section>
 
 <!-- Adsterra Ad -->
 <div class="my-6 text-center">
@@ -271,8 +243,14 @@
       <a href="/Halloween-Charades/" class="text-gray-300 hover:text-white transition-colors">Halloween Charades</a>
       <a href="/How-to-Play-Charades/" class="text-gray-300 hover:text-white transition-colors">How to Play Charades</a>
     </div>
-    <div class="border-t border-gray-700 mt-6 pt-4 text-center">
-      <p class="text-gray-400 text-sm">&copy; 2025 Charades Generator – All rights reserved.</p>
+    <div class="flex flex-wrap justify-center gap-4 text-sm mt-3 pt-3 border-t border-gray-700">
+      <a href="/privacy-policy.html" class="text-gray-400 hover:text-gray-300 transition-colors">Privacy Policy</a>
+      <a href="/terms-of-service.html" class="text-gray-400 hover:text-gray-300 transition-colors">Terms of Service</a>
+      <a href="/about.html" class="text-gray-400 hover:text-gray-300 transition-colors">About Us</a>
+      <a href="/about.html#contact" class="text-gray-400 hover:text-gray-300 transition-colors">Contact</a>
+    </div>
+        <div class="border-t border-gray-700 mt-6 pt-4 text-center">
+      <p class="text-gray-400 text-sm">&copy; 2025-2026 Charades Generator – All rights reserved.</p>
     </div>
   </div>
 </footer>
