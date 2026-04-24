@@ -58,12 +58,18 @@
   </div>
 </nav>
 
-<main class="container mx-auto px-4 py-12 max-w-5xl">
-  <nav class="text-sm text-gray-500 mb-8">
-    <a href="/" class="hover:text-blue-600">Home</a> › <span class="text-gray-700">Blog</span>
-  </nav>
+<nav aria-label="Breadcrumb" class="bg-white border-b border-gray-100">
+  <div class="container mx-auto px-4 py-2">
+    <ol class="flex items-center gap-1 text-sm text-gray-500">
+      <li><a href="/" class="hover:text-blue-600 transition-colors">Home</a></li>
+      <li><span class="mx-1 text-gray-300">/</span></li>
+      <li class="text-gray-700 font-medium">Blog</li>
+    </ol>
+  </div>
+</nav>
 
-  <div class="text-center mb-12">
+<main class="container mx-auto px-4 py-12 max-w-5xl">
+    <div class="text-center mb-12">
     <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Charades Blog</h1>
     <p class="text-xl text-gray-600 max-w-2xl mx-auto">Tips, Ideas &amp; Game Night Guides — everything you need to play better charades with friends and family.</p>
   </div>
