@@ -131,4 +131,11 @@
     <changefreq>monthly</changefreq>
   </url>
 
+  <url>
+    <loc>https://charades-generator.org/blog/movie-charades-complete-guide</loc>
+    <lastmod>2026-04-26</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
 </urlset>
