@@ -1,9 +1,12 @@
 {
   "redirects": [
-    { "source": "/:page.html", "destination": "/:page/", "permanent": true },
-    { "source": "/:page", "destination": "/:page/", "permanent": false }
+    { "source": "/blog/:article.html", "destination": "/blog/:article/", "permanent": true },
+    { "source": "/blog/:article",      "destination": "/blog/:article/", "permanent": false },
+    { "source": "/:page.html",         "destination": "/:page/",         "permanent": true },
+    { "source": "/:page",              "destination": "/:page/",         "permanent": false }
   ],
   "rewrites": [
-    { "source": "/:page/", "destination": "/:page.html" }
-  ] 
+    { "source": "/blog/:article/", "destination": "/blog/:article.html" },
+    { "source": "/:page/",         "destination": "/:page.html" }
+  ]
 }
