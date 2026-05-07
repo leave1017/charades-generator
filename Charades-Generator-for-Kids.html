@@ -102,7 +102,7 @@
         <span id="cat-badge" class="text-white text-xs font-semibold px-3 py-1 bg-white/20 rounded-full">Kids</span>
         <span id="diff-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-700">Easy</span>
       </div>
-      <div class="px-6 py-8 text-center">
+      <div class="px-6 py-8 text-center game-card-inner">
         <div id="word-display" class="word-display text-5xl md:text-6xl font-bold text-gray-800 mb-7 leading-tight min-h-[80px] flex items-center justify-center">--</div>
         <div id="hint-area" class="hidden mb-5 p-4 bg-amber-50 border border-amber-200 rounded-xl text-left">
           <p class="text-amber-700 text-xs font-bold uppercase mb-1">💡 Hint</p>
@@ -114,7 +114,7 @@
             <button onclick="stopTimer()" class="text-red-400 hover:text-red-600 text-xs font-semibold border border-red-200 rounded px-2 py-1 transition-colors">STOP</button>
           </div>
         </div>
-        <button onclick="nextWord()" class="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white text-2xl font-bold py-5 rounded-xl transition-all shadow-md hover:shadow-lg mb-4">
+        <button onclick="nextWord()" class="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white text-2xl font-bold py-5 rounded-xl transition-all shadow-md hover:shadow-lg mb-4 next-word-btn">
           Next Word →
         </button>
         <div class="flex justify-center gap-2">
@@ -232,10 +232,6 @@
 </footer>
 
 <script>
-  document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-    document.getElementById('mobile-menu').classList.toggle('hidden');
-  });
-
   let selectedTheme = null;
   let gameActive    = false;
   let gamePaused    = false;
@@ -352,4 +348,5 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9TKDY0SV6"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-M9TKDY0SV6');</script>
 </div>
+<script src="/mobile-nav.js"></script>
 </html>
