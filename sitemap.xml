@@ -91,7 +91,7 @@
   <!-- Blog -->
   <url>
     <loc>https://charades-generator.org/blog/</loc>
-    <lastmod>2026-04-19</lastmod>
+    <lastmod>2026-05-07</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
@@ -134,6 +134,13 @@
   <url>
     <loc>https://charades-generator.org/blog/movie-charades-complete-guide</loc>
     <lastmod>2026-04-26</lastmod>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://charades-generator.org/blog/charades-ideas-ultimate-list</loc>
+    <lastmod>2026-05-07</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
