@@ -1,12 +1,56 @@
 {
+  "trailingSlash": true,
   "redirects": [
-    { "source": "/blog/:article.html", "destination": "/blog/:article/", "permanent": true },
-    { "source": "/blog/:article",      "destination": "/blog/:article/", "permanent": false },
-    { "source": "/:page.html",         "destination": "/:page/",         "permanent": true },
-    { "source": "/:page",              "destination": "/:page/",         "permanent": false }
+    {
+      "source": "/Charades-Generator-for-Kids.html",
+      "destination": "/Charades-Generator-for-Kids/",
+      "statusCode": 301
+    },
+    {
+      "source": "/Charades-Ideas-for-Adults.html",
+      "destination": "/Charades-Ideas-for-Adults/",
+      "statusCode": 301
+    },
+    {
+      "source": "/Movies-for-Charades.html",
+      "destination": "/Movies-for-Charades/",
+      "statusCode": 301
+    },
+    {
+      "source": "/Animal-Charades-Game.html",
+      "destination": "/Animal-Charades-Game/",
+      "statusCode": 301
+    },
+    {
+      "source": "/Christmas-Charades.html",
+      "destination": "/Christmas-Charades/",
+      "statusCode": 301
+    },
+    {
+      "source": "/Halloween-Charades.html",
+      "destination": "/Halloween-Charades/",
+      "statusCode": 301
+    },
+    {
+      "source": "/How-to-Play-Charades.html",
+      "destination": "/How-to-Play-Charades/",
+      "statusCode": 301
+    },
+    {
+      "source": "/:path*.html",
+      "destination": "/:path*/",
+      "statusCode": 301
+    }
   ],
-  "rewrites": [
-    { "source": "/blog/:article/", "destination": "/blog/:article.html" },
-    { "source": "/:page/",         "destination": "/:page.html" }
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
+    }
   ]
 }
