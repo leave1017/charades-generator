@@ -753,3 +753,40 @@ body.nav-open { overflow: hidden; }
     margin-right: 0 !important;
   }
 }
+
+/* ── Ko-fi support button (nav, top right) ── */
+.kofi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  color: #fff;
+  background: #ff5e5b;
+  border: 2px solid #ff5e5b;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.kofi-btn:hover {
+  background: #e94a47;
+  border-color: #e94a47;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 94, 91, 0.4);
+}
+
+@media (min-width: 768px) {
+  .kofi-btn { margin-left: 1.5rem; }
+}
+
+/* Mobile: keep the label short so it never crowds the burger */
+@media (max-width: 480px) {
+  .kofi-btn { padding: 6px 11px; font-size: 13px; }
+  .kofi-btn .kofi-label { display: none; }
+}
