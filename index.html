@@ -42,7 +42,7 @@
         "@type": "WebSite",
         "name": "Charades Generator",
         "description": "Free charades generator for kids and adults with movie charades, Disney charades, animal charades and action charades",
-        "url": "https://charadesgenerator.com"
+        "url": "https://charades-generator.org/"
     }
     </script>
   <script type="application/ld+json">
@@ -220,6 +220,69 @@
           </button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Movie & TV Themes Section -->
+  <section id="movie-tv-themes" class="container mx-auto px-4 pb-6">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">🎬 Movie &amp; TV Charades Themes</h2>
+      <p class="text-center text-gray-600 text-sm mb-4">Pick a genre and the movie charades generator serves film and TV
+        titles from that theme — right here, no new page to load.</p>
+
+      <div class="flex flex-wrap justify-center gap-2 mb-4" id="movie-theme-filters">
+        <button class="movie-theme-btn" data-theme="action">💥 Action</button>
+        <button class="movie-theme-btn" data-theme="comedy">😂 Comedy</button>
+        <button class="movie-theme-btn" data-theme="romance">💕 Romance</button>
+        <button class="movie-theme-btn" data-theme="horror">👻 Horror</button>
+        <button class="movie-theme-btn" data-theme="bollywood">🪔 Bollywood</button>
+      </div>
+
+      <!-- Theme result (revealed after a theme is picked) -->
+      <div id="theme-result" class="hidden bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="bg-gradient-to-r from-rose-500 to-orange-500 px-5 py-3 flex justify-between items-center">
+          <span id="theme-cat-badge"
+            class="text-white text-xs font-semibold px-3 py-1 bg-white/20 rounded-full">Action</span>
+          <span id="theme-diff-badge"
+            class="text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-700">Easy</span>
+        </div>
+        <div class="px-6 py-6 text-center">
+          <div id="theme-word-display"
+            class="word-display text-3xl md:text-4xl font-bold text-gray-800 mb-5 leading-tight min-h-[56px] flex items-center justify-center">
+            --</div>
+          <div id="theme-hint-area" class="hidden mb-4 p-4 bg-amber-50 border border-amber-200 rounded-xl text-left">
+            <p class="text-amber-700 text-xs font-bold uppercase mb-1">💡 Hint</p>
+            <p id="theme-hint-text" class="text-gray-700 text-sm"></p>
+          </div>
+          <div class="flex justify-center gap-2">
+            <button onclick="nextThemeWord()"
+              class="bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold px-6 py-2.5 rounded-lg transition-all shadow-md">
+              Next Word →
+            </button>
+            <button onclick="toggleThemeHint()"
+              class="bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors">
+              💡 Hint
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center text-gray-500 text-sm mt-4">Looking for a longer list? Open the full <a
+          href="/Movies-for-Charades/" class="text-blue-600 hover:underline">movie charades generator</a> or read our <a
+          href="/blog/movie-charades-ideas-by-genre/" class="text-blue-600 hover:underline">film charades ideas by
+          genre</a>.</p>
+    </div>
+  </section>
+
+  <!-- Popular Themes Section -->
+  <section id="popular-themes" class="container mx-auto px-4 pb-10">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-xl font-bold text-gray-800 mb-3">Popular Themes</h2>
+      <p class="text-gray-600 text-sm">Jump straight to a themed word bank: our <a href="/Christmas-Charades/"
+          class="text-blue-600 font-semibold hover:underline">christmas charades generator</a> for holiday parties, the
+        <a href="/disney/" class="text-blue-600 font-semibold hover:underline">disney charades generator</a> for
+        character, film and song prompts, or <a href="/Halloween-Charades/"
+          class="text-blue-600 font-semibold hover:underline">Halloween charades</a> for spooky season.</p>
     </div>
   </section>
 
@@ -561,6 +624,79 @@
     </div>
   </section>
 
+  <!-- FAQ Section -->
+  <section id="faq" class="container mx-auto px-4 py-16">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Frequently Asked Questions</h2>
+      <div class="space-y-5">
+        <div class="bg-white rounded-xl shadow p-6">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">What are some good movie charades ideas?</h3>
+          <p class="text-gray-700">Good movie charades ideas are titles the whole group knows and that can be mimed in
+            one scene — Titanic, Jaws, Home Alone, The Lion King and Jurassic Park are reliable openers, while Pulp
+            Fiction or Inception work for harder rounds. Rather than writing a list by hand, pick a genre in the Movie
+            &amp; TV Themes section above and tap Next Word for a fresh title every turn.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-6">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Can I generate charades words from specific movie genres?
+          </h3>
+          <p class="text-gray-700">Yes — use the Movie &amp; TV Themes feature to pick from Action, Comedy, Romance,
+            Horror, Bollywood, and more.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-6">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Is there a Bollywood charades generator?</h3>
+          <p class="text-gray-700">Yes, select the Bollywood theme above to generate Bollywood movie charades words.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-6">
+          <h3 class="text-xl font-semibold text-gray-800 mb-2">Is this charades generator free?</h3>
+          <p class="text-gray-700">Completely free. There is nothing to install, print or sign up for — open the page,
+            tap Next Word and play. It works on phones, tablets and laptops, so one device can be passed around the
+            table.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are some good movie charades ideas?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Good movie charades ideas are titles the whole group knows and that can be mimed in one scene — Titanic, Jaws, Home Alone, The Lion King and Jurassic Park are reliable openers, while Pulp Fiction or Inception work for harder rounds. Rather than writing a list by hand, pick a genre in the Movie & TV Themes section above and tap Next Word for a fresh title every turn."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I generate charades words from specific movie genres?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, use the Movie & TV Themes feature to pick from Action, Comedy, Romance, Horror, Bollywood, and more."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a Bollywood charades generator?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, select the Bollywood theme above to generate Bollywood movie charades words."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this charades generator free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Completely free. There is nothing to install, print or sign up for — open the page, tap Next Word and play. It works on phones, tablets and laptops, so one device can be passed around the table."
+        }
+      }
+    ]
+  }
+  </script>
+
   <!-- Footer -->
   <footer class="bg-gray-800 text-white py-8">
     <div class="container mx-auto px-4">
@@ -618,6 +754,7 @@
   <script src="charades-words.js"></script>
   <script src="game-ui.js"></script>
   <script src="script.js"></script>
+  <script src="movie-themes.js"></script>
 
   <div style="display: none;">
     <!-- Google tag (gtag.js) -->

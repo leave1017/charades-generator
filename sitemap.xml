@@ -31,6 +31,11 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://charades-generator.org/disney/</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://charades-generator.org/Halloween-Charades/</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>

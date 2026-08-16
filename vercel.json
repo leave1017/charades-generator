@@ -38,6 +38,16 @@
       "statusCode": 301
     },
     {
+      "source": "/disney",
+      "destination": "/disney/",
+      "statusCode": 301
+    },
+    {
+      "source": "/disney.html",
+      "destination": "/disney/",
+      "statusCode": 301
+    },
+    {
       "source": "/Charades-Generator-for-Kids.html",
       "destination": "/Charades-Generator-for-Kids/",
       "statusCode": 301

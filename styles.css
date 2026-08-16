@@ -753,3 +753,33 @@ body.nav-open { overflow: hidden; }
     margin-right: 0 !important;
   }
 }
+
+/* ── Movie & TV theme buttons (homepage themes section) ── */
+.movie-theme-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 2px solid #e5e7eb;
+  background: white;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.movie-theme-btn:hover {
+  border-color: #f43f5e;
+  color: #f43f5e;
+}
+
+.movie-theme-btn.active {
+  background: #f43f5e;
+  border-color: #f43f5e;
+  color: white;
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.35);
+}
+
+@media (max-width: 640px) {
+  .movie-theme-btn { padding: 6px 12px; font-size: 13px; }
+}
