@@ -81,6 +81,16 @@
       "source": "/How-to-Play-Charades.html",
       "destination": "/How-to-Play-Charades/",
       "statusCode": 301
+    },
+    {
+      "source": "/Charades-Ideas-for-Kids-List",
+      "destination": "/Charades-Generator-for-Kids/",
+      "statusCode": 301
+    },
+    {
+      "source": "/Charades-Ideas-for-Kids-List.html",
+      "destination": "/Charades-Generator-for-Kids/",
+      "statusCode": 301
     }
   ]
 }

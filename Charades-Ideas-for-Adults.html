@@ -54,8 +54,8 @@
             title="Charades Generator – Home">Home</a>
           <a href="/Charades-Ideas-for-Adults/" class="text-blue-600 font-semibold"
             title="Charades Ideas for Adults – Funny, Hard & Movie Game Themes">Adults</a>
-          <a href="/Charades-Generator-for-Kids/" class="text-gray-600 hover:text-blue-600 transition-colors"
-            title="Charades Generator for Kids – Free, Easy & Fun">Kids</a>
+          <a href="/disney/" title="Disney Charades Generator – Movie Characters &amp; Song Ideas"
+            class="text-gray-600 hover:text-blue-600 transition-colors">Disney</a>
           <a href="/Movies-for-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors"
             title="Movie Charades Generator – 300+ Film Ideas, Free & Instant">Movies</a>
           <a href="/Animal-Charades-Game/" class="text-gray-600 hover:text-blue-600 transition-colors"
@@ -71,7 +71,7 @@
         <!-- Ko-fi support button -->
         <a href="https://ko-fi.com/P3L6256K50" target="_blank" rel="noopener noreferrer nofollow"
           class="kofi-btn" title="Support Charades Generator on Ko-fi">
-          <img src="https://storage.ko-fi.com/cdn/kofi1.png?v=6" height="36"
+          <img src="https://storage.ko-fi.com/cdn/kofi1.png?v=6" width="143" height="36"
             alt="Buy Me a Coffee at ko-fi.com"></a>
         <button id="mobile-menu-btn" class="md:hidden ml-auto p-2">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,8 +85,8 @@
             title="Charades Generator – Home">Home</a>
           <a href="/Charades-Ideas-for-Adults/" class="text-blue-600 font-semibold"
             title="Charades Ideas for Adults – Funny, Hard & Movie Game Themes">Adults</a>
-          <a href="/Charades-Generator-for-Kids/" class="text-gray-600 hover:text-blue-600 transition-colors"
-            title="Charades Generator for Kids – Free, Easy & Fun">Kids</a>
+          <a href="/disney/" title="Disney Charades Generator – Movie Characters &amp; Song Ideas"
+            class="text-gray-600 hover:text-blue-600 transition-colors">Disney</a>
           <a href="/Movies-for-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors"
             title="Movie Charades Generator – 300+ Film Ideas, Free & Instant">Movies</a>
           <a href="/Animal-Charades-Game/" class="text-gray-600 hover:text-blue-600 transition-colors"
@@ -322,6 +322,7 @@
         <a href="/Charades-Generator-for-Kids/" class="text-gray-300 hover:text-white transition-colors">Charades
           Generator for Kids</a>
         <a href="/Movies-for-Charades/" class="text-gray-300 hover:text-white transition-colors">Movies for Charades</a>
+        <a href="/disney/" class="text-gray-300 hover:text-white transition-colors">Disney Charades</a>
         <a href="/Animal-Charades-Game/" class="text-gray-300 hover:text-white transition-colors">Animal Charades
           Game</a>
         <a href="/Christmas-Charades/" class="text-gray-300 hover:text-white transition-colors">Christmas Charades</a>
@@ -342,145 +343,6 @@
     </div>
   </footer>
 
-  <script>
-    // ── Game state ───────────────────────────────────────────
-    let selectedDifficulty = null;
-    let gameActive = false;
-    let gamePaused = false;
-    let timeLeft = 120;
-    let charadeList = [];
-    let currentWord = '';
-
-    // ── Difficulty selection ─────────────────────────────────
-    function selectDifficulty(d) {
-      selectedDifficulty = d;
-      ['easy', 'medium', 'hard'].forEach(x => {
-        document.getElementById(x + '-btn').classList.remove('ring-4', 'ring-blue-300');
-      });
-      document.getElementById(d + '-btn').classList.add('ring-4', 'ring-blue-300');
-      document.getElementById('difficulty-notice').innerHTML =
-        `<p class="text-blue-800 font-medium">Selected: <strong>${d.charAt(0).toUpperCase() + d.slice(1)}</strong> difficulty. Ready to start!</p>`;
-      charadeList = (CHARADES_VOCABULARY?.adult?.[d] || []);
-    }
-
-    // ── Start ────────────────────────────────────────────────
-    function startGame() {
-      if (!selectedDifficulty || charadeList.length === 0) {
-        // Mix all difficulties
-        const v = CHARADES_VOCABULARY?.adult || {};
-        charadeList = [...(v.easy || []), ...(v.medium || []), ...(v.hard || [])];
-        selectedDifficulty = 'mixed';
-        document.getElementById('difficulty-notice').innerHTML =
-          `<p class="text-green-800 font-medium">Started with <strong>Mixed Difficulty</strong>!</p>`;
-      }
-      SafeTimer.stop('adult');   // clear any stale timer
-      gameActive = true;
-      gamePaused = false;
-      timeLeft = 120;
-      _setButtons(true);
-      document.getElementById('countdown-timer').classList.remove('hidden');
-      _nextWord();
-      _startTimer();
-    }
-
-    // ── Timer ────────────────────────────────────────────────
-    function _startTimer() {
-      SafeTimer.start('adult', () => {
-        if (gamePaused) return;
-        timeLeft--;
-        _renderTimer();
-        if (timeLeft <= 0) {
-          SafeTimer.stop('adult');
-          showTimeUpOverlay(currentWord, () => {
-            timeLeft = 120;
-            _renderTimer();
-            _nextWord();
-            gamePaused = false;
-            _startTimer();
-          });
-        }
-      }, 1000);
-    }
-
-    function _renderTimer() {
-      document.getElementById('minutes').textContent = Math.floor(timeLeft / 60);
-      document.getElementById('seconds').textContent = String(timeLeft % 60).padStart(2, '0');
-    }
-
-    // ── Word ─────────────────────────────────────────────────
-    function _nextWord() {
-      currentWord = charadeList[Math.floor(Math.random() * charadeList.length)] || '';
-      const el = document.getElementById('charade-content');
-      el.textContent = currentWord;
-      el.style.transform = 'scale(1.04)';
-      setTimeout(() => { el.style.transform = ''; }, 200);
-      document.getElementById('difficulty-info').classList.add('hidden');
-    }
-
-    function nextCharade() {
-      if (!gameActive || gamePaused) return;
-      timeLeft = 120;
-      _renderTimer();
-      _nextWord();
-    }
-
-    // ── Pause ────────────────────────────────────────────────
-    function pauseGame() {
-      if (!gameActive) return;
-      gamePaused = !gamePaused;
-      const btn = document.getElementById('pause-game-btn');
-      btn.textContent = gamePaused ? '▶️ Resume' : '⏸️ Pause';
-    }
-
-    // ── Reset ────────────────────────────────────────────────
-    function resetGame() {
-      gameActive = false;
-      gamePaused = false;
-      SafeTimer.stop('adult');
-      document.getElementById('charade-content').textContent = 'Click "Start Game" to begin!';
-      document.getElementById('countdown-timer').classList.add('hidden');
-      document.getElementById('difficulty-info').classList.add('hidden');
-      _setButtons(false);
-    }
-
-    // ── Hint ─────────────────────────────────────────────────
-    function showHint() {
-      const info = document.getElementById('difficulty-info');
-      const isHidden = info.classList.contains('hidden');
-      if (isHidden) {
-        document.getElementById('current-difficulty').textContent =
-          selectedDifficulty === 'mixed' ? 'Mixed (Easy + Medium + Hard)'
-            : (selectedDifficulty?.charAt(0).toUpperCase() + selectedDifficulty?.slice(1) || '—');
-        info.classList.remove('hidden');
-        document.getElementById('hint-btn').textContent = '🔍 Hide Info';
-      } else {
-        info.classList.add('hidden');
-        document.getElementById('hint-btn').textContent = '💡 Hint';
-      }
-    }
-
-    // ── Button state ─────────────────────────────────────────
-    function _setButtons(active) {
-      const show = active
-        ? ['next-charade-btn', 'hint-btn', 'pause-game-btn', 'reset-game-btn']
-        : ['start-game-btn'];
-      const hide = active
-        ? ['start-game-btn']
-        : ['next-charade-btn', 'hint-btn', 'pause-game-btn', 'reset-game-btn'];
-      show.forEach(id => document.getElementById(id)?.classList.remove('hidden'));
-      hide.forEach(id => document.getElementById(id)?.classList.add('hidden'));
-      if (active) {
-        const p = document.getElementById('pause-game-btn');
-        if (p) p.textContent = '⏸️ Pause';
-      }
-    }
-
-    // ── URL auto-select ──────────────────────────────────────
-    document.addEventListener('DOMContentLoaded', () => {
-      const d = new URLSearchParams(location.search).get('difficulty');
-      if (d && ['easy', 'medium', 'hard'].includes(d)) selectDifficulty(d);
-    });
-  </script>
 
   <div style="display:none;">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9TKDY0SV6"></script>

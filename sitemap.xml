@@ -51,38 +51,53 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://charades-generator.org/blog/best-charades-ideas-for-family-game-night</loc>
+    <loc>https://charades-generator.org/blog/best-charades-ideas-for-family-game-night/</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://charades-generator.org/blog/how-to-play-charades-rules-and-tips</loc>
+    <loc>https://charades-generator.org/blog/how-to-play-charades-rules-and-tips/</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://charades-generator.org/blog/christmas-charades-ideas-for-holiday-parties</loc>
+    <loc>https://charades-generator.org/blog/christmas-charades-ideas-for-holiday-parties/</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://charades-generator.org/blog/movie-charades-ideas-by-genre</loc>
+    <loc>https://charades-generator.org/blog/movie-charades-ideas-by-genre/</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://charades-generator.org/blog/charades-for-kids-classroom-activities</loc>
+    <loc>https://charades-generator.org/blog/charades-for-kids-classroom-activities/</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://charades-generator.org/blog/movie-charades-complete-guide</loc>
+    <loc>https://charades-generator.org/blog/movie-charades-complete-guide/</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://charades-generator.org/blog/charades-ideas-ultimate-list</loc>
+    <loc>https://charades-generator.org/blog/charades-ideas-ultimate-list/</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://charades-generator.org/about/</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://charades-generator.org/privacy-policy/</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://charades-generator.org/terms-of-service/</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
   </url>
 </urlset>

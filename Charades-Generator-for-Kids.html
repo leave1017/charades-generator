@@ -51,8 +51,8 @@
           title="Charades Generator – Home">Home</a>
         <a href="/Charades-Ideas-for-Adults/" class="text-gray-600 hover:text-blue-600 transition-colors"
           title="Charades Ideas for Adults – Funny, Hard & Movie Game Themes">Adults</a>
-        <a href="/Charades-Generator-for-Kids/" class="text-blue-600 font-semibold"
-          title="Charades Generator for Kids – Free, Easy & Fun">Kids</a>
+        <a href="/disney/" title="Disney Charades Generator – Movie Characters &amp; Song Ideas"
+            class="text-gray-600 hover:text-blue-600 transition-colors">Disney</a>
         <a href="/Movies-for-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors"
           title="Movie Charades Generator – 300+ Film Ideas, Free & Instant">Movies</a>
         <a href="/Animal-Charades-Game/" class="text-gray-600 hover:text-blue-600 transition-colors"
@@ -68,7 +68,7 @@
         <!-- Ko-fi support button -->
         <a href="https://ko-fi.com/P3L6256K50" target="_blank" rel="noopener noreferrer nofollow"
           class="kofi-btn" title="Support Charades Generator on Ko-fi">
-          <img src="https://storage.ko-fi.com/cdn/kofi1.png?v=6" height="36"
+          <img src="https://storage.ko-fi.com/cdn/kofi1.png?v=6" width="143" height="36"
             alt="Buy Me a Coffee at ko-fi.com"></a>
       <button id="mobile-menu-btn" class="md:hidden ml-auto p-2">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,8 +82,8 @@
           title="Charades Generator – Home">Home</a>
         <a href="/Charades-Ideas-for-Adults/" class="text-gray-600 hover:text-blue-600 transition-colors"
           title="Charades Ideas for Adults – Funny, Hard & Movie Game Themes">Adults</a>
-        <a href="/Charades-Generator-for-Kids/" class="text-blue-600 font-semibold"
-          title="Charades Generator for Kids – Free, Easy & Fun">Kids</a>
+        <a href="/disney/" title="Disney Charades Generator – Movie Characters &amp; Song Ideas"
+            class="text-gray-600 hover:text-blue-600 transition-colors">Disney</a>
         <a href="/Movies-for-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors"
           title="Movie Charades Generator – 300+ Film Ideas, Free & Instant">Movies</a>
         <a href="/Animal-Charades-Game/" class="text-gray-600 hover:text-blue-600 transition-colors"
@@ -219,7 +219,7 @@
       Focus on <strong>everyday actions</strong> (jumping, eating, sleeping, swimming) and <strong>simple
         animals</strong> (dog, cat, frog, elephant). Keep timers at 2–3 minutes and allow one hint per turn. Avoid
       multi-word phrases at this age — single nouns and verbs work best. For a full age-sorted list, see our <a
-        href="/Charades-Ideas-for-Kids-List/" class="text-blue-600 hover:underline">Charades Ideas for Kids</a> page.
+        href="/Charades-Generator-for-Kids/" class="text-blue-600 hover:underline">Charades Ideas for Kids</a> page.
     </p>
 
     <h3 class="text-2xl font-semibold text-gray-800 mb-3">Ages 8–12: Disney, Movies, and Themes</h3>
@@ -258,7 +258,7 @@
         <h3 class="font-bold text-gray-800 mb-2">Mix ages strategically</h3>
         <p class="text-gray-700 text-sm">In mixed-age family games, pair younger kids with older siblings or parents.
           The older player can guide the acting without giving the answer away, which builds confidence in younger
-          players. For more ideas across all age groups, browse our <a href="/Charades-Ideas-for-Kids-List/"
+          players. For more ideas across all age groups, browse our <a href="/Charades-Generator-for-Kids/"
             class="text-blue-600 hover:underline">full kids charades list</a>.</p>
       </div>
     </div>
@@ -278,6 +278,7 @@
         Adults</a>
       <a href="/Charades-Generator-for-Kids/" class="text-blue-400 font-semibold">Charades Generator for Kids</a>
       <a href="/Movies-for-Charades/" class="text-gray-300 hover:text-white transition-colors">Movies for Charades</a>
+        <a href="/disney/" class="text-gray-300 hover:text-white transition-colors">Disney Charades</a>
       <a href="/Animal-Charades-Game/" class="text-gray-300 hover:text-white transition-colors">Animal Charades Game</a>
       <a href="/Christmas-Charades/" class="text-gray-300 hover:text-white transition-colors">Christmas Charades</a>
       <a href="/Halloween-Charades/" class="text-gray-300 hover:text-white transition-colors">Halloween Charades</a>
@@ -295,118 +296,6 @@
   </div>
 </footer>
 
-<script>
-  let selectedTheme = null;
-  let gameActive = false;
-  let gamePaused = false;
-  let timeLeft = 120;
-  let charadeList = [];
-  let currentWord = '';
-
-  function selectTheme(t) {
-    selectedTheme = t;
-    ['disney', 'halloween', 'kids'].forEach(x =>
-      document.getElementById(x + '-btn').classList.remove('ring-4', 'ring-blue-300'));
-    document.getElementById(t + '-btn').classList.add('ring-4', 'ring-blue-300');
-    document.getElementById('theme-notice').innerHTML =
-      `<p class="text-blue-800 font-medium">Selected: <strong>${t.charAt(0).toUpperCase() + t.slice(1)}</strong> theme. Ready to start!</p>`;
-    charadeList = CHARADES_VOCABULARY?.kids?.[t] || [];
-  }
-
-  function startGame() {
-    if (!selectedTheme || charadeList.length === 0) {
-      const k = CHARADES_VOCABULARY?.kids || {};
-      charadeList = [...(k.disney || []), ...(k.halloween || []), ...(k.kids || [])];
-      selectedTheme = 'mixed';
-      document.getElementById('theme-notice').innerHTML =
-        `<p class="text-green-800 font-medium">Started with <strong>Mixed Themes</strong>!</p>`;
-    }
-    SafeTimer.stop('kids');
-    gameActive = true;
-    gamePaused = false;
-    timeLeft = 120;
-    _setButtons(true);
-    document.getElementById('countdown-timer').classList.remove('hidden');
-    _nextWord();
-    _startTimer();
-  }
-
-  function _startTimer() {
-    SafeTimer.start('kids', () => {
-      if (gamePaused) return;
-      timeLeft--;
-      _renderTimer();
-      if (timeLeft <= 0) {
-        SafeTimer.stop('kids');
-        showTimeUpOverlay(currentWord, () => {
-          timeLeft = 120; _renderTimer(); _nextWord(); gamePaused = false; _startTimer();
-        });
-      }
-    }, 1000);
-  }
-
-  function _renderTimer() {
-    document.getElementById('minutes').textContent = Math.floor(timeLeft / 60);
-    document.getElementById('seconds').textContent = String(timeLeft % 60).padStart(2, '0');
-  }
-
-  function _nextWord() {
-    currentWord = charadeList[Math.floor(Math.random() * charadeList.length)] || '';
-    const el = document.getElementById('charade-content');
-    el.textContent = currentWord;
-    el.style.transform = 'scale(1.04)';
-    setTimeout(() => { el.style.transform = ''; }, 200);
-    document.getElementById('theme-info').classList.add('hidden');
-    document.getElementById('hint-btn').textContent = '💡 Hint';
-  }
-
-  function nextCharade() {
-    if (!gameActive || gamePaused) return;
-    timeLeft = 120; _renderTimer(); _nextWord();
-  }
-
-  function pauseGame() {
-    if (!gameActive) return;
-    gamePaused = !gamePaused;
-    document.getElementById('pause-game-btn').textContent = gamePaused ? '▶️ Resume' : '⏸️ Pause';
-  }
-
-  function resetGame() {
-    gameActive = false; gamePaused = false;
-    SafeTimer.stop('kids');
-    document.getElementById('charade-content').textContent = 'Click "Start Game" to begin!';
-    document.getElementById('countdown-timer').classList.add('hidden');
-    document.getElementById('theme-info').classList.add('hidden');
-    _setButtons(false);
-  }
-
-  function showHint() {
-    const info = document.getElementById('theme-info');
-    const hidden = info.classList.contains('hidden');
-    if (hidden) {
-      document.getElementById('current-theme').textContent =
-        selectedTheme === 'mixed' ? 'Mixed Themes' : (selectedTheme?.charAt(0).toUpperCase() + selectedTheme?.slice(1) || '—');
-      info.classList.remove('hidden');
-      document.getElementById('hint-btn').textContent = '🔍 Hide Info';
-    } else {
-      info.classList.add('hidden');
-      document.getElementById('hint-btn').textContent = '💡 Hint';
-    }
-  }
-
-  function _setButtons(active) {
-    const show = active ? ['next-charade-btn', 'hint-btn', 'pause-game-btn', 'reset-game-btn'] : ['start-game-btn'];
-    const hide = active ? ['start-game-btn'] : ['next-charade-btn', 'hint-btn', 'pause-game-btn', 'reset-game-btn'];
-    show.forEach(id => document.getElementById(id)?.classList.remove('hidden'));
-    hide.forEach(id => document.getElementById(id)?.classList.add('hidden'));
-    if (active) document.getElementById('pause-game-btn').textContent = '⏸️ Pause';
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const t = new URLSearchParams(location.search).get('theme');
-    if (t && ['disney', 'halloween', 'kids'].includes(t)) selectTheme(t);
-  });
-</script>
 
 <div style="display:none;">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9TKDY0SV6"></script>
