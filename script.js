@@ -194,10 +194,8 @@ function selectAnimalHabitat(habitat) {
 
 // ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile menu
-  const menuBtn = document.getElementById('mobile-menu-btn');
-  const menu    = document.getElementById('mobile-menu');
-  if (menuBtn && menu) menuBtn.addEventListener('click', () => menu.classList.toggle('hidden'));
+  // Mobile menu is owned by mobile-nav.js — binding a second toggle here
+  // cancelled it out and left the burger dead on this page.
 
   // Filter buttons
   document.querySelectorAll('.filter-btn').forEach(btn =>
