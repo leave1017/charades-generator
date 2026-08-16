@@ -758,35 +758,53 @@ body.nav-open { overflow: hidden; }
 .kofi-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   margin-left: auto;
-  padding: 7px 14px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
-  color: #fff;
-  background: #ff5e5b;
-  border: 2px solid #ff5e5b;
+  line-height: 0;
   text-decoration: none;
-  transition: all 0.2s;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.kofi-btn img {
+  display: block;
+  height: 36px;
+  width: auto;
+  border: 0;
 }
 
 .kofi-btn:hover {
-  background: #e94a47;
-  border-color: #e94a47;
-  color: #fff;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 94, 91, 0.4);
+  filter: brightness(1.05);
 }
 
 @media (min-width: 768px) {
   .kofi-btn { margin-left: 1.5rem; }
 }
 
-/* Mobile: keep the label short so it never crowds the burger */
+/* Below 1280px the nav container narrows to 1024px and the nine desktop
+   links fill it exactly, so the badge has to give ground. */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .kofi-btn { margin-left: 0.75rem; }
+  .kofi-btn img { height: 26px; }
+}
+
+/* 768-1023px: the desktop link row already overflows on its own here,
+   so the badge stays out of the way rather than adding to it. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .kofi-btn { display: none; }
+}
+
+/* The mobile drawer slides over the left 75vw and would slice the badge
+   in half, so hide it while the menu is open. visibility keeps its space
+   reserved so the burger does not jump. */
+body.nav-open .kofi-btn { visibility: hidden; }
+
+/* Phones: shrink the badge so it never crowds the burger */
 @media (max-width: 480px) {
-  .kofi-btn { padding: 6px 11px; font-size: 13px; }
-  .kofi-btn .kofi-label { display: none; }
+  .kofi-btn img { height: 28px; }
+}
+
+/* 320px-class screens: pages whose burger carries extra padding run out
+   of nav width above 18px */
+@media (max-width: 360px) {
+  .kofi-btn img { height: 18px; }
 }
