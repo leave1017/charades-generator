@@ -1,6 +1,6 @@
-// movie-themes.js — genre word banks + in-page generator for the
-// "Movie & TV Charades Themes" section on the homepage.
-// Self-contained: does not touch script.js state or the main game card.
+// movie-themes.js — genre word banks for the homepage movie charades
+// generator. Data only: script.js reads MOVIE_THEME_WORDS to build the
+// pool behind the Action / Comedy / Romance / Horror / Bollywood filters.
 
 const MOVIE_THEME_WORDS = {
   action: {
@@ -109,83 +109,3 @@ const MOVIE_THEME_WORDS = {
     ]
   }
 };
-
-(function () {
-  var activeTheme = null;
-  var currentWord = null;
-
-  function el(id) { return document.getElementById(id); }
-
-  function pick(theme, exclude) {
-    var list = MOVIE_THEME_WORDS[theme] ? MOVIE_THEME_WORDS[theme].words : [];
-    if (!list.length) return null;
-    var pool = exclude ? list.filter(function (w) { return w.word !== exclude; }) : list;
-    if (!pool.length) pool = list;
-    return pool[Math.floor(Math.random() * pool.length)];
-  }
-
-  function render(wordObj) {
-    if (!wordObj) return;
-    currentWord = wordObj;
-
-    var display = el('theme-word-display');
-    if (display) {
-      display.textContent = wordObj.word;
-      display.classList.remove('word-pop');
-      void display.offsetWidth;
-      display.classList.add('word-pop');
-    }
-
-    var badge = el('theme-cat-badge');
-    if (badge && activeTheme) badge.textContent = MOVIE_THEME_WORDS[activeTheme].label;
-
-    var diffBadge = el('theme-diff-badge');
-    if (diffBadge) {
-      diffBadge.textContent = wordObj.difficulty.charAt(0).toUpperCase() + wordObj.difficulty.slice(1);
-      diffBadge.className = 'text-xs font-semibold px-3 py-1 rounded-full';
-      if (wordObj.difficulty === 'easy') diffBadge.classList.add('bg-green-100', 'text-green-700');
-      else if (wordObj.difficulty === 'medium') diffBadge.classList.add('bg-yellow-100', 'text-yellow-700');
-      else diffBadge.classList.add('bg-red-100', 'text-red-700');
-    }
-
-    el('theme-hint-area')?.classList.add('hidden');
-  }
-
-  function selectMovieTheme(theme) {
-    if (!MOVIE_THEME_WORDS[theme]) return;
-    activeTheme = theme;
-    document.querySelectorAll('.movie-theme-btn').forEach(function (btn) {
-      btn.classList.toggle('active', btn.dataset.theme === theme);
-    });
-    el('theme-result')?.classList.remove('hidden');
-    render(pick(theme));
-  }
-
-  function nextThemeWord() {
-    if (!activeTheme) return;
-    render(pick(activeTheme, currentWord && currentWord.word));
-  }
-
-  function toggleThemeHint() {
-    var area = el('theme-hint-area');
-    var text = el('theme-hint-text');
-    if (!area || !text || !currentWord) return;
-    if (area.classList.contains('hidden')) {
-      text.textContent = currentWord.hint ||
-        'Starts with "' + currentWord.word[0].toUpperCase() + '"';
-      area.classList.remove('hidden');
-    } else {
-      area.classList.add('hidden');
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.movie-theme-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () { selectMovieTheme(btn.dataset.theme); });
-    });
-  });
-
-  window.selectMovieTheme = selectMovieTheme;
-  window.nextThemeWord   = nextThemeWord;
-  window.toggleThemeHint = toggleThemeHint;
-})();

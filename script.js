@@ -8,26 +8,49 @@ let timerInterval    = null;
 let timerSeconds     = 120;
 let timerRunning     = false;
 
-// ── Category filter → which word categories to include ───────
-const CATEGORY_MAP = {
-  all:       null,   // no filter
-  adults:    ['adults', 'famous', 'objects', 'food', 'sports', 'actions', 'tvshows'],
-  kids:      ['kids', 'animals', 'actions'],
-  movies:    ['movies', 'tvshows'],
-  animals:   ['animals'],
-  christmas: ['christmas'],
-  halloween: ['halloween'],
-};
+// ── Word pools ────────────────────────────────────────────────
+// The homepage tool is a movie charades generator: "all" mixes every
+// genre with the generic film/TV titles, and each genre button narrows
+// it to that genre's bank in movie-themes.js.
+let POOLS = null;
+
+function buildPools() {
+  const byGenre = {};
+  const all     = [];
+  const seen    = new Set();
+
+  const add = (list) => list.forEach(w => {
+    if (seen.has(w.word)) return;
+    seen.add(w.word);
+    all.push(w);
+  });
+
+  if (typeof MOVIE_THEME_WORDS !== 'undefined') {
+    Object.keys(MOVIE_THEME_WORDS).forEach(genre => {
+      const label = MOVIE_THEME_WORDS[genre].label;
+      byGenre[genre] = MOVIE_THEME_WORDS[genre].words.map(w => ({ ...w, category: label }));
+      add(byGenre[genre]);
+    });
+  }
+
+  // Generic film & TV titles already in the shared word list widen "All".
+  if (typeof CHARADES_WORDS !== 'undefined') {
+    add(CHARADES_WORDS
+      .filter(w => w.category === 'movies' || w.category === 'tvshows')
+      .map(w => ({ ...w, category: w.category === 'tvshows' ? 'TV Show' : 'Movie' })));
+  }
+
+  return { byGenre, all };
+}
 
 // ── Word selection ────────────────────────────────────────────
 function getFilteredWords() {
-  if (typeof CHARADES_WORDS === 'undefined' || !CHARADES_WORDS.length) return [];
-  const cats = CATEGORY_MAP[activeCategory];
-  let words = cats ? CHARADES_WORDS.filter(w => cats.includes(w.category)) : CHARADES_WORDS;
-  if (activeDifficulty !== 'all') {
-    words = words.filter(w => w.difficulty === activeDifficulty);
-  }
-  return words.length ? words : CHARADES_WORDS;
+  if (!POOLS) POOLS = buildPools();
+  const base = POOLS.byGenre[activeCategory] || POOLS.all;
+  if (!base.length) return [];
+  if (activeDifficulty === 'all') return base;
+  const words = base.filter(w => w.difficulty === activeDifficulty);
+  return words.length ? words : base;
 }
 
 function getRandomWord(excludeWord) {
@@ -51,9 +74,9 @@ function showWord(wordObj) {
     display.classList.add('word-pop');
   }
 
-  // Category badge
+  // Category badge (already a display label: "Action", "Movie", "TV Show")
   const catBadge = document.getElementById('cat-badge');
-  if (catBadge) catBadge.textContent = capitalize(wordObj.category);
+  if (catBadge) catBadge.textContent = wordObj.category;
 
   // Difficulty badge
   const diffBadge = document.getElementById('diff-badge');
