@@ -281,8 +281,11 @@ ${pagesHTML(words)}
   await page.goto('file://' + htmlPath, { waitUntil: 'load' });
   const outPath = path.join(ROOT, out);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  await page.pdf({ path: outPath, format: paper.format, printBackground: true,
-                   margin: { top: '10mm', right: '10mm', bottom: '10mm', left: '10mm' } });
+  // preferCSSPageSize hands page size and margins entirely to the CSS @page
+  // rule. Passing format/margin here as well made Chromium lay the content out
+  // at 210mm, add 10mm margins on top, then scale the lot down to fit the
+  // sheet — every dimension came out at 91.4% of what it should be.
+  await page.pdf({ path: outPath, printBackground: true, preferCSSPageSize: true });
   await browser.close();
 
   const kb = (fs.statSync(outPath).size / 1024).toFixed(0);
