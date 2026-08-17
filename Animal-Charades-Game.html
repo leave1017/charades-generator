@@ -30,7 +30,30 @@
   <link rel="apple-touch-icon" href="/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/charades-words.js"></script>
-  <script>window.PAGE_CATEGORIES = ['animals']; window.PAGE_LABEL = 'Animals';</script>
+  <script>
+    window.PAGE_CATEGORIES = ['animals'];
+    window.PAGE_LABEL = 'Animals';
+    window.PAGE_SUBSET_PARAM = 'habitat';
+    window.PAGE_SUBSETS = {
+      land: {
+        label: 'Land Animals',
+        words: ['Dog', 'Cat', 'Rabbit', 'Horse', 'Cow', 'Pig', 'Sheep', 'Mouse', 'Frog', 'Turtle',
+          'Bear', 'Lion', 'Tiger', 'Elephant', 'Monkey', 'Giraffe', 'Zebra', 'Hamster', 'Snake',
+          'Kangaroo', 'Chimpanzee', 'Hippopotamus', 'Crocodile', 'Chameleon', 'Iguana', 'Sloth',
+          'Gorilla', 'Panda', 'Koala', 'Polar Bear', 'Platypus', 'Pangolin', 'Komodo Dragon',
+          'Capybara', 'Tapir', 'Wolverine', 'Armadillo', 'Quokka', 'Wombat']
+      },
+      marine: {
+        label: 'Marine Animals',
+        words: ['Fish', 'Dolphin', 'Octopus', 'Jellyfish', 'Sea Turtle', 'Manta Ray', 'Narwhal',
+          'Axolotl', 'Mantis Shrimp']
+      },
+      birds: {
+        label: 'Birds',
+        words: ['Bird', 'Duck', 'Chicken', 'Penguin', 'Flamingo', 'Peacock', 'Ostrich', 'Bald Eagle']
+      }
+    };
+  </script>
   <script src="/inner-game.js"></script>
   <link rel="stylesheet" href="/styles.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104"></script>
@@ -114,6 +137,14 @@
 
   <section id="game-section" class="container mx-auto px-4 py-6">
     <h1 class="text-4xl md:text-5xl font-bold text-gray-800 text-center mb-5">Animal Charades Game</h1>
+
+    <!-- Sub-filters: Pick a habitat -->
+    <div class="flex flex-wrap justify-center gap-2 mb-3" id="subset-filters">
+      <button class="filter-btn subset-btn active" data-subset="all">🐾 All Animals</button>
+      <button class="filter-btn subset-btn" data-subset="land">🦁 Land</button>
+      <button class="filter-btn subset-btn" data-subset="marine">🐋 Marine</button>
+      <button class="filter-btn subset-btn" data-subset="birds">🦅 Birds</button>
+    </div>
 
     <!-- Difficulty Filters -->
     <div class="flex flex-wrap justify-center gap-2 mb-5" id="difficulty-filters">

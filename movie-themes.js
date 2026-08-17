@@ -87,6 +87,27 @@ const MOVIE_THEME_WORDS = {
       { word: "Nosferatu",          difficulty: "hard",   hint: "Silent-film vampire with long fingers climbing the stairs" }
     ]
   },
+  animation: {
+    label: 'Animation',
+    words: [
+      { word: "The Lion King",      difficulty: "easy",   hint: "Cub held above a rock at sunrise, uncle with a scar" },
+      { word: "Toy Story",          difficulty: "easy",   hint: "Toys drop and freeze whenever a human walks in" },
+      { word: "Frozen",             difficulty: "easy",   hint: "Sister freezes a whole kingdom, builds an ice palace" },
+      { word: "Finding Nemo",       difficulty: "easy",   hint: "Clownfish father crosses the ocean for his son" },
+      { word: "Moana",              difficulty: "easy",   hint: "Girl sails past the reef to return a green stone" },
+      { word: "Kung Fu Panda",      difficulty: "easy",   hint: "Chubby panda accidentally becomes a martial arts hero" },
+      { word: "Up",                 difficulty: "medium", hint: "Old man lifts his house with a bundle of balloons" },
+      { word: "WALL-E",             difficulty: "medium", hint: "Little robot tidies an abandoned Earth, falls in love" },
+      { word: "Ratatouille",        difficulty: "medium", hint: "Rat cooks by pulling a chef's hair like puppet strings" },
+      { word: "Inside Out",         difficulty: "medium", hint: "Five emotions run a control room inside a girl's head" },
+      { word: "Zootopia",           difficulty: "medium", hint: "Rabbit cop and fox con artist, plus a very slow sloth" },
+      { word: "How to Train Your Dragon", difficulty: "medium", hint: "Viking boy befriends the dragon he was meant to kill" },
+      { word: "Spirited Away",      difficulty: "hard",   hint: "Girl works in a bathhouse for spirits to free her parents" },
+      { word: "Into the Spider-Verse", difficulty: "hard", hint: "Many Spider-Men from different worlds, comic-book panels" },
+      { word: "Princess Mononoke",  difficulty: "hard",   hint: "Girl raised by wolves fights for the forest gods" },
+      { word: "Fantastic Mr Fox",   difficulty: "hard",   hint: "Stop-motion fox in a suit raids three farmers" }
+    ]
+  },
   bollywood: {
     label: 'Bollywood',
     words: [

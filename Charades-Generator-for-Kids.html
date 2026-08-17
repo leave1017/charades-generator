@@ -30,7 +30,18 @@
   <link rel="apple-touch-icon" href="/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/charades-words.js"></script>
-  <script>window.PAGE_CATEGORIES = ['kids']; window.PAGE_LABEL = 'Kids';</script>
+  <script src="/disney-words.js"></script>
+  <script>
+    window.PAGE_CATEGORIES = ['kids'];
+    window.PAGE_LABEL = 'Kids';
+    window.PAGE_SUBSET_PARAM = 'theme';
+    window.PAGE_SUBSETS = {
+      kids:      { label: 'Kids',      categories: ['kids'] },
+      disney:    { label: 'Disney',    list: DISNEY_CHARADES_WORDS },
+      halloween: { label: 'Halloween', categories: ['halloween'] },
+      animals:   { label: 'Animals',   categories: ['animals'] }
+    };
+  </script>
   <script src="/inner-game.js"></script>
   <link rel="stylesheet" href="/styles.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104"></script>
@@ -113,6 +124,15 @@
 
 <section id="game-section" class="container mx-auto px-4 py-6">
   <h1 class="text-4xl md:text-5xl font-bold text-gray-800 text-center mb-5">Charades Generator for Kids</h1>
+
+  <!-- Sub-filters: Pick a theme -->
+  <div class="flex flex-wrap justify-center gap-2 mb-3" id="subset-filters">
+    <button class="filter-btn subset-btn active" data-subset="all">🎲 All Kids Words</button>
+    <button class="filter-btn subset-btn" data-subset="kids">🧒 Everyday</button>
+    <button class="filter-btn subset-btn" data-subset="disney">🏰 Disney</button>
+    <button class="filter-btn subset-btn" data-subset="halloween">🎃 Halloween</button>
+    <button class="filter-btn subset-btn" data-subset="animals">🐾 Animals</button>
+  </div>
 
   <!-- Difficulty Filters -->
   <div class="flex flex-wrap justify-center gap-2 mb-5" id="difficulty-filters">

@@ -186,10 +186,10 @@ function capitalize(str) {
 
 // ── Navigation helpers (kept for inner pages) ─────────────────
 function selectMovieGenre(genre) {
-  window.location.href = `Movies-for-Charades.html?genre=${genre}#quick-start-game`;
+  window.location.href = `/Movies-for-Charades/?genre=${genre}#game-section`;
 }
 function selectAnimalHabitat(habitat) {
-  window.location.href = `Animal-Charades-Game.html?habitat=${habitat}#quick-start-game`;
+  window.location.href = `/Animal-Charades-Game/?habitat=${habitat}#game-section`;
 }
 
 // ── Init ──────────────────────────────────────────────────────

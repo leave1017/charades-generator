@@ -1,19 +1,55 @@
 // inner-game.js — category page game logic
 // Requires charades-words.js loaded first
 // Requires window.PAGE_CATEGORIES (array) and window.PAGE_LABEL (string)
+//
+// Optional sub-filters. A page can offer a second row of chips that narrows
+// its word pool — movie genres, animal habitats, kid themes. Declare:
+//   window.PAGE_SUBSET_PARAM = 'genre'          // the URL parameter to honour
+//   window.PAGE_SUBSETS = {
+//     action: { label: 'Action', list: [...] },       // an explicit word array
+//     land:   { label: 'Land',   words: ['Lion'] },   // names from CHARADES_WORDS
+//     spooky: { label: 'Spooky', categories: ['halloween'] }
+//   }
+// Mark the chips with class "subset-btn" and data-subset="<key>". Landing on
+// ?<param>=<key> preselects that chip, so a link from the homepage lands on
+// the words it promised.
 (function () {
   var activeDiff = 'all';
+  var activeSubset = null;
   var currentWord = null;
   var timerInterval = null;
   var timerSeconds = 120;
   var timerRunning = false;
 
+  function allWords() {
+    return (typeof CHARADES_WORDS !== 'undefined' ? CHARADES_WORDS : []);
+  }
+
+  function subsetWords(key) {
+    var def = (window.PAGE_SUBSETS || {})[key];
+    if (!def) return null;
+    if (def.list) return def.list;
+    var all = allWords();
+    if (def.categories) {
+      return all.filter(function (w) { return def.categories.indexOf(w.category) !== -1; });
+    }
+    if (def.words) {
+      return all.filter(function (w) { return def.words.indexOf(w.word) !== -1; });
+    }
+    return null;
+  }
+
   function getWords() {
-    var cats = window.PAGE_CATEGORIES || [];
-    var all = (typeof CHARADES_WORDS !== 'undefined' ? CHARADES_WORDS : []);
-    var words = cats.length ? all.filter(function (w) { return cats.indexOf(w.category) !== -1; }) : all;
-    if (activeDiff !== 'all') words = words.filter(function (w) { return w.difficulty === activeDiff; });
-    return words.length ? words : all;
+    var all = allWords();
+    var base = activeSubset ? subsetWords(activeSubset) : null;
+    if (!base || !base.length) {
+      var cats = window.PAGE_CATEGORIES || [];
+      base = cats.length ? all.filter(function (w) { return cats.indexOf(w.category) !== -1; }) : all;
+    }
+    if (!base.length) base = all;
+    if (activeDiff === 'all') return base;
+    var words = base.filter(function (w) { return w.difficulty === activeDiff; });
+    return words.length ? words : base;
   }
 
   function randomWord(exclude) {
@@ -44,6 +80,31 @@
     if (ha) ha.classList.add('hidden');
     var ht = document.getElementById('hint-text');
     if (ht) ht.textContent = obj.hint || '';
+    updateBadge();
+  }
+
+  // Card badge shows the active sub-filter, falling back to the page label.
+  function updateBadge() {
+    var cb = document.getElementById('cat-badge');
+    if (!cb) return;
+    var def = activeSubset ? (window.PAGE_SUBSETS || {})[activeSubset] : null;
+    cb.textContent = (def && def.label) || window.PAGE_LABEL || '';
+  }
+
+  function setSubset(key, rerender) {
+    activeSubset = (window.PAGE_SUBSETS || {})[key] ? key : null;
+    document.querySelectorAll('.subset-btn').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.subset === (activeSubset || 'all'));
+    });
+    if (rerender !== false) showWord(randomWord());
+  }
+
+  function setDifficulty(key, rerender) {
+    activeDiff = ['easy', 'medium', 'hard'].indexOf(key) !== -1 ? key : 'all';
+    document.querySelectorAll('.diff-btn').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.difficulty === activeDiff);
+    });
+    if (rerender !== false) showWord(randomWord());
   }
 
   window.nextWord = function () { showWord(randomWord(currentWord)); };
@@ -91,16 +152,19 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.diff-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        activeDiff = this.dataset.difficulty;
-        document.querySelectorAll('.diff-btn').forEach(function (b) {
-          b.classList.toggle('active', b.dataset.difficulty === activeDiff);
-        });
-        showWord(randomWord());
-      });
+      btn.addEventListener('click', function () { setDifficulty(btn.dataset.difficulty); });
     });
-    var cb = document.getElementById('cat-badge');
-    if (cb) cb.textContent = window.PAGE_LABEL || '';
+    document.querySelectorAll('.subset-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () { setSubset(btn.dataset.subset); });
+    });
+
+    // Honour the deep links from the homepage cards: land on the promised words.
+    var qs = new URLSearchParams(location.search);
+    var param = window.PAGE_SUBSET_PARAM;
+    if (param && qs.get(param)) setSubset(qs.get(param), false);
+    if (qs.get('difficulty')) setDifficulty(qs.get('difficulty'), false);
+
+    updateBadge();
     showWord(randomWord());
   });
 
