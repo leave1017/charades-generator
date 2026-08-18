@@ -7,6 +7,11 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://charades-generator.org/printable-charades-cards/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://charades-generator.org/Charades-Ideas-for-Adults/</loc>
     <lastmod>2026-08-16</lastmod>
     <priority>0.8</priority>

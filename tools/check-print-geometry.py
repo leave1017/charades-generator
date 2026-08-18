@@ -22,8 +22,23 @@ MM = 72 / 25.4
 TOL = 0.5          # mm; Chromium rounds page boxes slightly
 
 
+def inked(page):
+    """Drawings that put ink on the page.
+
+    A page-sized white fill is background, not content, and counting it makes
+    every extent measurement come out as the full page.
+    """
+    out = []
+    for d in page.get_drawings():
+        white = d.get('fill') and all(c > 0.95 for c in d['fill'])
+        if white and not d.get('color'):
+            continue
+        out.append(d)
+    return out
+
+
 def rects_mm(page):
-    return [(d['rect'].width / MM, d['rect'].height / MM) for d in page.get_drawings()]
+    return [(d['rect'].width / MM, d['rect'].height / MM) for d in inked(page)]
 
 
 def bbox_mm(page):
@@ -32,7 +47,7 @@ def bbox_mm(page):
     A dashed border is emitted as hundreds of separate dash segments rather
     than one rectangle, so the card grid can only be measured as an extent.
     """
-    ds = page.get_drawings()
+    ds = inked(page)
     if not ds:
         return None
     x0 = min(d['rect'].x0 for d in ds) / MM

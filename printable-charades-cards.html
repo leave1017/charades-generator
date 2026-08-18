@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Printable Charades Cards – Free Cards to Print at Home</title>
+  <meta name="description"
+    content="Make your own printable charades cards free. Pick the categories and difficulty, then print or save as PDF — 9 cards a page, cut and play.">
+  <link rel="canonical" href="https://charades-generator.org/printable-charades-cards/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Charades Generator">
+  <meta property="og:title" content="Printable Charades Cards – Free Cards to Print at Home">
+  <meta property="og:description"
+    content="Build a charades card set in seconds: choose categories and difficulty, then print or save as PDF. Nine cards a page, ready to cut.">
+  <meta property="og:url" content="https://charades-generator.org/printable-charades-cards/">
+  <meta property="og:image" content="https://charades-generator.org/image/big%20logo.webp">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Printable Charades Cards – Free Cards to Print at Home">
+  <meta name="twitter:description"
+    content="Build a charades card set in seconds: choose categories and difficulty, then print or save as PDF. Nine cards a page, ready to cut.">
+  <meta name="twitter:image" content="https://charades-generator.org/image/big%20logo.webp">
+  <meta name="author" content="Charades Generator">
+  <meta name="robots" content="index, follow">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Printable Charades Cards Generator",
+    "description": "Free tool that builds printable charades cards from a chosen set of categories and difficulty levels, laid out nine to a page for A4 or US Letter.",
+    "url": "https://charades-generator.org/printable-charades-cards/",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Any",
+    "inLanguage": "en",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Charades Generator",
+      "url": "https://charades-generator.org/"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I make printable charades cards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose the categories you want, pick a difficulty and how many cards you need, then press Print cards. Your browser's print dialog opens and you can either send the sheets to a printer or choose Save as PDF to keep them. Each sheet holds nine cards with dashed cut lines shared between neighbours, so every cut is one straight pass across the page."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What size are the printed charades cards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On A4 each card is 63 by 92 millimetres, which is close to a standard playing card. On US Letter the cards are 65 by 86 millimetres. Both sizes fit comfortably in one hand and stack into a bowl. To get those measurements you must print at 100 percent scale — if your print dialog is set to Fit to page, every card comes out several millimetres small."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What paper should I print charades cards on?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use 160gsm card stock or heavier. On ordinary 80gsm copy paper the word shows through from the back, so a card lying face down on the table can be read by the other team. Card stock also survives being shuffled and pulled out of a bowl all evening. If plain paper is all you have, keep the cards face down in a container rather than on the table."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are these charades cards free to print?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The generator is free with no sign-up, no watermark and no limit on how many sets you print. You can also download a ready-made 18-card sample pack as a PDF if you would rather not configure anything."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many charades cards do I need for a party?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Allow roughly six to eight cards per player for an evening. Eight people playing for about an hour will get through 50 to 60 cards, which is six sheets. Print a few more than you think you need: cards that are guessed instantly still get used up, and having spares means you can drop any word that does not suit the group."
+        }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://charades-generator.org/"},{"@type":"ListItem","position":2,"name":"Printable Charades Cards","item":"https://charades-generator.org/printable-charades-cards/"}]}
+  </script>
+
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles.css">
+  <!-- The printed sheet is styled by the same file the downloadable packs use,
+       so a set printed here cuts to the same size as a pack from /downloads/. -->
+  <link rel="stylesheet" href="/print-cards.css">
+  <script src="/charades-words.js"></script>
+  <style>
+    /* On screen the sheets live inside a scaled preview; transforms do not
+       affect layout metrics, so the type-fitting pass still measures true
+       millimetres. In print the transform is dropped and the page furniture
+       goes away. */
+    /* Grid items default to min-width: auto, so the 189mm sheet inside the
+       preview propagates its width out through the column and pushes the whole
+       page sideways on a phone. Letting the columns shrink below their content
+       is what makes overflow: hidden actually clip. */
+    #builder > div { min-width: 0; }
+    #preview-frame { overflow: hidden; max-width: 100%; }
+    #print-area { transform-origin: top left; }
+    @media screen {
+      #print-area, #print-area .pc-sheet { background: #fff; }
+      #print-area .pc-sheet { box-shadow: 0 1px 3px rgba(0, 0, 0, .18); }
+      #print-area .pc-sheet + .pc-sheet { margin-top: 6mm; }
+    }
+
+    /* Printing must leave nothing but the sheets: every wrapper between the
+       page and .pc-grid is flattened, or its padding and rounded white panel
+       would shift the grid off the 10mm margin the layout assumes. */
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff !important; }
+      #builder-wrap, #builder, #preview-panel {
+        display: block !important; max-width: none !important;
+        margin: 0 !important; padding: 0 !important;
+        background: none !important; box-shadow: none !important; border-radius: 0 !important;
+      }
+      #preview-frame { overflow: visible !important; height: auto !important; }
+      #print-area { transform: none !important; }
+    }
+
+    .opt {
+      border: 1px solid #d1d5db; background: #fff; color: #374151;
+      padding: .4rem .85rem; border-radius: 9999px; font-size: .875rem; font-weight: 500;
+      cursor: pointer; transition: all .15s;
+    }
+    .opt:hover { border-color: #6366f1; color: #4f46e5; }
+    .opt.on { background: #4f46e5; border-color: #4f46e5; color: #fff; }
+    .opt-n { opacity: .55; font-size: .75rem; margin-left: .15rem; }
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'AW-17617716104');</script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4601450349641821"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-gray-50">
+  <nav class="bg-white shadow-lg sticky top-0 z-50 no-print">
+    <div class="container mx-auto px-4">
+      <div class="flex items-center">
+        <div class="flex items-center space-x-3">
+          <img src="/favicon.svg" alt="Charades Generator" class="w-10 h-10">
+          <a href="/" class="text-2xl font-bold text-gray-800">Charades Generator</a>
+        </div>
+        <div class="hidden md:flex space-x-8 ml-auto">
+          <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors"
+            title="Charades Generator – Home">Home</a>
+          <a href="/Charades-Ideas-for-Adults/" class="text-gray-600 hover:text-blue-600 transition-colors"
+            title="Charades Ideas for Adults – Funny, Hard &amp; Movie Game Themes">Adults</a>
+          <a href="/disney/" class="text-gray-600 hover:text-blue-600 transition-colors"
+            title="Disney Charades Generator – Movie Characters &amp; Song Ideas">Disney</a>
+          <a href="/Movies-for-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors"
+            title="Movie Charades Generator – 300+ Film Ideas, Free &amp; Instant">Movies</a>
+          <a href="/Animal-Charades-Game/" class="text-gray-600 hover:text-blue-600 transition-colors"
+            title="Animal Charades Game – 200+ Fun Ideas for All Ages">Animals</a>
+          <a href="/Christmas-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors"
+            title="Christmas Charades Generator – 200+ Free Holiday Ideas">Christmas</a>
+          <a href="/Halloween-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors"
+            title="Halloween Charades – 100+ Ideas for Kids &amp; Adults">Halloween</a>
+          <a href="/How-to-Play-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors"
+            title="How to Play Charades – Step by Step Rules &amp; Tips">How to Play</a>
+          <a href="/blog/" class="text-gray-600 hover:text-blue-600 transition-colors">Blog</a>
+        </div>
+        <a href="https://ko-fi.com/P3L6256K50" target="_blank" rel="noopener noreferrer nofollow" class="kofi-btn"
+          title="Support Charades Generator on Ko-fi">
+          <img src="https://storage.ko-fi.com/cdn/kofi1.png?v=6" width="143" height="36"
+            alt="Buy Me a Coffee at ko-fi.com"></a>
+        <button id="mobile-menu-btn" class="md:hidden ml-auto p-2">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4 border-t border-gray-200">
+        <div class="flex flex-col space-y-3 pt-4">
+          <a href="/" class="text-gray-600 hover:text-blue-600 transition-colors">Home</a>
+          <a href="/Charades-Ideas-for-Adults/" class="text-gray-600 hover:text-blue-600 transition-colors">Adults</a>
+          <a href="/disney/" class="text-gray-600 hover:text-blue-600 transition-colors">Disney</a>
+          <a href="/Movies-for-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors">Movies</a>
+          <a href="/Animal-Charades-Game/" class="text-gray-600 hover:text-blue-600 transition-colors">Animals</a>
+          <a href="/Christmas-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors">Christmas</a>
+          <a href="/Halloween-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors">Halloween</a>
+          <a href="/How-to-Play-Charades/" class="text-gray-600 hover:text-blue-600 transition-colors">How to Play</a>
+          <a href="/blog/" class="text-gray-600 hover:text-blue-600 transition-colors">Blog</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav aria-label="Breadcrumb" class="bg-white border-b border-gray-100 no-print">
+    <div class="container mx-auto px-4 py-2">
+      <ol class="flex items-center gap-1 text-sm text-gray-500">
+        <li><a href="/" class="hover:text-blue-600 transition-colors">Home</a></li>
+        <li><span class="mx-1 text-gray-300">/</span></li>
+        <li class="text-gray-700 font-medium">Printable Charades Cards</li>
+      </ol>
+    </div>
+  </nav>
+
+  <section id="builder-wrap" class="container mx-auto px-4 py-6">
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 text-center mb-3 no-print">Printable Charades Cards</h1>
+    <p class="text-center text-gray-600 max-w-2xl mx-auto mb-6 no-print">Build your own set of charades cards to print — pick
+      the categories, set the difficulty, then print the sheets or save them as a PDF. Nine cards a page, dashed cut
+      lines, free and no sign-up.</p>
+
+    <div id="builder" class="grid lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+      <!-- controls -->
+      <div class="lg:col-span-2 bg-white rounded-2xl shadow-xl p-5 no-print">
+        <h2 class="text-lg font-bold text-gray-800 mb-1">1 &nbsp;Choose your words</h2>
+        <p class="text-sm text-gray-500 mb-3">Tap to add or remove a category.</p>
+        <div id="cat-opts" class="flex flex-wrap gap-2 mb-2"></div>
+        <div class="flex gap-3 text-sm mb-5">
+          <button id="cat-all" class="text-indigo-600 hover:underline">Select all</button>
+          <button id="cat-none" class="text-gray-500 hover:underline">Clear</button>
+        </div>
+
+        <h2 class="text-lg font-bold text-gray-800 mb-3">2 &nbsp;Difficulty</h2>
+        <div id="diff-opts" class="flex flex-wrap gap-2 mb-5">
+          <button class="opt on" data-diff="all">All levels</button>
+          <button class="opt" data-diff="easy">🟢 Easy</button>
+          <button class="opt" data-diff="medium">🟡 Medium</button>
+          <button class="opt" data-diff="hard">🔴 Hard</button>
+        </div>
+
+        <h2 class="text-lg font-bold text-gray-800 mb-3">3 &nbsp;How many cards</h2>
+        <div id="count-opts" class="flex flex-wrap gap-2 mb-5">
+          <button class="opt" data-count="9">9</button>
+          <button class="opt on" data-count="18">18</button>
+          <button class="opt" data-count="27">27</button>
+          <button class="opt" data-count="36">36</button>
+          <button class="opt" data-count="54">54</button>
+        </div>
+
+        <h2 class="text-lg font-bold text-gray-800 mb-3">4 &nbsp;Paper size</h2>
+        <div id="paper-opts" class="flex flex-wrap gap-2 mb-5">
+          <button class="opt on" data-paper="a4">A4</button>
+          <button class="opt" data-paper="letter">US Letter</button>
+        </div>
+
+        <p id="status" class="text-sm text-gray-600 mb-4"></p>
+
+        <div class="flex flex-col gap-2">
+          <button id="print-btn"
+            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-colors">🖨️
+            Print cards</button>
+          <button id="shuffle-btn"
+            class="w-full bg-white border border-gray-300 hover:border-indigo-400 text-gray-700 font-semibold py-2.5 rounded-xl transition-colors">🔀
+            Draw a different set</button>
+        </div>
+
+        <p class="text-xs text-gray-500 mt-4 leading-relaxed">In the print dialog set <strong>Scale</strong> to
+          100% (not &ldquo;Fit to page&rdquo;) and untick <strong>Headers and footers</strong>. Choose
+          <strong>Save as PDF</strong> as the destination if you want to keep the file.
+        </p>
+      </div>
+
+      <!-- preview -->
+      <div class="lg:col-span-3">
+        <div id="preview-panel" class="bg-white rounded-2xl shadow-xl p-5">
+          <div class="flex items-baseline justify-between mb-3 no-print">
+            <h2 class="text-lg font-bold text-gray-800">Preview</h2>
+            <span id="sheet-note" class="text-sm text-gray-500"></span>
+          </div>
+          <div id="preview-frame">
+            <div id="print-area"></div>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-5 mt-4 no-print">
+          <h2 class="font-bold text-gray-800 mb-2">Prefer a ready-made pack?</h2>
+          <p class="text-sm text-gray-700 mb-3">The free sample pack is an 18-card PDF with a rules sheet, a signal
+            chart and a score sheet on the front page — nothing to configure, just print.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="/downloads/charades-cards-sample-a4.pdf"
+              class="bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">Download
+              A4 sample (PDF)</a>
+            <a href="/downloads/charades-cards-sample-letter.pdf"
+              class="bg-white border border-amber-300 hover:border-amber-500 text-amber-700 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">Download
+              US Letter sample (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container mx-auto px-4 py-8 no-print">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">How to print charades cards that actually come out right</h2>
+      <p class="text-gray-700 mb-4">Most printable card sets go wrong in the same place: the print dialog quietly
+        shrinks the page. Browsers and printer drivers default to &ldquo;Fit to page&rdquo; or &ldquo;Shrink oversized
+        pages&rdquo;, which scales everything down by four to eight percent to keep clear of the printer's unprintable
+        edge. Nothing looks wrong on screen, but the cards come out small and two sets printed on different days
+        will not match each other.</p>
+
+      <div class="grid md:grid-cols-2 gap-6 mb-6">
+        <div class="bg-white rounded-xl shadow p-5">
+          <h3 class="font-bold text-gray-800 mb-2">Print settings</h3>
+          <ol class="text-gray-700 text-sm space-y-2 list-decimal list-inside">
+            <li>Set <strong>Scale</strong> to <strong>100%</strong> or <strong>Actual size</strong>.</li>
+            <li>Leave <strong>Margins</strong> on <strong>Default</strong> — the layout already reserves 10&nbsp;mm.</li>
+            <li>Untick <strong>Headers and footers</strong> so the URL and date stay off the sheet.</li>
+            <li>Tick <strong>Background graphics</strong> so the difficulty dots print.</li>
+            <li>Match the paper size you chose above to the paper in the tray.</li>
+          </ol>
+        </div>
+        <div class="bg-white rounded-xl shadow p-5">
+          <h3 class="font-bold text-gray-800 mb-2">Paper choice</h3>
+          <p class="text-gray-700 text-sm mb-2">Use <strong>160gsm card stock or heavier</strong>. On ordinary 80gsm
+            copy paper the word shows through from the back, and a card lying face down can be read by the other
+            team — which quietly ruins the game.</p>
+          <p class="text-gray-700 text-sm">Card stock also survives an evening of shuffling and being pulled out of a
+            bowl. If plain paper is all you have, keep the drawn cards in a container rather than face down on the
+            table.</p>
+        </div>
+      </div>
+
+      <h3 class="text-2xl font-bold text-gray-800 mb-3">What is on each card</h3>
+      <p class="text-gray-700 mb-4">Every card carries the word in the largest type that fits it without breaking
+        across a line, the category in small caps at the top, and a coloured dot at the bottom for the difficulty —
+        green for easy, amber for medium, red for hard. The dot is deliberately small: a full colour band would
+        drain an ink cartridge across six sheets, and the dot reads just as fast from across a table.</p>
+      <p class="text-gray-700 mb-6">Cut lines are shared between neighbouring cards, so a sheet of nine is four
+        straight cuts rather than nine little boxes to trim. On A4 each finished card is
+        <strong>63 &times; 92&nbsp;mm</strong>, close to a standard playing card; on US Letter it is
+        <strong>65 &times; 86&nbsp;mm</strong>.
+      </p>
+
+      <h3 class="text-2xl font-bold text-gray-800 mb-3">How many cards to print</h3>
+      <p class="text-gray-700 mb-6">Allow roughly six to eight cards per player for an evening. Eight people playing
+        for about an hour will get through 50 to 60 cards, which is six sheets. Print a few more than you think you
+        need — cards guessed in three seconds are used up just as fast as hard ones, and spares let you quietly drop
+        any word that does not suit the group.</p>
+
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Frequently asked questions</h2>
+      <div class="space-y-4">
+        <div class="bg-white rounded-xl shadow p-5">
+          <h3 class="font-bold text-gray-800 mb-1">How do I make printable charades cards?</h3>
+          <p class="text-gray-700 text-sm">Choose the categories you want, pick a difficulty and how many cards you
+            need, then press <strong>Print cards</strong>. Your browser's print dialog opens and you can either send
+            the sheets to a printer or choose <strong>Save as PDF</strong> to keep them. Each sheet holds nine cards
+            with dashed cut lines shared between neighbours, so every cut is one straight pass across the page.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-5">
+          <h3 class="font-bold text-gray-800 mb-1">What size are the printed charades cards?</h3>
+          <p class="text-gray-700 text-sm">On A4 each card is 63 by 92 millimetres, close to a standard playing card.
+            On US Letter the cards are 65 by 86 millimetres. To get those measurements you must print at 100 percent
+            scale — if the print dialog is set to <em>Fit to page</em>, every card comes out several millimetres
+            small.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-5">
+          <h3 class="font-bold text-gray-800 mb-1">What paper should I print charades cards on?</h3>
+          <p class="text-gray-700 text-sm">Use 160gsm card stock or heavier. On ordinary 80gsm copy paper the word
+            shows through from the back, so a card lying face down on the table can be read by the other team. Card
+            stock also survives being shuffled and pulled out of a bowl all evening.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-5">
+          <h3 class="font-bold text-gray-800 mb-1">Are these charades cards free to print?</h3>
+          <p class="text-gray-700 text-sm">Yes — free, no sign-up, no watermark and no limit on how many sets you
+            print. There is also a ready-made 18-card sample pack to download if you would rather not configure
+            anything.</p>
+        </div>
+        <div class="bg-white rounded-xl shadow p-5">
+          <h3 class="font-bold text-gray-800 mb-1">How many charades cards do I need for a party?</h3>
+          <p class="text-gray-700 text-sm">Allow six to eight cards per player. Eight people playing for an hour get
+            through 50 to 60 cards, which is six sheets.</p>
+        </div>
+      </div>
+
+      <h2 class="text-3xl font-bold text-gray-800 mt-10 mb-4">More charades ideas</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="/" class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-gray-800 mb-1">Charades Generator</h3>
+          <p class="text-sm text-gray-600">Play on screen with no printing at all.</p>
+        </a>
+        <a href="/How-to-Play-Charades/" class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-gray-800 mb-1">How to Play Charades</h3>
+          <p class="text-sm text-gray-600">Rules, timing and the standard hand signals.</p>
+        </a>
+        <a href="/Christmas-Charades/" class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-gray-800 mb-1">Christmas Charades</h3>
+          <p class="text-sm text-gray-600">100 festive words for the holidays.</p>
+        </a>
+        <a href="/Charades-Generator-for-Kids/" class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-gray-800 mb-1">Charades for Kids</h3>
+          <p class="text-sm text-gray-600">Simple words young children can act out.</p>
+        </a>
+        <a href="/Charades-Ideas-for-Adults/" class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-gray-800 mb-1">Charades for Adults</h3>
+          <p class="text-sm text-gray-600">Harder words for a party or the office.</p>
+        </a>
+        <a href="/Movies-for-Charades/" class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition-shadow">
+          <h3 class="font-bold text-gray-800 mb-1">Movie Charades</h3>
+          <p class="text-sm text-gray-600">Film titles by genre, from action to horror.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-800 text-white py-8 no-print">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-6">
+        <h3 class="text-2xl font-bold mb-4">Charades Game Ideas &amp; Generator</h3>
+        <p class="text-gray-300 text-sm max-w-3xl mx-auto">Play free charades games online with our Charades Generator.
+        </p>
+      </div>
+      <div class="flex flex-col items-center gap-4 text-sm">
+        <a href="/" class="text-gray-300 hover:text-white transition-colors">Home</a>
+        <a href="/printable-charades-cards/" class="text-blue-400 font-semibold">Printable Charades Cards</a>
+        <a href="/Charades-Ideas-for-Adults/" class="text-gray-300 hover:text-white transition-colors">Charades Ideas
+          for Adults</a>
+        <a href="/Charades-Generator-for-Kids/" class="text-gray-300 hover:text-white transition-colors">Charades
+          Generator for Kids</a>
+        <a href="/Movies-for-Charades/" class="text-gray-300 hover:text-white transition-colors">Movies for Charades</a>
+        <a href="/disney/" class="text-gray-300 hover:text-white transition-colors">Disney Charades</a>
+        <a href="/Animal-Charades-Game/" class="text-gray-300 hover:text-white transition-colors">Animal Charades
+          Game</a>
+        <a href="/Christmas-Charades/" class="text-gray-300 hover:text-white transition-colors">Christmas Charades</a>
+        <a href="/Halloween-Charades/" class="text-gray-300 hover:text-white transition-colors">Halloween Charades</a>
+        <a href="/How-to-Play-Charades/" class="text-gray-300 hover:text-white transition-colors">How to Play
+          Charades</a>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 text-sm mt-3 pt-3 border-t border-gray-700">
+        <a href="/privacy-policy/" class="text-gray-400 hover:text-gray-300 transition-colors">Privacy Policy</a>
+        <a href="/terms-of-service/" class="text-gray-400 hover:text-gray-300 transition-colors">Terms of Service</a>
+        <a href="/about/" class="text-gray-400 hover:text-gray-300 transition-colors">About Us</a>
+        <a href="/about/#contact" class="text-gray-400 hover:text-gray-300 transition-colors">Contact</a>
+      </div>
+      <div class="border-t border-gray-700 mt-6 pt-4 text-center">
+        <p class="text-gray-400 text-sm">&copy; 2025-2026 Charades Generator – All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/mobile-nav.js"></script>
+  <script src="/printable-cards.js"></script>
+</body>
+
+</html>

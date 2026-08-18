@@ -27,6 +27,10 @@ function loadWords(file, varName) {
 
 const ALL = loadWords('charades-words.js', 'CHARADES_WORDS');
 
+// The card layout lives in print-cards.css so the browser generator at
+// /printable-charades-cards/ and these packs cut to the same size.
+const SHARED_CSS = fs.readFileSync(path.join(ROOT, 'print-cards.css'), 'utf8');
+
 const PACKS = {
   // Small proof-of-design set: broad categories, even difficulty spread.
   sample: {
@@ -99,12 +103,12 @@ function fitSize(phrase, maxLines = 2) {
 
 function cardHTML(w) {
   return `
-      <div class="card">
-        <div class="cat">${esc(CAT_LABEL[w.category] || w.category)}</div>
-        <div class="word" style="font-size:${fitSize(w.word)}pt"><span>${esc(w.word)}</span></div>
-        <div class="foot">
-          <span class="pip"><i style="background:${DIFF[w.difficulty].color}"></i>${DIFF[w.difficulty].label}</span>
-          <span class="src">charades-generator.org</span>
+      <div class="pc-card">
+        <div class="pc-cat">${esc(CAT_LABEL[w.category] || w.category)}</div>
+        <div class="pc-word" style="font-size:${fitSize(w.word)}pt"><span>${esc(w.word)}</span></div>
+        <div class="pc-foot">
+          <span class="pc-pip"><i style="background:${DIFF[w.difficulty].color}"></i>${DIFF[w.difficulty].label}</span>
+          <span class="pc-src">charades-generator.org</span>
         </div>
       </div>`;
 }
@@ -115,9 +119,9 @@ function pagesHTML(words) {
   for (let i = 0; i < words.length; i += per) {
     const slice = words.slice(i, i + per);
     const blanks = per - slice.length;
-    out += `\n  <section class="sheet cards">\n    <div class="grid">` +
+    out += `\n  <section class="pc-sheet">\n    <div class="pc-grid">` +
       slice.map(cardHTML).join('') +
-      '<div class="card empty"></div>'.repeat(blanks) +
+      '<div class="pc-card"></div>'.repeat(blanks) +
       `\n    </div>\n  </section>`;
   }
   return out;
@@ -125,7 +129,7 @@ function pagesHTML(words) {
 
 function instructionsHTML(pack, count, paperLabel) {
   return `
-  <section class="sheet intro">
+  <section class="pc-sheet intro">
     <header>
       <h1>${esc(pack.title)}</h1>
       <p class="sub">${esc(pack.subtitle)} &middot; ${count} cards &middot; ${paperLabel}</p>
@@ -202,43 +206,13 @@ function documentHTML(pack, words, paper) {
 <html lang="en"><head><meta charset="utf-8">
 <style>
   @page { size: ${paper.format}; margin: 10mm; }
+${SHARED_CSS}
+  /* after the shared :root, so this overrides the sheet box and keeps the
+     palette — replacing that block instead left --cut undefined and the
+     dashed cut lines simply stopped being drawn */
+  :root { --sheet-w: ${sheetW}mm; --sheet-h: ${sheetH}mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DejaVu Sans', 'Liberation Sans', sans-serif; color: #111; }
-  .sheet { page-break-after: always; width: ${sheetW}mm; height: ${sheetH}mm; margin: 0 auto; overflow: hidden; }
-  .sheet:last-child { page-break-after: auto; }
-
-  /* ── cards ── */
-  .grid {
-    /* minmax(0, 1fr) not 1fr: a bare 1fr is minmax(auto, 1fr), so a long word
-       inflates its column and squashes the others. That shipped 59/59/70mm
-       columns instead of three equal 63mm cards. */
-    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(3, minmax(0, 1fr));
-    height: ${sheetH}mm; border: 0.4mm dashed #9ca3af;
-  }
-  .card {
-    border-right: 0.4mm dashed #9ca3af; border-bottom: 0.4mm dashed #9ca3af;
-    padding: 4mm 3mm; display: flex; flex-direction: column; text-align: center;
-  }
-  .grid > .card:nth-child(3n) { border-right: none; }
-  .grid > .card:nth-child(n+7) { border-bottom: none; }
-  .card.empty { }
-
-  .cat {
-    font-size: 7.5pt; letter-spacing: 0.12em; text-transform: uppercase;
-    color: #6b7280; font-weight: bold;
-  }
-  .word {
-    flex: 1; display: flex; align-items: center; justify-content: center;
-    font-weight: bold; line-height: 1.15; hyphens: none; overflow-wrap: normal;
-    min-width: 0; min-height: 0;
-  }
-  .word span { display: block; text-align: center; }
-
-  .foot { display: flex; justify-content: space-between; align-items: center; font-size: 6.5pt; color: #6b7280; }
-  .pip { display: flex; align-items: center; gap: 1mm; font-weight: bold; }
-  .pip i { width: 2mm; height: 2mm; border-radius: 50%; display: inline-block; }
-  .src { color: #9ca3af; }
 
   /* ── instructions ── */
   .intro { display: flex; flex-direction: column; }
@@ -301,7 +275,7 @@ ${pagesHTML(words)}
   // page instead and step each word down until it genuinely fits its box.
   const shrunk = await page.evaluate(() => {
     const out = [];
-    for (const el of document.querySelectorAll('.word')) {
+    for (const el of document.querySelectorAll('.pc-word')) {
       const span = el.firstElementChild;
       const fits = () => span.scrollWidth <= el.clientWidth + 0.5 &&
                          span.scrollHeight <= el.clientHeight + 0.5;

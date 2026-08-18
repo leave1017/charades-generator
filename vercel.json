@@ -91,6 +91,16 @@
       "source": "/Charades-Ideas-for-Kids-List.html",
       "destination": "/Charades-Generator-for-Kids/",
       "statusCode": 301
+    },
+    {
+      "source": "/printable-charades-cards",
+      "destination": "/printable-charades-cards/",
+      "statusCode": 301
+    },
+    {
+      "source": "/printable-charades-cards.html",
+      "destination": "/printable-charades-cards/",
+      "statusCode": 301
     }
   ]
 }
