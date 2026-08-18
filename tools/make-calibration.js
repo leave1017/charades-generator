@@ -60,7 +60,7 @@ function documentHTML(paper) {
   @page { size: ${paper.format}; margin: 10mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DejaVu Sans', 'Liberation Sans', sans-serif; color: #111; }
-  .sheet { position: relative; height: ${paper.contentH}mm; width: ${paper.contentW}mm; }
+  .sheet { position: relative; height: ${paper.contentH - 1}mm; width: ${paper.contentW - 1}mm; margin: 0 auto; }
 
   h1 { font-family: 'Bitstream Charter', 'Liberation Serif', serif; font-size: 19pt; }
   .sub { font-size: 8.5pt; color: #6b7280; margin-top: 1mm; }
@@ -100,10 +100,11 @@ function documentHTML(paper) {
 
   /* These widths must sum with the gaps to exactly contentW. If the row
      overflows, Chromium silently shrinks the whole page to fit and every
-     printed millimetre is wrong — the bug this sheet exists to catch. */
+     printed millimetre is wrong — the bug this sheet exists to catch.
+     They sum to contentW - 1mm: see SAFE in make-cards.js. */
   .row { display: flex; gap: 4mm; align-items: flex-start; }
   .row > :nth-child(1) { width: 52mm; flex: none; }
-  .row > :nth-child(2) { width: 68mm; flex: none; }
+  .row > :nth-child(2) { width: 67mm; flex: none; }
   .row > :nth-child(3) { width: 62mm; flex: none; }
 
   /* a real card, drawn at the exact size the packs use */

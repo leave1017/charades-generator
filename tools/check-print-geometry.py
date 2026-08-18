@@ -2,7 +2,7 @@
 """Assert that a generated PDF is at true physical scale.
 
     python3 tools/check-print-geometry.py downloads/print-calibration-a4.pdf --ruler 150
-    python3 tools/check-print-geometry.py downloads/cards.pdf --grid 190x277
+    python3 tools/check-print-geometry.py downloads/cards.pdf --grid 189x276 --edges
 
 Chromium shrinks the whole page to fit whenever any element overflows the
 content box, and nothing about the resulting PDF looks wrong on screen — the
@@ -42,7 +42,29 @@ def bbox_mm(page):
     return x1 - x0, y1 - y0
 
 
-def check(path, ruler=None, grid=None):
+def edge_rules(page, dpi=300):
+    """Widths, in pixels, of the leftmost and rightmost full-height vertical rules.
+
+    Borders that land exactly on the page content edge get clipped to a
+    sub-pixel sliver: present in the vector data, invisible on paper. Comparing
+    the outer rules against each other catches that, which measuring the
+    geometry cannot.
+    """
+    pix = page.get_pixmap(dpi=dpi)
+    runs, run = [], []
+    for px in range(pix.width):
+        ink = sum(1 for y in range(0, pix.height, 8) if pix.pixel(px, y)[0] < 200)
+        if ink > pix.height / 8 * 0.3:
+            run.append(px)
+        elif run:
+            runs.append((run[0], len(run)))
+            run = []
+    if run:
+        runs.append((run[0], len(run)))
+    return runs
+
+
+def check(path, ruler=None, grid=None, edges=False):
     doc = pymupdf.open(path)
     pw, ph = doc[0].rect.width / MM, doc[0].rect.height / MM
     print(f'{path}\n  {doc.page_count} page(s), {pw:.2f} x {ph:.2f} mm')
@@ -78,6 +100,22 @@ def check(path, ruler=None, grid=None):
                   f'{"OK" if err <= TOL else f"FAIL off by {err:.2f} mm, scale {w / want_w:.4f}"}')
             ok &= err <= TOL
 
+    if edges:
+        # The card grid is a handful of dashed paths, so it has far fewer
+        # drawing objects than the instructions page's tables — pick by extent.
+        page = max((pg for pg in doc if bbox_mm(pg)),
+                   key=lambda pg: bbox_mm(pg)[0] * bbox_mm(pg)[1])
+        runs = edge_rules(page)
+        if len(runs) < 2:
+            print('  edge rules: FAIL — fewer than two vertical rules found'); ok = False
+        else:
+            (lx, lw), (rx, rw) = runs[0], runs[-1]
+            same = abs(lw - rw) <= 1
+            print(f'  edge rules: left {lw}px at {lx / 300 * 25.4:.1f} mm, '
+                  f'right {rw}px at {rx / 300 * 25.4:.1f} mm '
+                  f'{"OK" if same else "FAIL — right rule is clipped at the page edge"}')
+            ok &= same
+
     print('  =>', 'true scale' if ok else 'SCALED — do not ship this file')
     return ok
 
@@ -86,6 +124,8 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument('pdf')
     ap.add_argument('--ruler', type=float, help='expected width of the ruler bar, mm')
-    ap.add_argument('--grid', help='expected card-grid box, e.g. 190x277')
+    ap.add_argument('--grid', help='expected card-grid box, e.g. 189x276')
+    ap.add_argument('--edges', action='store_true',
+                    help='check the outer cut lines print at equal weight')
     a = ap.parse_args()
-    sys.exit(0 if check(a.pdf, a.ruler, a.grid) else 1)
+    sys.exit(0 if check(a.pdf, a.ruler, a.grid, a.edges) else 1)

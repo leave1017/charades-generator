@@ -101,7 +101,7 @@ function cardHTML(w) {
   return `
       <div class="card">
         <div class="cat">${esc(CAT_LABEL[w.category] || w.category)}</div>
-        <div class="word" style="font-size:${fitSize(w.word)}pt">${esc(w.word)}</div>
+        <div class="word" style="font-size:${fitSize(w.word)}pt"><span>${esc(w.word)}</span></div>
         <div class="foot">
           <span class="pip"><i style="background:${DIFF[w.difficulty].color}"></i>${DIFF[w.difficulty].label}</span>
           <span class="src">charades-generator.org</span>
@@ -135,7 +135,7 @@ function instructionsHTML(pack, count, paperLabel) {
       <div>
         <h2>How to play</h2>
         <ol>
-          <li>Print this pack, then cut along the lines. Card stock or thicker paper holds up better, but ordinary paper is fine.</li>
+          <li>Print at <strong>100% scale</strong> — turn off &ldquo;fit to page&rdquo; — then cut along the dashed lines. Use <strong>160gsm card stock or heavier</strong>: on ordinary copy paper the word shows through from the back and the other team can read it.</li>
           <li>Split into two teams and put the cards face down in a bowl.</li>
           <li>One player draws a card and acts out the word — <strong>no talking, no sounds, no pointing at letters</strong>.</li>
           <li>Their team guesses for up to two minutes. A correct guess scores a point; then the turn passes.</li>
@@ -187,20 +187,34 @@ function instructionsHTML(pack, count, paperLabel) {
   </section>`;
 }
 
+// Chromium's A4 page is 209.89mm wide, not 210, so a 10mm margin leaves
+// 189.89mm of content while the layout rounds borders to the 190mm edge. Any
+// element whose right edge lands there has its border clipped to a sliver that
+// does not survive printing — it took out the last column's cut line and the
+// score table's right rule. Inset everything by 1mm and nothing sits on the
+// boundary.
+const SAFE = 1;
+
 function documentHTML(pack, words, paper) {
+  const sheetW = paper.contentW - SAFE;
+  const sheetH = paper.contentH - SAFE;
   return `<!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <style>
   @page { size: ${paper.format}; margin: 10mm; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DejaVu Sans', 'Liberation Sans', sans-serif; color: #111; }
-  .sheet { page-break-after: always; height: ${paper.contentH}mm; overflow: hidden; }
+  .sheet { page-break-after: always; width: ${sheetW}mm; height: ${sheetH}mm; margin: 0 auto; overflow: hidden; }
   .sheet:last-child { page-break-after: auto; }
 
   /* ── cards ── */
   .grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
-    height: ${paper.contentH}mm; border: 0.4mm dashed #9ca3af;
+    /* minmax(0, 1fr) not 1fr: a bare 1fr is minmax(auto, 1fr), so a long word
+       inflates its column and squashes the others. That shipped 59/59/70mm
+       columns instead of three equal 63mm cards. */
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    height: ${sheetH}mm; border: 0.4mm dashed #9ca3af;
   }
   .card {
     border-right: 0.4mm dashed #9ca3af; border-bottom: 0.4mm dashed #9ca3af;
@@ -217,7 +231,9 @@ function documentHTML(pack, words, paper) {
   .word {
     flex: 1; display: flex; align-items: center; justify-content: center;
     font-weight: bold; line-height: 1.15; hyphens: none; overflow-wrap: normal;
+    min-width: 0; min-height: 0;
   }
+  .word span { display: block; text-align: center; }
 
   .foot { display: flex; justify-content: space-between; align-items: center; font-size: 6.5pt; color: #6b7280; }
   .pip { display: flex; align-items: center; gap: 1mm; font-weight: bold; }
@@ -279,6 +295,24 @@ ${pagesHTML(words)}
     process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
   const page = await browser.newPage();
   await page.goto('file://' + htmlPath, { waitUntil: 'load' });
+
+  // fitSize() only estimates from an assumed character width, and it was
+  // optimistic enough to let words push past the card edge. Ask the laid-out
+  // page instead and step each word down until it genuinely fits its box.
+  const shrunk = await page.evaluate(() => {
+    const out = [];
+    for (const el of document.querySelectorAll('.word')) {
+      const span = el.firstElementChild;
+      const fits = () => span.scrollWidth <= el.clientWidth + 0.5 &&
+                         span.scrollHeight <= el.clientHeight + 0.5;
+      let pt = parseFloat(el.style.fontSize);
+      const from = pt;
+      while (!fits() && pt > 8) { pt -= 0.5; el.style.fontSize = pt + 'pt'; }
+      if (pt !== from) out.push(`${span.textContent}: ${from} -> ${pt}pt`);
+    }
+    return out;
+  });
+  if (shrunk.length) console.log('  refit: ' + shrunk.join(', '));
   const outPath = path.join(ROOT, out);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   // preferCSSPageSize hands page size and margins entirely to the CSS @page
