@@ -83,6 +83,11 @@
       "statusCode": 301
     },
     {
+      "source": "/Charades-Ideas-for-Kids-List/",
+      "destination": "/Charades-Generator-for-Kids/",
+      "statusCode": 301
+    },
+    {
       "source": "/Charades-Ideas-for-Kids-List",
       "destination": "/Charades-Generator-for-Kids/",
       "statusCode": 301
