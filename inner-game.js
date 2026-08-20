@@ -8,7 +8,8 @@
 //   window.PAGE_SUBSETS = {
 //     action: { label: 'Action', list: [...] },       // an explicit word array
 //     land:   { label: 'Land',   words: ['Lion'] },   // names from CHARADES_WORDS
-//     spooky: { label: 'Spooky', categories: ['halloween'] }
+//     spooky: { label: 'Spooky', categories: ['halloween'] },
+//     songs:  { label: 'Songs',  groups: ['songs'] }  // the entry's group field
 //   }
 // Mark the chips with class "subset-btn" and data-subset="<key>". Landing on
 // ?<param>=<key> preselects that chip, so a link from the homepage lands on
@@ -32,6 +33,11 @@
     var all = allWords();
     if (def.categories) {
       return all.filter(function (w) { return def.categories.indexOf(w.category) !== -1; });
+    }
+    // A group tag on the entry itself, for banks whose sections are not
+    // separate categories — the Disney characters / movies / songs split.
+    if (def.groups) {
+      return all.filter(function (w) { return def.groups.indexOf(w.group) !== -1; });
     }
     if (def.words) {
       return all.filter(function (w) { return def.words.indexOf(w.word) !== -1; });

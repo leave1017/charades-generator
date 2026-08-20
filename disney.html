@@ -86,6 +86,14 @@
     window.CHARADES_WORDS = DISNEY_CHARADES_WORDS;
     window.PAGE_CATEGORIES = [];
     window.PAGE_LABEL = 'Disney';
+    // The bank's three sections are group tags on each entry, so the chips can
+    // filter on them directly rather than listing 55 words by name.
+    window.PAGE_SUBSET_PARAM = 'type';
+    window.PAGE_SUBSETS = {
+      characters: { label: 'Characters', groups: ['characters'] },
+      movies:     { label: 'Films',      groups: ['movies'] },
+      songs:      { label: 'Songs',      groups: ['songs'] }
+    };
   </script>
   <script src="/inner-game.js"></script>
   <link rel="stylesheet" href="/styles.css">
@@ -182,6 +190,14 @@
       charades idea — characters, films and songs. No sign-up, no printing, works on any phone.</p>
 
     <!-- Difficulty Filters -->
+    <!-- Sub-filters: which part of the Disney bank -->
+    <div class="flex flex-wrap justify-center gap-2 mb-3" id="subset-filters">
+      <button class="filter-btn subset-btn active" data-subset="all">✨ All Disney</button>
+      <button class="filter-btn subset-btn" data-subset="characters">🐭 Characters</button>
+      <button class="filter-btn subset-btn" data-subset="movies">🎬 Films</button>
+      <button class="filter-btn subset-btn" data-subset="songs">🎵 Songs</button>
+    </div>
+
     <div class="flex flex-wrap justify-center gap-2 mb-5" id="difficulty-filters">
       <button class="diff-btn active" data-difficulty="all">All Levels</button>
       <button class="diff-btn" data-difficulty="easy">🟢 Easy</button>
@@ -404,6 +420,7 @@
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-M9TKDY0SV6');</script>
   </div>
   <script src="/mobile-nav.js"></script>
+  <script src="/round-mode.js"></script>
 </body>
 
 </html>
