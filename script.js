@@ -9,15 +9,36 @@ let timerSeconds     = 120;
 let timerRunning     = false;
 
 // ── Word pools ────────────────────────────────────────────────
-// The homepage tool is a movie charades generator: "all" mixes every
-// genre with the generic film/TV titles, and each genre button narrows
-// it to that genre's bank in movie-themes.js.
+// The homepage tool covers every category the site has. Each chip narrows
+// the pool to one of them; "all" mixes the lot. The chips deliberately
+// mirror the themed landing pages, so a player who wants more of one thing
+// has somewhere to go — and each of those pages then offers a second axis
+// the homepage does not, which is what keeps them from being duplicates.
 let POOLS = null;
 
+// Display labels for the card badge. The word data stores lowercase keys.
+const CAT_LABEL = {
+  animals: 'Animal', movies: 'Movie', tvshows: 'TV Show', famous: 'Famous Person',
+  actions: 'Action', objects: 'Object', food: 'Food & Drink', sports: 'Sport',
+  kids: 'For Kids', adults: 'Everyday Life', christmas: 'Christmas',
+  halloween: 'Halloween',
+};
+
+// Which word categories feed each chip. Anything not named here is still
+// reachable through "all".
+const CHIP_CATEGORIES = {
+  movies:    ['movies', 'tvshows'],
+  adults:    ['adults'],
+  kids:      ['kids'],
+  animals:   ['animals'],
+  christmas: ['christmas'],
+  halloween: ['halloween'],
+};
+
 function buildPools() {
-  const byGenre = {};
-  const all     = [];
-  const seen    = new Set();
+  const byCategory = {};
+  const all  = [];
+  const seen = new Set();
 
   const add = (list) => list.forEach(w => {
     if (seen.has(w.word)) return;
@@ -25,28 +46,37 @@ function buildPools() {
     all.push(w);
   });
 
+  const shared = (typeof CHARADES_WORDS !== 'undefined' ? CHARADES_WORDS : [])
+    .map(w => ({ ...w, category: CAT_LABEL[w.category] || w.category, key: w.category }));
+
+  Object.keys(CHIP_CATEGORIES).forEach(chip => {
+    byCategory[chip] = shared.filter(w => CHIP_CATEGORIES[chip].indexOf(w.key) !== -1);
+  });
+
+  // The movie genre banks are extra titles that only exist for the film
+  // theme, so they widen the Movies chip rather than replacing it.
   if (typeof MOVIE_THEME_WORDS !== 'undefined') {
+    const genreWords = [];
     Object.keys(MOVIE_THEME_WORDS).forEach(genre => {
-      const label = MOVIE_THEME_WORDS[genre].label;
-      byGenre[genre] = MOVIE_THEME_WORDS[genre].words.map(w => ({ ...w, category: label }));
-      add(byGenre[genre]);
+      MOVIE_THEME_WORDS[genre].words.forEach(w => {
+        genreWords.push({ ...w, category: MOVIE_THEME_WORDS[genre].label, key: 'movies' });
+      });
     });
+    byCategory.movies = byCategory.movies.concat(genreWords);
   }
 
-  // Generic film & TV titles already in the shared word list widen "All".
-  if (typeof CHARADES_WORDS !== 'undefined') {
-    add(CHARADES_WORDS
-      .filter(w => w.category === 'movies' || w.category === 'tvshows')
-      .map(w => ({ ...w, category: w.category === 'tvshows' ? 'TV Show' : 'Movie' })));
-  }
+  // "All" is every chip plus the categories with no chip of their own —
+  // actions, food, sports, objects and famous people.
+  Object.keys(byCategory).forEach(chip => add(byCategory[chip]));
+  add(shared);
 
-  return { byGenre, all };
+  return { byCategory, all };
 }
 
 // ── Word selection ────────────────────────────────────────────
 function getFilteredWords() {
   if (!POOLS) POOLS = buildPools();
-  const base = POOLS.byGenre[activeCategory] || POOLS.all;
+  const base = POOLS.byCategory[activeCategory] || POOLS.all;
   if (!base.length) return [];
   if (activeDifficulty === 'all') return base;
   const words = base.filter(w => w.difficulty === activeDifficulty);
