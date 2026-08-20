@@ -1,0 +1,106 @@
+/* print-cards.css — the printed card sheet, shared by two callers:
+ *
+ *   /printable-charades-cards/   the browser generator, printed via the
+ *                                browser's own Save as PDF
+ *   tools/make-cards.js          the Node tool that builds the download packs
+ *
+ * Both must produce a card of the same physical size, or a pack bought on the
+ * site would not match one printed from it. Keeping the layout in one file is
+ * the only way that stays true.
+ *
+ * The caller sets --sheet-w and --sheet-h to the printable box MINUS 1mm.
+ * The millimetre of slack matters: Chromium's A4 page is 209.89mm wide, not
+ * 210, so a 10mm margin leaves 189.89mm of content while the layout rounds
+ * borders to the 190mm edge. Anything whose right edge lands there has its
+ * border clipped to a sub-pixel sliver — still in the vector data, invisible
+ * on paper. That silently removed the last column's cut line.
+ *
+ *   A4      190 x 277 printable  ->  --sheet-w: 189mm; --sheet-h: 276mm
+ *   Letter  196 x 259 printable  ->  --sheet-w: 195mm; --sheet-h: 258mm
+ *
+ * Cards come out 63 x 92mm on A4, close to a playing card.
+ */
+
+:root {
+  --sheet-w: 189mm;
+  --sheet-h: 276mm;
+  --cut: #9ca3af;
+  --ink: #111;
+  --muted: #6b7280;
+}
+
+.pc-sheet {
+  width: var(--sheet-w);
+  height: var(--sheet-h);
+  margin: 0 auto;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+  color: var(--ink);
+  font-family: 'DejaVu Sans', 'Liberation Sans', Arial, sans-serif;
+}
+
+.pc-sheet:last-of-type {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+/* minmax(0, 1fr), never a bare 1fr: 1fr means minmax(auto, 1fr), so one long
+   word inflates its own column and squashes the other two. That shipped
+   59 / 59 / 70mm columns instead of three equal cards. */
+.pc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  height: var(--sheet-h);
+  border: 0.4mm dashed var(--cut);
+}
+
+/* Cut lines are shared between neighbours, so every cut is one straight pass
+   across the sheet rather than 9 little boxes to trim. */
+.pc-card {
+  border-right: 0.4mm dashed var(--cut);
+  border-bottom: 0.4mm dashed var(--cut);
+  padding: 4mm 3mm;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.pc-grid > .pc-card:nth-child(3n) { border-right: none; }
+.pc-grid > .pc-card:nth-child(n+7) { border-bottom: none; }
+
+.pc-cat {
+  font-size: 7.5pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: bold;
+}
+
+.pc-word {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  line-height: 1.15;
+  hyphens: none;
+  overflow-wrap: normal;
+  min-width: 0;
+  min-height: 0;
+}
+
+.pc-word span { display: block; text-align: center; }
+
+.pc-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 6.5pt;
+  color: var(--muted);
+}
+
+.pc-pip { display: flex; align-items: center; gap: 1mm; font-weight: bold; }
+.pc-pip i { width: 2mm; height: 2mm; border-radius: 50%; display: inline-block; }
+.pc-src { color: #9ca3af; }
