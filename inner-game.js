@@ -8,7 +8,8 @@
 //   window.PAGE_SUBSETS = {
 //     action: { label: 'Action', list: [...] },       // an explicit word array
 //     land:   { label: 'Land',   words: ['Lion'] },   // names from CHARADES_WORDS
-//     spooky: { label: 'Spooky', categories: ['halloween'] }
+//     spooky: { label: 'Spooky', categories: ['halloween'] },
+//     songs:  { label: 'Songs',  groups: ['songs'] }  // the entry's group field
 //   }
 // Mark the chips with class "subset-btn" and data-subset="<key>". Landing on
 // ?<param>=<key> preselects that chip, so a link from the homepage lands on
@@ -17,9 +18,6 @@
   var activeDiff = 'all';
   var activeSubset = null;
   var currentWord = null;
-  var timerInterval = null;
-  var timerSeconds = 120;
-  var timerRunning = false;
 
   function allWords() {
     return (typeof CHARADES_WORDS !== 'undefined' ? CHARADES_WORDS : []);
@@ -32,6 +30,11 @@
     var all = allWords();
     if (def.categories) {
       return all.filter(function (w) { return def.categories.indexOf(w.category) !== -1; });
+    }
+    // A group tag on the entry itself, for banks whose sections are not
+    // separate categories — the Disney characters / movies / songs split.
+    if (def.groups) {
+      return all.filter(function (w) { return def.groups.indexOf(w.group) !== -1; });
     }
     if (def.words) {
       return all.filter(function (w) { return def.words.indexOf(w.word) !== -1; });
@@ -112,43 +115,7 @@
     var a = document.getElementById('hint-area');
     if (a) a.classList.toggle('hidden');
   };
-  window.toggleTimer = function () { timerRunning ? stopTimer() : startTimer(); };
-
-  function startTimer() {
-    var wrap = document.getElementById('timer-wrap');
-    if (wrap) wrap.classList.remove('hidden');
-    timerSeconds = 120;
-    timerRunning = true;
-    tick();
-    timerInterval = setInterval(tick, 1000);
-  }
-
-  function tick() {
-    updateDisplay();
-    if (timerSeconds <= 0) { stopTimer(); timeUp(); return; }
-    timerSeconds--;
-  }
-
-  window.stopTimer = function () {
-    clearInterval(timerInterval);
-    timerRunning = false;
-    var wrap = document.getElementById('timer-wrap');
-    if (wrap) wrap.classList.add('hidden');
-  };
-
-  function updateDisplay() {
-    var m = Math.floor(timerSeconds / 60), s = timerSeconds % 60;
-    var el = document.getElementById('timer-display');
-    if (el) el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
-  }
-
-  function timeUp() {
-    var el = document.getElementById('word-display');
-    if (!el) return;
-    var prev = el.textContent;
-    el.textContent = "⏰ Time's Up!";
-    setTimeout(function () { if (el.textContent === "⏰ Time's Up!") el.textContent = prev; }, 2000);
-  }
+  // The clock lives in round-mode.js now — see the note in script.js.
 
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.diff-btn').forEach(function (btn) {

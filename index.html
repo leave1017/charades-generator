@@ -158,17 +158,19 @@
   <!-- Game Section -->
   <section id="game-section" class="container mx-auto px-4 py-6">
     <h1 class="text-4xl md:text-5xl font-bold text-gray-800 text-center mb-3">Charades Generator</h1>
-    <p class="text-center text-gray-600 max-w-2xl mx-auto mb-4">Pick a genre for random movie and TV charades ideas —
-      or scroll down for kids, adults, animal, Christmas and Halloween charades.</p>
+    <p class="text-center text-gray-600 max-w-2xl mx-auto mb-4">Pick a category for random charades ideas — movie and TV
+      titles, adults, kids, animals, Christmas and Halloween — then set the difficulty to match your players.</p>
 
-    <!-- Movie genre filters -->
+    <!-- Category filters. Every chip but "All" has a themed page of its own,
+         where a second filter narrows it further than the homepage can. -->
     <div class="flex flex-wrap justify-center gap-2 mb-3" id="category-filters">
-      <button class="filter-btn active" data-category="all">🎬 All Movies</button>
-      <button class="filter-btn" data-category="action">💥 Action</button>
-      <button class="filter-btn" data-category="comedy">😂 Comedy</button>
-      <button class="filter-btn" data-category="romance">💕 Romance</button>
-      <button class="filter-btn" data-category="horror">👻 Horror</button>
-      <button class="filter-btn" data-category="bollywood">🪔 Bollywood</button>
+      <button class="filter-btn active" data-category="all">🎲 All</button>
+      <button class="filter-btn" data-category="movies">🎬 Movies</button>
+      <button class="filter-btn" data-category="adults">🍷 Adults</button>
+      <button class="filter-btn" data-category="kids">🧒 Kids</button>
+      <button class="filter-btn" data-category="animals">🐾 Animals</button>
+      <button class="filter-btn" data-category="christmas">🎄 Christmas</button>
+      <button class="filter-btn" data-category="halloween">🎃 Halloween</button>
     </div>
 
     <!-- Difficulty Filters -->
@@ -201,14 +203,6 @@
           <p id="hint-text" class="text-gray-700 text-sm"></p>
         </div>
 
-        <!-- Timer display -->
-        <div id="timer-wrap" class="hidden mb-5 flex justify-center">
-          <div class="inline-flex items-center gap-4 bg-red-50 border-2 border-red-200 rounded-xl px-8 py-3">
-            <span id="timer-display" class="text-3xl font-bold text-red-600 tabular-nums">2:00</span>
-            <button onclick="stopTimer()"
-              class="text-red-400 hover:text-red-600 text-xs font-semibold border border-red-200 rounded px-2 py-1 transition-colors">STOP</button>
-          </div>
-        </div>
 
         <!-- Next button -->
         <button onclick="nextWord()"
@@ -222,11 +216,7 @@
             class="flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
             💡 Hint
           </button>
-          <button onclick="toggleTimer()" id="timer-btn"
-            class="flex items-center gap-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
-            ⏱ Timer
-          </button>
-          <button onclick="nextWord()"
+          <button onclick="nextWord()" id="skip-btn"
             class="flex items-center gap-1.5 bg-gray-50 hover:bg-gray-100 text-gray-600 border border-gray-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
             ↩ Skip
           </button>
@@ -746,6 +736,8 @@
   </div>
 
   <script src="/mobile-nav.js"></script>
+  <script src="/round-mode.js"></script>
+  <script src="/fit-word.js"></script>
 </body>
 
 </html>

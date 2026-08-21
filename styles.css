@@ -719,39 +719,6 @@ body.nav-open { overflow: hidden; }
     gap: 4px;
   }
 
-  /* H1 in game section: 30% smaller than text-4xl (2.25rem) → ~1.6rem */
-  #game-section h1 {
-    font-size: 1.6rem !important;
-  }
-
-  /* Filter rows: single-line horizontal scroll */
-  #category-filters,
-  #difficulty-filters {
-    flex-wrap: nowrap !important;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    justify-content: flex-start !important;
-    padding-bottom: 4px;
-  }
-  #category-filters::-webkit-scrollbar,
-  #difficulty-filters::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Game card inner: tighter padding */
-  .game-card-inner {
-    padding: 16px 12px !important;
-  }
-
-  /* Next Word button: full width with 16px side margins, min 56px tall */
-  .next-word-btn {
-    display: block;
-    width: calc(100% - 0px);
-    min-height: 56px !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
 }
 
 /* ── Ko-fi support button (nav, top right) ── */
@@ -807,4 +774,348 @@ body.nav-open .kofi-btn { visibility: hidden; }
    of nav width above 18px */
 @media (max-width: 360px) {
   .kofi-btn img { height: 18px; }
+}
+
+/* ── Tool above the fold, every page ─────────────────────────────────
+   The whole tool has to be reachable without scrolling on a laptop too,
+   and the inner pages carry a sub-filter row the homepage does not. They
+   were 756-819px against a homepage of 762. These rules trim the same
+   places on every page so the inner pages land at or below the homepage
+   and all of them clear a short laptop viewport.
+
+   Inner pages set the heading to mb-5 while the homepage uses mb-3; that
+   is normalised here rather than edited into eight files. */
+#game-section > h1 {
+  margin-bottom: 0.5rem;
+}
+
+/* The homepage is the only page keeping its intro above the card on a
+   laptop; trimming its gap is what brings that screen under 720. */
+#game-section > p {
+  margin-bottom: 0.6rem;
+}
+
+#subset-filters { margin-bottom: 0.5rem !important; }
+#difficulty-filters { margin-bottom: 0.75rem !important; }
+
+#game-section .game-card-inner {
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+
+/* A fixed box, not a minimum: sized by content, a long phrase wrapped to a
+   second line and grew the card ~40px, moving the buttons mid-round.
+   fit-word.js shrinks the type to fit rather than letting the box grow. */
+#game-section #word-display .fw-text {
+  display: inline-block;
+  max-width: 100%;
+}
+
+#game-section #word-display {
+  height: 92px;
+  min-height: 0;
+  margin-bottom: 1rem !important;
+  overflow: hidden;
+}
+
+#game-section .next-word-btn,
+#game-section .rm-passbig {
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  margin-bottom: 0.75rem !important;
+}
+
+/* ── Tool above the fold on a phone ──────────────────────────────────
+   The whole tool — categories, difficulty, the word, the buttons and the
+   round settings — has to be visible without scrolling. On a 390px screen
+   it ran 942px tall.
+
+   This is the only mobile block for the tool. There used to be a second one
+   further up whose !important declarations quietly beat half the rules here,
+   so the card padding and button sizing set below never actually applied.
+
+   The intro paragraph moves below the card rather than being hidden: it is
+   real indexed copy that simply does not need to precede the thing it
+   describes on a small screen. Source order is unchanged. */
+@media (max-width: 767px) {
+  #game-section {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.75rem;
+  }
+
+  /* An auto side margin cancels stretch on a flex item, and the card and the
+     intro both carry mx-auto. Without this the card shrank to fit whichever
+     word was on screen — 197px on "Dracula", 326px on "Reindeer Antlers
+     Headband" — so the buttons changed size as you played. */
+  #game-section > * {
+    width: 100%;
+  }
+
+  /* Sized so the longest heading — "Christmas Charades Generator", 28
+     characters — stays on one line at 390px. The extra line cost 29px, which
+     was that page's whole overshoot. */
+  #game-section > h1 {
+    font-size: 1.35rem !important;
+    line-height: 1.15;
+    margin-bottom: 0.45rem;
+  }
+
+  #game-section > p {
+    order: 99;                 /* after the card */
+    font-size: 0.875rem;
+    margin: 1.25rem auto 0;
+  }
+
+  /* Chips swipe sideways instead of wrapping. Seven category chips took three
+     rows on a phone, which was most of the reason the themed pages ran past
+     the fold. */
+  #category-filters,
+  #subset-filters,
+  #difficulty-filters {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    justify-content: flex-start !important;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  #category-filters::-webkit-scrollbar,
+  #subset-filters::-webkit-scrollbar,
+  #difficulty-filters::-webkit-scrollbar { display: none; }
+
+  #game-section .filter-btn,
+  #game-section .diff-btn {
+    flex: 0 0 auto;
+    padding: 6px 11px;
+    font-size: 12.5px;
+    border-width: 1px;
+  }
+
+  #category-filters { margin-bottom: 0.4rem !important; }
+  #subset-filters { margin-bottom: 0.4rem !important; }
+  #difficulty-filters { margin-bottom: 0.6rem !important; }
+
+  #game-section .game-card-inner {
+    padding: 0.85rem 0.9rem 0.75rem !important;
+  }
+
+  #game-section #word-display {
+    font-size: 2.5rem;
+    height: 60px;
+    margin-bottom: 0.75rem !important;
+  }
+
+  #game-section .next-word-btn,
+  #game-section .rm-passbig {
+    min-height: 0 !important;
+    padding: 0.75rem 0.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #game-section .rm-start { padding: 0.5rem; margin-top: 0.4rem; }
+  #game-section .rm-setup { margin-top: 0.55rem; padding-top: 0.5rem; }
+}
+
+/* ── Ko-fi support button (nav, top right) ── */
+.kofi-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  line-height: 0;
+  text-decoration: none;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.kofi-btn img {
+  display: block;
+  height: 36px;
+  width: auto;
+  border: 0;
+}
+
+.kofi-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+@media (min-width: 768px) {
+  .kofi-btn { margin-left: 1.5rem; }
+}
+
+/* Below 1280px the nav container narrows to 1024px and the nine desktop
+   links fill it exactly, so the badge has to give ground. */
+@media (min-width: 768px) and (max-width: 1279px) {
+  .kofi-btn { margin-left: 0.75rem; }
+  .kofi-btn img { height: 26px; }
+}
+
+/* 768-1023px: the desktop link row already overflows on its own here,
+   so the badge stays out of the way rather than adding to it. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .kofi-btn { display: none; }
+}
+
+/* The mobile drawer slides over the left 75vw and would slice the badge
+   in half, so hide it while the menu is open. visibility keeps its space
+   reserved so the burger does not jump. */
+body.nav-open .kofi-btn { visibility: hidden; }
+
+/* Phones: shrink the badge so it never crowds the burger */
+@media (max-width: 480px) {
+  .kofi-btn img { height: 28px; }
+}
+
+/* 320px-class screens: pages whose burger carries extra padding run out
+   of nav width above 18px */
+@media (max-width: 360px) {
+  .kofi-btn img { height: 18px; }
+}
+
+/* ── Tool above the fold, every page ─────────────────────────────────
+   The whole tool has to be reachable without scrolling on a laptop too,
+   and the inner pages carry a sub-filter row the homepage does not. They
+   were 756-819px against a homepage of 762. These rules trim the same
+   places on every page so the inner pages land at or below the homepage
+   and all of them clear a short laptop viewport.
+
+   Inner pages set the heading to mb-5 while the homepage uses mb-3; that
+   is normalised here rather than edited into eight files. */
+#game-section > h1 {
+  margin-bottom: 0.5rem;
+}
+
+/* The homepage is the only page keeping its intro above the card on a
+   laptop; trimming its gap is what brings that screen under 720. */
+#game-section > p {
+  margin-bottom: 0.6rem;
+}
+
+#subset-filters { margin-bottom: 0.5rem !important; }
+#difficulty-filters { margin-bottom: 0.75rem !important; }
+
+#game-section .game-card-inner {
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+
+/* A fixed box, not a minimum: sized by content, a long phrase wrapped to a
+   second line and grew the card ~40px, moving the buttons mid-round.
+   fit-word.js shrinks the type to fit rather than letting the box grow. */
+#game-section #word-display .fw-text {
+  display: inline-block;
+  max-width: 100%;
+}
+
+#game-section #word-display {
+  height: 92px;
+  min-height: 0;
+  margin-bottom: 1rem !important;
+  overflow: hidden;
+}
+
+#game-section .next-word-btn,
+#game-section .rm-passbig {
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  margin-bottom: 0.75rem !important;
+}
+
+/* ── Tool above the fold on a phone ──────────────────────────────────
+   The whole tool — categories, difficulty, the word, the buttons and the
+   round settings — has to be visible without scrolling, and on a 390px
+   screen it ran 942px tall. These rules apply only below 640px and only
+   inside the game section, so the desktop layout is untouched.
+
+   The intro paragraph moves below the card rather than being hidden: it
+   is real copy that should stay indexed and readable, it just does not
+   need to come before the thing it describes on a small screen. Source
+   order is unchanged, so this costs nothing in search. */
+@media (max-width: 639px) {
+  #game-section {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.75rem;
+  }
+
+  /* An auto side margin cancels stretch on a flex item, and the card and the
+     intro both carry mx-auto. Without this the card shrank to fit whichever
+     word was on screen — 197px on "Dracula", 326px on "Reindeer Antlers
+     Headband" — so the buttons changed size as you played. */
+  #game-section > * {
+    width: 100%;
+  }
+
+  /* Sized so the longest heading — "Christmas Charades Generator", 28
+     characters — stays on one line at 390px. It wrapped at both 1.75rem and
+     1.5rem, and the extra line cost 29px, which was that page's whole
+     overshoot. */
+  #game-section > h1 {
+    font-size: 1.35rem;
+    line-height: 1.15;
+    margin-bottom: 0.45rem;
+  }
+
+  #game-section > p {
+    order: 99;                 /* after the card */
+    font-size: 0.875rem;
+    margin: 1.25rem auto 0;
+  }
+
+  #game-section .filter-btn {
+    padding: 6px 11px;
+    font-size: 12.5px;
+    border-width: 1px;
+  }
+
+  #game-section .diff-btn {
+    padding: 5px 10px;
+    font-size: 12.5px;
+  }
+
+  /* Chips swipe sideways instead of wrapping. Seven category chips took
+     three rows on a phone, which was most of the reason the tool ran past
+     the fold on the themed pages. */
+  #category-filters,
+  #subset-filters,
+  #difficulty-filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  #category-filters::-webkit-scrollbar,
+  #subset-filters::-webkit-scrollbar,
+  #difficulty-filters::-webkit-scrollbar { display: none; }
+
+  #game-section .filter-btn,
+  #game-section .diff-btn { flex: 0 0 auto; }
+
+  #category-filters { margin-bottom: 0.4rem !important; }
+  #subset-filters { margin-bottom: 0.4rem !important; }
+  #difficulty-filters { margin-bottom: 0.6rem !important; }
+
+  #game-section .game-card-inner {
+    padding: 1rem 1rem 0.9rem;
+  }
+
+  #game-section #word-display {
+    font-size: 2.5rem;
+    height: 60px;
+    margin-bottom: 0.75rem !important;
+  }
+
+  #game-section .next-word-btn,
+  #game-section .rm-passbig {
+    padding: 0.75rem 0.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #game-section .game-card-inner { padding: 0.85rem 0.9rem 0.75rem; }
+  #game-section .rm-start { padding: 0.5rem; margin-top: 0.4rem; }
+  #game-section .rm-setup { margin-top: 0.55rem; padding-top: 0.5rem; }
 }

@@ -30,7 +30,42 @@
   <link rel="apple-touch-icon" href="/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/charades-words.js"></script>
-  <script>window.PAGE_CATEGORIES = ['adults']; window.PAGE_LABEL = 'Adults';</script>
+  <script>
+    window.PAGE_CATEGORIES = ['adults'];
+    window.PAGE_LABEL = 'Adults';
+    // Everyday-life words have no natural genre the way films do, so the
+    // second axis here is the setting the scene happens in. Every word
+    // belongs to exactly one group, and difficulty stays as its own filter.
+    window.PAGE_SUBSET_PARAM = 'scene';
+    window.PAGE_SUBSETS = {
+      home: {
+        label: 'At Home',
+        words: ['Cooking Dinner', 'Washing Dishes', 'Making the Bed', 'Taking Out the Trash',
+          'Watching Netflix', 'Binge Watching', 'Folding Laundry', 'Mowing the Lawn',
+          'Assembling Flat-Pack Furniture', 'Reading', 'Ordering Food Delivery',
+          'Working from Home', 'Snoozing the Alarm', 'Yoga', 'Meditation', 'Going on a Diet']
+      },
+      work: {
+        label: 'At Work',
+        words: ['Job Interview', 'Public Speaking', 'Video Conferencing', 'Working Overtime',
+          'Getting a Promotion', 'Negotiating a Raise', 'Doing Taxes', 'Waiting on Hold',
+          'Jury Duty', 'Commuting', 'Running for Office']
+      },
+      social: {
+        label: 'Going Out',
+        words: ['Wine Tasting', 'Online Dating', 'First Date', 'Happy Hour', 'Karaoke Night',
+          'Hosting a Dinner Party', 'Taking a Selfie', 'Nursing a Hangover',
+          'Getting a Tattoo', 'Drinking Coffee']
+      },
+      errands: {
+        label: 'Out & About',
+        words: ['Driving', 'Parallel Parking', 'Being Stuck in Traffic', 'Changing a Flat Tire',
+          'Missing the Bus', 'Road Trip', 'Grocery Shopping', 'Shopping',
+          'Losing Your Car Keys', 'Moving Apartments', 'Texting',
+          'Going to the Gym', 'Rock Climbing']
+      }
+    };
+  </script>
   <script src="/inner-game.js"></script>
   <link rel="stylesheet" href="/styles.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104"></script>
@@ -159,6 +194,15 @@
     <h1 class="text-4xl md:text-5xl font-bold text-gray-800 text-center mb-5">Charades Ideas for Adults</h1>
 
     <!-- Difficulty Filters -->
+    <!-- Sub-filters: which part of adult life the scene comes from -->
+    <div class="flex flex-wrap justify-center gap-2 mb-3" id="subset-filters">
+      <button class="filter-btn subset-btn active" data-subset="all">🍷 All Adult Ideas</button>
+      <button class="filter-btn subset-btn" data-subset="home">🏠 At Home</button>
+      <button class="filter-btn subset-btn" data-subset="work">💼 At Work</button>
+      <button class="filter-btn subset-btn" data-subset="social">🎉 Going Out</button>
+      <button class="filter-btn subset-btn" data-subset="errands">🚗 Out &amp; About</button>
+    </div>
+
     <div class="flex flex-wrap justify-center gap-2 mb-5" id="difficulty-filters">
       <button class="diff-btn active" data-difficulty="all">All Levels</button>
       <button class="diff-btn" data-difficulty="easy">🟢 Easy</button>
@@ -181,13 +225,6 @@
           <p class="text-amber-700 text-xs font-bold uppercase mb-1">💡 Hint</p>
           <p id="hint-text" class="text-gray-700 text-sm"></p>
         </div>
-        <div id="timer-wrap" class="hidden mb-5 flex justify-center">
-          <div class="inline-flex items-center gap-4 bg-red-50 border-2 border-red-200 rounded-xl px-8 py-3">
-            <span id="timer-display" class="text-3xl font-bold text-red-600 tabular-nums">2:00</span>
-            <button onclick="stopTimer()"
-              class="text-red-400 hover:text-red-600 text-xs font-semibold border border-red-200 rounded px-2 py-1 transition-colors">STOP</button>
-          </div>
-        </div>
         <button onclick="nextWord()"
           class="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white text-2xl font-bold py-5 rounded-xl transition-all shadow-md hover:shadow-lg mb-4 next-word-btn">
           Next Word →
@@ -196,10 +233,7 @@
           <button onclick="toggleHint()"
             class="flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">💡
             Hint</button>
-          <button onclick="toggleTimer()" id="timer-btn"
-            class="flex items-center gap-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">⏱
-            Timer</button>
-          <button onclick="nextWord()"
+          <button onclick="nextWord()" id="skip-btn"
             class="flex items-center gap-1.5 bg-gray-50 hover:bg-gray-100 text-gray-600 border border-gray-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">↩
             Skip</button>
         </div>
@@ -412,6 +446,8 @@
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-M9TKDY0SV6');</script>
   </div>
   <script src="/mobile-nav.js"></script>
+  <script src="/round-mode.js"></script>
+  <script src="/fit-word.js"></script>
 </body>
 
 </html>
