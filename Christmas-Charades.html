@@ -70,7 +70,22 @@
   <link rel="apple-touch-icon" href="/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/charades-words.js"></script>
-  <script>window.PAGE_CATEGORIES = ['christmas']; window.PAGE_LABEL = 'Christmas';</script>
+  <script>
+    window.PAGE_CATEGORIES = ['christmas'];
+    window.PAGE_LABEL = 'Christmas';
+    // 180 words, tagged in charades-words.js so the chips filter on the tag
+    // rather than listing every word here. Each group holds 30 — enough that a
+    // full table of players does not start seeing repeats within an evening.
+    window.PAGE_SUBSET_PARAM = 'theme';
+    window.PAGE_SUBSETS = {
+      santa: { label: 'Santa & Reindeer',   groups: ['santa'] },
+      tree:  { label: 'Tree & Decorations', groups: ['tree'] },
+      food:  { label: 'Food & Drink',       groups: ['food'] },
+      songs: { label: 'Songs & Films',      groups: ['songs'] },
+      snow:  { label: 'Snow & Outdoors',    groups: ['snow'] },
+      trad:  { label: 'Traditions & Gifts', groups: ['trad'] }
+    };
+  </script>
   <script src="/inner-game.js"></script>
   <link rel="stylesheet" href="/styles.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104"></script>
@@ -164,6 +179,17 @@
     <h1 class="text-4xl md:text-5xl font-bold text-gray-800 text-center mb-5">Christmas Charades Generator</h1>
 
     <!-- Difficulty Filters -->
+    <!-- Sub-filters: which corner of Christmas -->
+    <div class="flex flex-wrap justify-center gap-2 mb-3" id="subset-filters">
+      <button class="filter-btn subset-btn active" data-subset="all">🎄 All Christmas</button>
+      <button class="filter-btn subset-btn" data-subset="santa">🎅 Santa</button>
+      <button class="filter-btn subset-btn" data-subset="tree">✨ Decorations</button>
+      <button class="filter-btn subset-btn" data-subset="food">🍪 Food</button>
+      <button class="filter-btn subset-btn" data-subset="songs">🎵 Songs &amp; Films</button>
+      <button class="filter-btn subset-btn" data-subset="snow">❄️ Snow</button>
+      <button class="filter-btn subset-btn" data-subset="trad">🎁 Traditions</button>
+    </div>
+
     <div class="flex flex-wrap justify-center gap-2 mb-5" id="difficulty-filters">
       <button class="diff-btn active" data-difficulty="all">All Levels</button>
       <button class="diff-btn" data-difficulty="easy">🟢 Easy</button>
