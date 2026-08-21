@@ -133,8 +133,27 @@
         margin: 0 !important; padding: 0 !important;
         background: none !important; box-shadow: none !important; border-radius: 0 !important;
       }
-      #preview-frame { overflow: visible !important; height: auto !important; }
       #print-area { transform: none !important; }
+
+      /* The sheet is a hard 189 x 276mm, sized for a printable area of
+         210 x 297mm less a 10mm margin. Chromium honours the @page margin
+         above, so that is exactly what it gets. Safari does not: iOS gives no
+         margin control and prints with its own, so the page area is a few
+         millimetres shorter and the 276mm sheet does not fit — the last row of
+         cards is pushed onto a sheet of its own, and a 2-page set prints as 4.
+         min() keeps the true size wherever there is room for it and falls back
+         to the page it actually got everywhere else, so the set always comes
+         out on the number of sheets it says it will.
+
+         The percentages need a definite height the whole way up, which is why
+         every wrapper is pinned to the page box here. Their content still
+         overflows and still fragments — that is how sheet 2 reaches page 2. */
+      html, body, #builder-wrap, #builder, #preview-panel, #preview-frame, #print-area {
+        height: 100% !important;
+      }
+      #preview-frame { overflow: visible !important; }
+      .pc-sheet { width: min(var(--sheet-w), 100%); height: min(var(--sheet-h), 100%); }
+      .pc-grid { height: 100%; }
     }
 
     .opt {
