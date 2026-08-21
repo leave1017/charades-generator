@@ -722,64 +722,79 @@ body.nav-open { overflow: hidden; }
 }
 
 /* ── Ko-fi support button (nav, top right) ──────────────────────────
-   Drawn in the page rather than loaded from storage.ko-fi.com. The remote
-   badge failed to load and still held 111px of a 350px nav row, so the
-   button was an invisible gap — and ad blockers treat ko-fi assets the same
-   way, so it would have been blank for a share of visitors regardless. */
+   Ko-fi's own badge, with a local one behind it. The remote PNG comes from
+   storage.ko-fi.com, which ad blockers routinely block and some networks
+   cannot reach; when it failed it still held 111px of a 350px nav row, so
+   the button was an invisible gap. On error the img removes itself, the
+   sibling selector below stops matching, and the drawn version takes over.
+   Either way something is always there. */
 .kofi-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
   margin-left: auto;
+  line-height: 0;
+  text-decoration: none;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.kofi-btn img {
+  display: block;
+  height: 36px;
+  width: auto;
+  border: 0;
+}
+
+.kofi-btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+
+/* Shown only once the img has removed itself. */
+.kofi-fallback {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.4rem 0.75rem;
   border-radius: 9999px;
   background: #ff5e5b;
   color: #fff;
   font-size: 0.85rem;
   font-weight: 700;
-  text-decoration: none;
+  line-height: 1;
   white-space: nowrap;
-  transition: transform 0.2s, filter 0.2s;
 }
 
-.kofi-cup {
-  width: 1.15rem;
-  height: 1.15rem;
-  flex: none;
-  fill: currentColor;
-}
+.kofi-btn img ~ .kofi-fallback { display: none; }
 
-.kofi-btn:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.06);
-  color: #fff;
-}
+.kofi-cup { width: 1.15rem; height: 1.15rem; flex: none; fill: currentColor; }
 
 @media (min-width: 768px) {
   .kofi-btn { margin-left: 1.5rem; }
 }
 
 /* Below 1280px the nav container narrows to 1024px and the nine desktop
-   links fill it exactly, so the button gives ground. */
+   links fill it exactly, so the badge gives ground. */
 @media (min-width: 768px) and (max-width: 1279px) {
-  .kofi-btn { margin-left: 0.75rem; padding: 0.3rem 0.6rem; font-size: 0.78rem; }
+  .kofi-btn { margin-left: 0.75rem; }
+  .kofi-btn img { height: 26px; }
+  .kofi-fallback { padding: 0.3rem 0.6rem; font-size: 0.78rem; }
 }
 
 /* 768-1023px: the desktop link row already overflows on its own here,
-   so the button stays out of the way rather than adding to it. */
+   so the badge stays out of the way rather than adding to it. */
 @media (min-width: 768px) and (max-width: 1023px) {
   .kofi-btn { display: none; }
 }
 
-/* On a phone the label is dropped and the cup carries it: the nav row is
-   350px wide and the burger and wordmark need most of that. */
+/* On a phone the row is 350px and the wordmark and burger need most of it,
+   so the badge comes down to 26px tall and the drawn fallback loses its
+   label. */
 @media (max-width: 767px) {
-  .kofi-btn { padding: 0.4rem; margin-right: 0.15rem; }
+  .kofi-btn { margin-right: 0.2rem; }
+  .kofi-btn img { height: 26px; }
+  .kofi-fallback { padding: 0.35rem; }
   .kofi-label { display: none; }
-  .kofi-cup { width: 1.3rem; height: 1.3rem; }
+  .kofi-cup { width: 1.2rem; height: 1.2rem; }
 }
 
-/* The mobile drawer slides over the left 75vw and would slice the button
+/* The mobile drawer slides over the left 75vw and would slice the badge
    in half, so hide it while the menu is open. visibility keeps its space
    reserved so the burger does not jump. */
 body.nav-open .kofi-btn { visibility: hidden; }
