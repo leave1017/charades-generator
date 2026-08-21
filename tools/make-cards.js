@@ -31,6 +31,18 @@ const ALL = loadWords('charades-words.js', 'CHARADES_WORDS');
 // /printable-charades-cards/ and these packs cut to the same size.
 const SHARED_CSS = fs.readFileSync(path.join(ROOT, 'print-cards.css'), 'utf8');
 
+// The six Christmas themes, in the order they are dealt. Colouring the card's
+// top label by theme is what makes a printed pack sortable into piles — the
+// cheapest possible ink for the most useful signal.
+const XMAS_THEMES = [
+  { key: 'santa', label: 'Santa & Reindeer',   color: '#b91c1c' },
+  { key: 'tree',  label: 'Tree & Decorations', color: '#15803d' },
+  { key: 'food',  label: 'Food & Drink',       color: '#b45309' },
+  { key: 'songs', label: 'Songs & Films',      color: '#6d28d9' },
+  { key: 'snow',  label: 'Snow & Outdoors',    color: '#0369a1' },
+  { key: 'trad',  label: 'Traditions & Gifts', color: '#a16207' },
+];
+
 const PACKS = {
   // Small proof-of-design set: broad categories, even difficulty spread.
   sample: {
@@ -52,6 +64,34 @@ const PACKS = {
       }
       return out;
     },
+  },
+
+  // The paid pack. Every Christmas word, dealt theme by theme with each theme
+  // starting on a fresh sheet, so cutting a stack leaves six ready-made piles
+  // rather than one shuffled heap.
+  christmas: {
+    title: 'Christmas Charades',
+    subtitle: 'Complete pack',
+    paid: true,
+    cover: {
+      lead: '204 cards in six themed decks',
+      blurb: 'Cut them out once and they are ready every December. Rules, the ' +
+             'standard hand signals and a score sheet are on the next page, and ' +
+             'the clue list at the back is for whoever is running the game.',
+    },
+    // A theme per pile: pad each one out to a full sheet.
+    pick: () => {
+      const out = [];
+      for (const t of XMAS_THEMES) {
+        const words = ALL.filter(w => w.category === 'christmas' && w.group === t.key);
+        out.push(...words);
+        while (out.length % 9) out.push(null);      // finish the sheet
+      }
+      return out;
+    },
+    label: w => (XMAS_THEMES.find(t => t.key === w.group) || {}).label || 'Christmas',
+    tint: w => (XMAS_THEMES.find(t => t.key === w.group) || {}).color || '#6b7280',
+    hintList: true,
   },
 };
 
@@ -101,10 +141,13 @@ function fitSize(phrase, maxLines = 2) {
   return 12;
 }
 
-function cardHTML(w) {
+function cardHTML(w, pack) {
+  if (!w) return '<div class="pc-card"></div>';       // padding to a full sheet
+  const label = pack && pack.label ? pack.label(w) : (CAT_LABEL[w.category] || w.category);
+  const tint = pack && pack.tint ? pack.tint(w) : '';
   return `
       <div class="pc-card">
-        <div class="pc-cat">${esc(CAT_LABEL[w.category] || w.category)}</div>
+        <div class="pc-cat"${tint ? ` style="color:${tint}"` : ''}>${esc(label)}</div>
         <div class="pc-word" style="font-size:${fitSize(w.word)}pt"><span>${esc(w.word)}</span></div>
         <div class="pc-foot">
           <span class="pc-pip"><i style="background:${DIFF[w.difficulty].color}"></i>${DIFF[w.difficulty].label}</span>
@@ -113,16 +156,51 @@ function cardHTML(w) {
       </div>`;
 }
 
-function pagesHTML(words) {
+function pagesHTML(words, pack) {
   const per = 9;
   let out = '';
   for (let i = 0; i < words.length; i += per) {
     const slice = words.slice(i, i + per);
-    const blanks = per - slice.length;
+    while (slice.length < per) slice.push(null);
     out += `\n  <section class="pc-sheet">\n    <div class="pc-grid">` +
-      slice.map(cardHTML).join('') +
-      '<div class="pc-card"></div>'.repeat(blanks) +
+      slice.map(w => cardHTML(w, pack)).join('') +
       `\n    </div>\n  </section>`;
+  }
+  return out;
+}
+
+// A cover exists so the pack looks like a product when it lands in a
+// downloads folder, and so the buyer can see what they have at a glance.
+function coverHTML(pack, count, paperLabel) {
+  const themes = XMAS_THEMES.map(t =>
+    `<li><i style="background:${t.color}"></i>${esc(t.label)}</li>`).join('');
+  return `
+  <section class="pc-sheet cover">
+    <div class="cover-inner">
+      <p class="cover-kicker">Printable charades cards</p>
+      <h1>${esc(pack.title)}</h1>
+      <p class="cover-lead">${esc(pack.cover.lead)}</p>
+      <ul class="cover-themes">${themes}</ul>
+      <p class="cover-blurb">${esc(pack.cover.blurb)}</p>
+      <footer>${count} cards &middot; ${esc(paperLabel)} &middot; charades-generator.org</footer>
+    </div>
+  </section>`;
+}
+
+// The clue list is for the person running the game: it is the one thing that
+// cannot go on a card without giving the answer away to the table.
+function hintsHTML(words, perPage = 78) {
+  const real = words.filter(Boolean);
+  let out = '';
+  for (let i = 0; i < real.length; i += perPage) {
+    const rows = real.slice(i, i + perPage).map(w =>
+      `<div><b>${esc(w.word)}</b><span>${esc(w.hint || '')}</span></div>`).join('');
+    out += `
+  <section class="pc-sheet hints">
+    <h2>Clue list${i ? ' (continued)' : ''}</h2>
+    <p class="hint-note">For whoever is running the game — never show this to the guessers.</p>
+    <div class="hint-cols">${rows}</div>
+  </section>`;
   }
   return out;
 }
@@ -241,10 +319,44 @@ ${SHARED_CSS}
   .formats div { display: flex; flex-direction: column; gap: 0.8mm; }
   .formats strong { font-size: 9pt; }
   .formats span { color: #4b5563; line-height: 1.4; }
+  /* ── cover ── */
+  .cover { display: flex; align-items: center; justify-content: center; text-align: center; }
+  .cover-inner { max-width: 140mm; }
+  .cover-kicker { font-size: 9pt; letter-spacing: .22em; text-transform: uppercase; color: #6b7280; }
+  .cover h1 {
+    font-family: 'Bitstream Charter', 'Liberation Serif', serif;
+    font-size: 40pt; line-height: 1.05; margin: 4mm 0 3mm; letter-spacing: -0.015em;
+  }
+  .cover-lead { font-size: 12pt; color: #374151; margin-bottom: 8mm; }
+  .cover-themes {
+    list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 6mm;
+    font-size: 10pt; text-align: left; margin: 0 auto 8mm; max-width: 110mm;
+  }
+  .cover-themes li { display: flex; align-items: center; }
+  .cover-themes i { width: 3mm; height: 3mm; border-radius: 50%; margin-right: 2.5mm; flex: none; }
+  .cover-blurb { font-size: 9.5pt; line-height: 1.55; color: #4b5563; }
+  .cover footer { margin-top: 10mm; font-size: 8.5pt; color: #9ca3af; }
+
+  /* ── clue list ── */
+  .hints h2 {
+    font-family: 'Bitstream Charter', 'Liberation Serif', serif;
+    font-size: 18pt; margin-bottom: 1mm;
+  }
+  .hint-note { font-size: 8.5pt; color: #b45309; font-style: italic; margin-bottom: 4mm; }
+  .hint-cols { column-count: 2; column-gap: 8mm; font-size: 7.6pt; line-height: 1.35; }
+  .hint-cols div {
+    break-inside: avoid; padding: 0.7mm 0; border-bottom: 0.15mm solid #f3f4f6;
+    display: flex; gap: 2mm;
+  }
+  .hint-cols b { flex: 0 0 34mm; }
+  .hint-cols span { color: #4b5563; }
+
   .intro footer { margin-top: auto; padding-top: 6mm; padding-top: 3mm; border-top: 0.3mm solid #d1d5db; font-size: 8pt; color: #6b7280; text-align: center; }
 </style></head><body>
-${instructionsHTML(pack, words.length, paper.label)}
-${pagesHTML(words)}
+${pack.cover ? coverHTML(pack, words.filter(Boolean).length, paper.label) : ''}
+${instructionsHTML(pack, words.filter(Boolean).length, paper.label)}
+${pagesHTML(words, pack)}
+${pack.hintList ? hintsHTML(words) : ''}
 </body></html>`;
 }
 
@@ -256,6 +368,22 @@ ${pagesHTML(words)}
 
   const pack = PACKS[packName];
   if (!pack) throw new Error('unknown pack: ' + packName);
+
+  // resolve, not join: path.join(ROOT, '/tmp/x.pdf') yields
+  // ROOT + '/tmp/x.pdf', so an absolute --out landed back inside the repo.
+  const outPath = path.resolve(ROOT, out);
+
+  // A paid pack written into the repo would be committed to public history
+  // and served by Vercel — permanently, and for free. The first version of
+  // this check tested path.resolve(out) while the write used
+  // path.join(ROOT, out); the two disagreed for absolute paths and it waved
+  // three paid PDFs straight into the working tree. A guard has to test the
+  // exact value the write will use.
+  if (pack.paid && !path.relative(ROOT, outPath).startsWith('..')) {
+    throw new Error(
+      'refusing to write a paid pack inside the repository: ' + outPath +
+      '\n  the repo is public and Vercel serves it — pass --out with a path outside ' + ROOT);
+  }
   const paper = PAPER[paperKey];
   if (!paper) throw new Error('unknown paper: ' + paperKey);
 
@@ -287,7 +415,6 @@ ${pagesHTML(words)}
     return out;
   });
   if (shrunk.length) console.log('  refit: ' + shrunk.join(', '));
-  const outPath = path.join(ROOT, out);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   // preferCSSPageSize hands page size and margins entirely to the CSS @page
   // rule. Passing format/margin here as well made Chromium lay the content out
@@ -298,5 +425,6 @@ ${pagesHTML(words)}
 
   const kb = (fs.statSync(outPath).size / 1024).toFixed(0);
   console.log(`${out}  ${words.length} cards, ${Math.ceil(words.length / 9) + 1} pages, ${kb} KB`);
-  console.log('words:', words.map(w => `${w.word}(${w.difficulty})`).join(', '));
+  const real = words.filter(Boolean);
+  console.log('words:', real.length, '| padding blanks:', words.length - real.length);
 })();
