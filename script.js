@@ -4,9 +4,6 @@
 let activeCategory   = 'all';
 let activeDifficulty = 'all';
 let currentWord      = null;
-let timerInterval    = null;
-let timerSeconds     = 120;
-let timerRunning     = false;
 
 // ── Word pools ────────────────────────────────────────────────
 // The homepage tool covers every category the site has. Each chip narrows
@@ -124,10 +121,6 @@ function showWord(wordObj) {
 // ── Game controls ──────────────────────────────────────────────
 function nextWord() {
   showWord(getRandomWord(currentWord?.word));
-  if (timerRunning) {
-    timerSeconds = 120;
-    renderTimer();
-  }
 }
 
 function toggleHint() {
@@ -147,50 +140,9 @@ function hideHint() {
   document.getElementById('hint-area')?.classList.add('hidden');
 }
 
-function toggleTimer() {
-  timerRunning ? stopTimer() : startTimer();
-}
-
-function startTimer() {
-  timerSeconds  = 120;
-  timerRunning  = true;
-  document.getElementById('timer-wrap')?.classList.remove('hidden');
-  const btn = document.getElementById('timer-btn');
-  if (btn) btn.textContent = '⏱ Stop';
-  renderTimer();
-  timerInterval = setInterval(() => {
-    timerSeconds--;
-    renderTimer();
-    if (timerSeconds <= 0) {
-      stopTimer();
-      onTimerEnd();
-    }
-  }, 1000);
-}
-
-function stopTimer() {
-  clearInterval(timerInterval);
-  timerInterval = null;
-  timerRunning  = false;
-  document.getElementById('timer-wrap')?.classList.add('hidden');
-  const btn = document.getElementById('timer-btn');
-  if (btn) btn.textContent = '⏱ Timer';
-}
-
-function renderTimer() {
-  const m  = Math.floor(timerSeconds / 60);
-  const s  = timerSeconds % 60;
-  const el = document.getElementById('timer-display');
-  if (el) el.textContent = `${m}:${String(s).padStart(2, '0')}`;
-}
-
-function onTimerEnd() {
-  if (typeof showTimeUpOverlay === 'function') {
-    showTimeUpOverlay(currentWord?.word || '', () => nextWord());
-  } else {
-    nextWord();
-  }
-}
+// The clock lives in round-mode.js now. A timer with no deck and no score
+// was the weaker half of two overlapping features, and having both on the
+// card made it unclear which one you were starting.
 
 // ── Filters ───────────────────────────────────────────────────
 function setCategoryFilter(category) {
@@ -242,8 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // ── Global exports ────────────────────────────────────────────
 window.nextWord            = nextWord;
 window.toggleHint          = toggleHint;
-window.toggleTimer         = toggleTimer;
-window.stopTimer           = stopTimer;
 window.setCategoryFilter   = setCategoryFilter;
 window.setDifficultyFilter = setDifficultyFilter;
 window.selectMovieGenre    = selectMovieGenre;
@@ -251,6 +201,5 @@ window.selectAnimalHabitat = selectAnimalHabitat;
 // Legacy no-ops (inner pages still reference these)
 window.startQuickGame   = nextWord;
 window.nextQuickCharade = nextWord;
-window.pauseQuickGame   = () => {};
 window.resetQuickGame   = () => {};
 window.showQuickHint    = toggleHint;
