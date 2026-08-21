@@ -721,26 +721,38 @@ body.nav-open { overflow: hidden; }
 
 }
 
-/* ── Ko-fi support button (nav, top right) ── */
+/* ── Ko-fi support button (nav, top right) ──────────────────────────
+   Drawn in the page rather than loaded from storage.ko-fi.com. The remote
+   badge failed to load and still held 111px of a 350px nav row, so the
+   button was an invisible gap — and ad blockers treat ko-fi assets the same
+   way, so it would have been blank for a share of visitors regardless. */
 .kofi-btn {
   display: inline-flex;
   align-items: center;
+  gap: 0.4rem;
   margin-left: auto;
-  line-height: 0;
+  padding: 0.4rem 0.75rem;
+  border-radius: 9999px;
+  background: #ff5e5b;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
   text-decoration: none;
+  white-space: nowrap;
   transition: transform 0.2s, filter 0.2s;
 }
 
-.kofi-btn img {
-  display: block;
-  height: 36px;
-  width: auto;
-  border: 0;
+.kofi-cup {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: none;
+  fill: currentColor;
 }
 
 .kofi-btn:hover {
   transform: translateY(-1px);
-  filter: brightness(1.05);
+  filter: brightness(1.06);
+  color: #fff;
 }
 
 @media (min-width: 768px) {
@@ -748,19 +760,26 @@ body.nav-open { overflow: hidden; }
 }
 
 /* Below 1280px the nav container narrows to 1024px and the nine desktop
-   links fill it exactly, so the badge has to give ground. */
+   links fill it exactly, so the button gives ground. */
 @media (min-width: 768px) and (max-width: 1279px) {
-  .kofi-btn { margin-left: 0.75rem; }
-  .kofi-btn img { height: 26px; }
+  .kofi-btn { margin-left: 0.75rem; padding: 0.3rem 0.6rem; font-size: 0.78rem; }
 }
 
 /* 768-1023px: the desktop link row already overflows on its own here,
-   so the badge stays out of the way rather than adding to it. */
+   so the button stays out of the way rather than adding to it. */
 @media (min-width: 768px) and (max-width: 1023px) {
   .kofi-btn { display: none; }
 }
 
-/* The mobile drawer slides over the left 75vw and would slice the badge
+/* On a phone the label is dropped and the cup carries it: the nav row is
+   350px wide and the burger and wordmark need most of that. */
+@media (max-width: 767px) {
+  .kofi-btn { padding: 0.4rem; margin-right: 0.15rem; }
+  .kofi-label { display: none; }
+  .kofi-cup { width: 1.3rem; height: 1.3rem; }
+}
+
+/* The mobile drawer slides over the left 75vw and would slice the button
    in half, so hide it while the menu is open. visibility keeps its space
    reserved so the burger does not jump. */
 body.nav-open .kofi-btn { visibility: hidden; }
@@ -857,7 +876,7 @@ body.nav-open .kofi-btn { visibility: hidden; }
   #game-section > h1 {
     font-size: 1.35rem !important;
     line-height: 1.15;
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.35rem;
   }
 
   #game-section > p {
@@ -866,44 +885,31 @@ body.nav-open .kofi-btn { visibility: hidden; }
     margin: 1.25rem auto 0;
   }
 
-  /* Chips swipe sideways instead of wrapping. Seven category chips took three
-     rows on a phone, which was most of the reason the themed pages ran past
-     the fold. */
+  /* Every category has to be visible without swiping: a row that scrolls
+     hides the choices behind a gesture nobody knows to make. Seven chips
+     need about 534px and a 390px screen has 358, so they wrap to two rows
+     and the labels are kept short enough that two is the most it ever
+     takes. */
   #category-filters,
   #subset-filters,
   #difficulty-filters {
-    flex-wrap: nowrap !important;
-    overflow-x: auto;
-    justify-content: flex-start !important;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 2px;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    row-gap: 0.25rem;
   }
 
-  #category-filters::-webkit-scrollbar,
-  #subset-filters::-webkit-scrollbar,
-  #difficulty-filters::-webkit-scrollbar { display: none; }
-
-  #game-section .filter-btn,
-  #game-section .diff-btn {
-    flex: 0 0 auto;
-    padding: 6px 11px;
-    font-size: 12.5px;
-    border-width: 1px;
-  }
-
-  #category-filters { margin-bottom: 0.4rem !important; }
-  #subset-filters { margin-bottom: 0.4rem !important; }
-  #difficulty-filters { margin-bottom: 0.6rem !important; }
+  #category-filters { margin-bottom: 0.35rem !important; }
+  #subset-filters { margin-bottom: 0.35rem !important; }
+  #difficulty-filters { margin-bottom: 0.4rem !important; }
 
   #game-section .game-card-inner {
-    padding: 0.85rem 0.9rem 0.75rem !important;
+    padding: 0.7rem 0.9rem 0.5rem !important;
   }
 
   #game-section #word-display {
     font-size: 2.5rem;
-    height: 60px;
-    margin-bottom: 0.75rem !important;
+    height: 52px;
+    margin-bottom: 0.55rem !important;
   }
 
   #game-section .next-word-btn,
@@ -915,7 +921,7 @@ body.nav-open .kofi-btn { visibility: hidden; }
   }
 
   #game-section .rm-start { padding: 0.5rem; margin-top: 0.4rem; }
-  #game-section .rm-setup { margin-top: 0.55rem; padding-top: 0.5rem; }
+  #game-section .rm-setup { margin-top: 0.45rem; padding-top: 0.4rem; }
 }
 
 /* ── Ko-fi support button (nav, top right) ── */
@@ -1053,7 +1059,7 @@ body.nav-open .kofi-btn { visibility: hidden; }
   #game-section > h1 {
     font-size: 1.35rem;
     line-height: 1.15;
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.35rem;
   }
 
   #game-section > p {
@@ -1094,9 +1100,9 @@ body.nav-open .kofi-btn { visibility: hidden; }
   #game-section .filter-btn,
   #game-section .diff-btn { flex: 0 0 auto; }
 
-  #category-filters { margin-bottom: 0.4rem !important; }
-  #subset-filters { margin-bottom: 0.4rem !important; }
-  #difficulty-filters { margin-bottom: 0.6rem !important; }
+  #category-filters { margin-bottom: 0.35rem !important; }
+  #subset-filters { margin-bottom: 0.35rem !important; }
+  #difficulty-filters { margin-bottom: 0.4rem !important; }
 
   #game-section .game-card-inner {
     padding: 1rem 1rem 0.9rem;
@@ -1104,8 +1110,8 @@ body.nav-open .kofi-btn { visibility: hidden; }
 
   #game-section #word-display {
     font-size: 2.5rem;
-    height: 60px;
-    margin-bottom: 0.75rem !important;
+    height: 52px;
+    margin-bottom: 0.55rem !important;
   }
 
   #game-section .next-word-btn,
@@ -1117,5 +1123,5 @@ body.nav-open .kofi-btn { visibility: hidden; }
 
   #game-section .game-card-inner { padding: 0.85rem 0.9rem 0.75rem; }
   #game-section .rm-start { padding: 0.5rem; margin-top: 0.4rem; }
-  #game-section .rm-setup { margin-top: 0.55rem; padding-top: 0.5rem; }
+  #game-section .rm-setup { margin-top: 0.45rem; padding-top: 0.4rem; }
 }
