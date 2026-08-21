@@ -808,3 +808,72 @@ body.nav-open .kofi-btn { visibility: hidden; }
 @media (max-width: 360px) {
   .kofi-btn img { height: 18px; }
 }
+
+/* ── Tool above the fold on a phone ──────────────────────────────────
+   The whole tool — categories, difficulty, the word, the buttons and the
+   round settings — has to be visible without scrolling, and on a 390px
+   screen it ran 942px tall. These rules apply only below 640px and only
+   inside the game section, so the desktop layout is untouched.
+
+   The intro paragraph moves below the card rather than being hidden: it
+   is real copy that should stay indexed and readable, it just does not
+   need to come before the thing it describes on a small screen. Source
+   order is unchanged, so this costs nothing in search. */
+@media (max-width: 639px) {
+  #game-section {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.75rem;
+  }
+
+  /* An auto side margin cancels stretch on a flex item, and the card and the
+     intro both carry mx-auto. Without this the card shrank to fit whichever
+     word was on screen — 197px on "Dracula", 326px on "Reindeer Antlers
+     Headband" — so the buttons changed size as you played. */
+  #game-section > * {
+    width: 100%;
+  }
+
+  #game-section > h1 {
+    font-size: 1.75rem;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  #game-section > p {
+    order: 99;                 /* after the card */
+    font-size: 0.875rem;
+    margin: 1.25rem auto 0;
+  }
+
+  #game-section .filter-btn {
+    padding: 6px 11px;
+    font-size: 12.5px;
+    border-width: 1px;
+  }
+
+  #game-section .diff-btn {
+    padding: 5px 10px;
+    font-size: 12.5px;
+  }
+
+  #category-filters { margin-bottom: 0.4rem !important; }
+  #difficulty-filters { margin-bottom: 0.6rem !important; }
+
+  #game-section .game-card-inner {
+    padding: 1rem 1rem 0.9rem;
+  }
+
+  #game-section #word-display {
+    font-size: 2.5rem;
+    min-height: 62px;
+    margin-bottom: 1rem !important;
+  }
+
+  #game-section .next-word-btn,
+  #game-section .rm-passbig {
+    padding: 0.85rem 0.5rem;
+    font-size: 1.15rem;
+    margin-bottom: 0.6rem !important;
+  }
+}

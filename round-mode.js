@@ -56,16 +56,26 @@
   function injectStyles() {
     var css = document.createElement('style');
     css.textContent = [
-      '.rm-setup{border-top:1px solid #f3f4f6;margin-top:1rem;padding-top:.9rem}',
-      '.rm-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;',
-      'gap:.35rem;margin-bottom:.45rem}',
-      '.rm-label{font-size:.7rem;font-weight:700;color:#9ca3af;letter-spacing:.06em;',
-      'text-transform:uppercase;margin-right:.2rem}',
-      '.rm-chip{border:1px solid #d1d5db;background:#fff;color:#374151;padding:.25rem .65rem;',
-      'border-radius:9999px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .15s}',
+      // display:none must beat any utility class the element carries
+      '.rm-hide{display:none !important}',
+      // width is stated rather than left to the block default: measured
+      // repeatedly, the row came out 197px on some loads and 322px on others,
+      // and an unpredictable button size is not something to ship
+      '.rm-mainrow{display:flex;gap:.5rem;width:100%}',
+      '.rm-mainrow>*{flex:1 1 0;min-width:0;width:auto}',
+      '.rm-passbig{background:#9ca3af !important}',
+      '.rm-passbig:hover{background:#6b7280 !important}',
+      // one row, so the settings cost a line rather than a block
+      '.rm-setup{border-top:1px solid #f3f4f6;margin-top:.7rem;padding-top:.65rem}',
+      '.rm-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.3rem}',
+      '.rm-label{font-size:.68rem;font-weight:700;color:#9ca3af;letter-spacing:.05em;',
+      'text-transform:uppercase;margin:0 .1rem 0 .35rem}',
+      '.rm-row .rm-label:first-child{margin-left:0}',
+      '.rm-chip{border:1px solid #d1d5db;background:#fff;color:#374151;padding:.2rem .55rem;',
+      'border-radius:9999px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .15s}',
       '.rm-chip:hover{border-color:#6366f1;color:#4f46e5}',
       '.rm-chip.on{background:#4f46e5;border-color:#4f46e5;color:#fff}',
-      '.rm-start{width:100%;margin-top:.55rem;background:#4f46e5;color:#fff;font-weight:700;',
+      '.rm-start{width:100%;margin-top:.5rem;background:#4f46e5;color:#fff;font-weight:700;',
       'padding:.6rem;border-radius:.6rem;border:0;cursor:pointer;font-size:.92rem;transition:background .15s}',
       '.rm-start:hover{background:#4338ca}',
       '.rm-hud{display:flex;justify-content:space-between;align-items:center;gap:1rem;',
@@ -100,10 +110,10 @@
     setup.id = 'rm-setup';
     setup.innerHTML =
       '<div class="rm-row"><span class="rm-label">Words</span>' +
-      chipRow('count', COUNTS, DEFAULT_COUNT) + '</div>' +
-      '<div class="rm-row"><span class="rm-label">Per word</span>' +
+      chipRow('count', COUNTS, DEFAULT_COUNT) +
+      '<span class="rm-label">Each</span>' +
       chipRow('seconds', SECONDS, DEFAULT_SECONDS, function (v) {
-        return v === 120 ? '2 min' : v + 's';
+        return v === 120 ? '2m' : v + 's';
       }) + '</div>' +
       '<button type="button" class="rm-start" id="rm-start">▶ Start timed round</button>';
     inner.appendChild(setup);
@@ -111,7 +121,7 @@
     var hud = document.createElement('div');
     hud.className = 'rm-hud';
     hud.id = 'rm-hud';
-    hud.hidden = true;
+    hud.classList.add('rm-hide');
     hud.innerHTML = '<span class="rm-progress" id="rm-progress"></span>' +
       '<span class="rm-clock" id="rm-clock">1:00</span>';
     inner.insertBefore(hud, inner.firstChild);
@@ -119,8 +129,24 @@
     var result = document.createElement('div');
     result.id = 'rm-result';
     result.className = 'rm-result';
-    result.hidden = true;
+    result.classList.add('rm-hide');
     inner.insertBefore(result, inner.firstChild);
+
+    // Got it and Pass are the two choices for the same decision, so they get
+    // the same weight: the main button halves and Pass takes the other half,
+    // both at full size. The small Skip in the row below stands down while a
+    // round runs, since Pass is doing its job.
+    var mainRow = document.createElement('div');
+    mainRow.className = 'rm-mainrow';
+    nextBtn.parentNode.insertBefore(mainRow, nextBtn);
+    mainRow.appendChild(nextBtn);
+
+    var passBtn = document.createElement('button');
+    passBtn.type = 'button';
+    passBtn.id = 'rm-pass';
+    passBtn.className = nextBtn.className + ' rm-passbig rm-hide';
+    passBtn.textContent = '↷ Pass';
+    mainRow.appendChild(passBtn);
 
     // Ending a round needs a control of its own, so it borrows the shape of
     // the buttons beside it and sits in the same row.
@@ -129,20 +155,26 @@
     endBtn.id = 'rm-end';
     endBtn.className = skipBtn.className + ' rm-end';
     endBtn.textContent = '⏹ End round';
-    endBtn.hidden = true;
+    endBtn.classList.add('rm-hide');
     skipBtn.parentNode.appendChild(endBtn);
 
     el = {
-      setup: setup, hud: hud, result: result, end: endBtn,
+      setup: setup, hud: hud, result: result, end: endBtn, pass: passBtn,
       progress: $('rm-progress'), clock: $('rm-clock'),
       next: nextBtn, skip: skipBtn, word: $('word-display'),
-      nextLabel: nextBtn.innerHTML, skipLabel: skipBtn.innerHTML,
+      nextLabel: nextBtn.innerHTML,
     };
     return true;
   }
 
   // ── round ────────────────────────────────────────────────────────────
-  function show(node, on) { if (node) node.hidden = !on; }
+  // Not the hidden attribute: Tailwind's preflight styles it as
+  // [hidden]:where(...) { display: none }, which :where() gives zero
+  // specificity, so any display utility on the element — .flex on a button
+  // that borrowed another button's classes — ties on specificity and wins on
+  // source order. The End round button stayed on screen from page load
+  // because of exactly that. An explicit class settles it.
+  function show(node, on) { if (node) node.classList.toggle('rm-hide', !on); }
 
   function paintClock() {
     var m = Math.floor(state.left / 60), s = state.left % 60;
@@ -188,16 +220,15 @@
     show(el.setup, !on);
     show(el.hud, on);
     show(el.end, on);
+    show(el.pass, on);
+    show(el.skip, !on);
     if (on) {
       el.next.innerHTML = '✓ Got it';
-      el.skip.innerHTML = '↷ Pass';
       el.next.onclick = function () { score(true); };
-      el.skip.onclick = function () { score(false); };
+      el.pass.onclick = function () { score(false); };
     } else {
       el.next.innerHTML = el.nextLabel;
-      el.skip.innerHTML = el.skipLabel;
       el.next.onclick = function () { if (window.nextWord) window.nextWord(); };
-      el.skip.onclick = function () { if (window.nextWord) window.nextWord(); };
     }
   }
 
@@ -208,7 +239,7 @@
     state.log = [];
 
     show(el.result, false);
-    el.word.style.display = '';
+    show(el.word, true);
     setRoundControls(true);
 
     deal();
@@ -228,9 +259,9 @@
     state.running = false;
     setRoundControls(false);
     show(el.setup, false);
-    el.next.style.display = 'none';
-    el.skip.style.display = 'none';
-    el.word.style.display = 'none';
+    show(el.next, false);
+    show(el.pass, false);
+    show(el.word, false);
 
     var total = state.log.length;
     el.result.innerHTML =
@@ -248,9 +279,8 @@
 
   function reset() {
     show(el.result, false);
-    el.word.style.display = '';
-    el.next.style.display = '';
-    el.skip.style.display = '';
+    show(el.word, true);
+    show(el.next, true);
     setRoundControls(false);
   }
 
