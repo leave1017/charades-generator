@@ -701,7 +701,7 @@ footer {
 }
 body.nav-open { overflow: hidden; }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   #mobile-menu:not(.hidden) {
     position: fixed;
     top: 0;
@@ -719,6 +719,20 @@ body.nav-open { overflow: hidden; }
     gap: 4px;
   }
 
+}
+
+/* ── Desktop nav fit ────────────────────────────────────────────────
+   Ten links at Tailwind's space-x-8 come to 806px, and the container is
+   984px at 1024 and 728px at 768 — with the wordmark and the Ko-fi button
+   also in the row, it overflowed at 768, 860 and 1024. The row already
+   overflowed at 768 before the tenth link was added; tightening the gap and
+   the type between 768 and 1279 fixes both.
+
+   space-x-8 sets margin-left on the siblings rather than a gap, so the
+   override has to target the same thing. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  nav .hidden.lg\:flex > a + a { margin-left: 0.7rem; }
+  nav .hidden.lg\:flex > a { font-size: 0.9rem; }
 }
 
 /* ── Ko-fi support button (nav, top right) ──────────────────────────
@@ -765,28 +779,21 @@ body.nav-open { overflow: hidden; }
 
 .kofi-cup { width: 1.15rem; height: 1.15rem; flex: none; fill: currentColor; }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
   .kofi-btn { margin-left: 1.5rem; }
 }
 
 /* Below 1280px the nav container narrows to 1024px and the nine desktop
    links fill it exactly, so the badge gives ground. */
-@media (min-width: 768px) and (max-width: 1279px) {
+@media (min-width: 1024px) and (max-width: 1279px) {
   .kofi-btn { margin-left: 0.75rem; }
   .kofi-btn img { height: 26px; }
   .kofi-fallback { padding: 0.3rem 0.6rem; font-size: 0.78rem; }
 }
 
-/* 768-1023px: the desktop link row already overflows on its own here,
-   so the badge stays out of the way rather than adding to it. */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .kofi-btn { display: none; }
-}
-
-/* On a phone the row is 350px and the wordmark and burger need most of it,
-   so the badge comes down to 26px tall and the drawn fallback loses its
-   label. */
-@media (max-width: 767px) {
+/* Wherever the drawer is in charge the row is narrow, so the badge comes
+   down to 26px tall and the drawn fallback loses its label. */
+@media (max-width: 1023px) {
   .kofi-btn { margin-right: 0.2rem; }
   .kofi-btn img { height: 26px; }
   .kofi-fallback { padding: 0.35rem; }
@@ -961,7 +968,7 @@ body.nav-open .kofi-btn { visibility: hidden; }
   filter: brightness(1.05);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
   .kofi-btn { margin-left: 1.5rem; }
 }
 
@@ -970,12 +977,6 @@ body.nav-open .kofi-btn { visibility: hidden; }
 @media (min-width: 768px) and (max-width: 1279px) {
   .kofi-btn { margin-left: 0.75rem; }
   .kofi-btn img { height: 26px; }
-}
-
-/* 768-1023px: the desktop link row already overflows on its own here,
-   so the badge stays out of the way rather than adding to it. */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .kofi-btn { display: none; }
 }
 
 /* The mobile drawer slides over the left 75vw and would slice the badge
