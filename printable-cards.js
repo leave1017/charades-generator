@@ -9,12 +9,46 @@
 (function () {
   'use strict';
 
+  // Safari does not apply the @page margin below. iOS gives no margin control
+  // at all and prints with the engine's own ~12.7mm, so the page area is
+  // smaller than the one the sheet is sized for: a 276mm sheet overflowed by
+  // about 4mm and the last row of cards was pushed onto a sheet of its own,
+  // turning an 18-card set into four pages.
+  //
+  // The sheet cannot simply be sized as a percentage of the page — Safari
+  // resolves that against something much smaller and the grid collapsed to a
+  // fraction of the sheet. So the two engines get two fixed sizes instead.
+  // Chromium, where the 63 x 92mm card was measured off real paper and where
+  // the paid packs are rendered, is left exactly as it was.
+  var ua = navigator.userAgent;
+  var WEBKIT =
+    /iPad|iPhone|iPod/.test(ua) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) ||
+    (/Safari/.test(ua) && !/Chrome|Chromium|Edg|OPR/.test(ua));
+
   var PAPER = {
     // sheet = printable box minus 1mm, so no border sits on the page edge
     // where the renderer clips it away. See print-cards.css.
-    a4:     { css: 'A4',     w: 189, h: 276, label: 'A4', card: '63 × 92 mm' },
-    letter: { css: 'Letter', w: 195, h: 258, label: 'US Letter', card: '65 × 86 mm' },
+    //   w/h    the page's own 10mm margin, honoured by Chromium
+    //   ww/wh  WebKit's larger margin, which it applies whatever we ask for
+    a4: {
+      css: 'A4', label: 'A4',
+      w: 189, h: 276, card: '63 × 92 mm',
+      ww: 183, wh: 270, wcard: '61 × 90 mm',
+    },
+    letter: {
+      css: 'Letter', label: 'US Letter',
+      w: 195, h: 258, card: '65 × 86 mm',
+      ww: 189, wh: 253, wcard: '63 × 84 mm',
+    },
   };
+
+  // Everything downstream asks for .w/.h/.card, so resolve it once here
+  // rather than branching at each of the four places that read it.
+  function paperOf(id) {
+    var p = PAPER[id];
+    return WEBKIT ? { css: p.css, label: p.label, w: p.ww, h: p.wh, card: p.wcard } : p;
+  }
 
   var DIFF = {
     easy:   { label: 'Easy',   color: '#15803d' },
@@ -115,7 +149,7 @@
   }
 
   function render(list) {
-    var paper = PAPER[state.paper];
+    var paper = paperOf(state.paper);
     area.style.setProperty('--sheet-w', paper.w + 'mm');
     area.style.setProperty('--sheet-h', paper.h + 'mm');
     pageRule.textContent = '@page { size: ' + paper.css + '; margin: 10mm; }';
@@ -159,7 +193,7 @@
   function mmToPx(mm) { return mm * 96 / 25.4; }
 
   function scalePreview() {
-    var paper = PAPER[state.paper];
+    var paper = paperOf(state.paper);
     var avail = frame.clientWidth;
     if (!avail) return;
     var scale = Math.min(1, avail / mmToPx(paper.w));
@@ -210,7 +244,7 @@
 
   function refresh() {
     var available = pool().length;
-    var paper = PAPER[state.paper];
+    var paper = paperOf(state.paper);
 
     if (available === 0) {
       area.innerHTML = '';
