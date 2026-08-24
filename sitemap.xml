@@ -78,6 +78,12 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://charades-generator.org/blog/halloween-charades-party-guide/</loc>
+    <lastmod>2026-08-24</lastmod>
+    <priority>0.5</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://charades-generator.org/blog/christmas-charades-ideas-for-holiday-parties/</loc>
     <lastmod>2026-08-16</lastmod>
     <priority>0.5</priority>
