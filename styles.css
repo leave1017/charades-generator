@@ -1141,3 +1141,31 @@ body.nav-open .kofi-btn { visibility: hidden; }
   #game-section .rm-start { padding: 0.5rem; margin-top: 0.4rem; }
   #game-section .rm-setup { margin-top: 0.45rem; padding-top: 0.4rem; }
 }
+
+/* ── Not-yet-bound controls ────────────────────────────────────────────
+   The generator buttons are inline onclick="nextWord()" handlers, and the
+   script that defines nextWord loads after the button has already painted.
+   Between those two moments a tap did nothing at all — 19 dead clicks in
+   65 homepage sessions, with zero JS errors, which is the signature of
+   exactly this gap rather than of a broken element.
+
+   So the buttons ship disabled and the generator releases them once it has
+   bound. A disabled button swallows the click, which is the point: the user
+   gets "not ready yet" instead of "nothing happened", and the browser stops
+   counting it as a failed interaction. The pulse is what separates "loading"
+   from "broken" — a button that is merely greyed out reads as the latter. */
+[data-needs-js][disabled] {
+  opacity: .55;
+  cursor: progress;
+  animation: needs-js-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes needs-js-pulse {
+  0%, 100% { opacity: .55; }
+  50%      { opacity: .75; }
+}
+
+/* Respect a reduced-motion preference: keep the dimming, drop the pulse. */
+@media (prefers-reduced-motion: reduce) {
+  [data-needs-js][disabled] { animation: none; }
+}

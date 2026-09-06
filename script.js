@@ -174,6 +174,30 @@ function selectAnimalHabitat(habitat) {
   window.location.href = `/Animal-Charades-Game/?habitat=${habitat}#game-section`;
 }
 
+// ── Release the controls ──────────────────────────────────────
+// The generator buttons ship disabled: their inline onclick handlers point at
+// functions this file defines, so until it has run a tap does nothing at all.
+// That gap was 19 dead clicks in 65 homepage sessions with zero JS errors —
+// the signature of "not bound yet" rather than of a broken element. A disabled
+// button swallows the tap instead, so the user gets "not ready" rather than
+// "nothing happened". See the [data-needs-js] rules in styles.css.
+//
+// The number reported is the whole window: navigation start to this line. It
+// goes to GA4 rather than a console global because the window is longest on
+// phones, and a phone is exactly where nobody can open a console to read it.
+function releaseControls(pageKind) {
+  document.querySelectorAll('[data-needs-js][disabled]').forEach(function (b) {
+    b.disabled = false;
+    b.removeAttribute('aria-busy');
+  });
+  if (typeof gtag === 'function' && window.performance && performance.now) {
+    gtag('event', 'button_ready', {
+      ready_ms: Math.round(performance.now()),
+      page_kind: pageKind,
+    });
+  }
+}
+
 // ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   // Mobile menu is owned by mobile-nav.js — binding a second toggle here
@@ -189,6 +213,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Auto-show first word
   showWord(getRandomWord());
+
+  releaseControls('home');
 });
 
 // ── Global exports ────────────────────────────────────────────

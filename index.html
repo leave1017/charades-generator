@@ -61,16 +61,9 @@
     "url": "https://charades-generator.org"
   }
   </script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104">
-  </script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'AW-17617716104');
-  </script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9TKDY0SV6"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-M9TKDY0SV6');</script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4601450349641821"
     crossorigin="anonymous"></script>
   <!-- Microsoft Clarity -->
@@ -216,18 +209,18 @@
 
 
         <!-- Next button -->
-        <button onclick="nextWord()"
+        <button onclick="nextWord()" disabled aria-busy="true" data-needs-js
           class="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white text-2xl font-bold py-5 rounded-xl transition-all shadow-md hover:shadow-lg mb-4 next-word-btn">
           Next Word →
         </button>
 
         <!-- Secondary controls -->
         <div class="flex justify-center gap-2">
-          <button onclick="toggleHint()"
+          <button onclick="toggleHint()" disabled aria-busy="true" data-needs-js
             class="flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
             💡 Hint
           </button>
-          <button onclick="nextWord()" id="skip-btn"
+          <button onclick="nextWord()" disabled aria-busy="true" data-needs-js id="skip-btn"
             class="flex items-center gap-1.5 bg-gray-50 hover:bg-gray-100 text-gray-600 border border-gray-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
             ↩ Skip
           </button>
@@ -746,27 +739,14 @@
       window.location.href = `/Animal-Charades-Game/?habitat=${habitat}#game-section`;
     }
   </script>
-  <script src="charades-vocabulary-database.js"></script>
-  <script src="charades-words.js"></script>
-  <script src="game-ui.js"></script>
-  <script src="movie-themes.js"></script>
-  <script src="script.js"></script>
+  <script defer src="charades-words.js"></script>
+  <script defer src="game-ui.js"></script>
+  <script defer src="movie-themes.js"></script>
+  <script defer src="script.js"></script>
 
-  <div style="display: none;">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9TKDY0SV6"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-
-      gtag('config', 'G-M9TKDY0SV6');
-    </script>
-  </div>
-
-  <script src="/mobile-nav.js"></script>
-  <script src="/round-mode.js"></script>
-  <script src="/fit-word.js"></script>
+  <script defer src="/mobile-nav.js"></script>
+  <script defer src="/round-mode.js"></script>
+  <script defer src="/fit-word.js"></script>
 </body>
 
 </html>

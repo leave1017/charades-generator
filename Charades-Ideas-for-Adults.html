@@ -29,7 +29,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="/charades-words.js"></script>
+  <script defer src="/charades-words.js"></script>
   <script>
     window.PAGE_CATEGORIES = ['adults'];
     window.PAGE_LABEL = 'Adults';
@@ -66,10 +66,8 @@
       }
     };
   </script>
-  <script src="/inner-game.js"></script>
+  <script defer src="/inner-game.js"></script>
   <link rel="stylesheet" href="/styles.css">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104"></script>
-  <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'AW-17617716104');</script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4601450349641821"
     crossorigin="anonymous"></script>
   <script type="application/ld+json">
@@ -236,15 +234,15 @@
           <p class="text-amber-700 text-xs font-bold uppercase mb-1">💡 Hint</p>
           <p id="hint-text" class="text-gray-700 text-sm"></p>
         </div>
-        <button onclick="nextWord()"
+        <button onclick="nextWord()" disabled aria-busy="true" data-needs-js
           class="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white text-2xl font-bold py-5 rounded-xl transition-all shadow-md hover:shadow-lg mb-4 next-word-btn">
           Next Word →
         </button>
         <div class="flex justify-center gap-2">
-          <button onclick="toggleHint()"
+          <button onclick="toggleHint()" disabled aria-busy="true" data-needs-js
             class="flex items-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">💡
             Hint</button>
-          <button onclick="nextWord()" id="skip-btn"
+          <button onclick="nextWord()" disabled aria-busy="true" data-needs-js id="skip-btn"
             class="flex items-center gap-1.5 bg-gray-50 hover:bg-gray-100 text-gray-600 border border-gray-200 px-4 py-2 rounded-lg text-sm font-medium transition-colors">↩
             Skip</button>
         </div>
@@ -456,9 +454,9 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9TKDY0SV6"></script>
     <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-M9TKDY0SV6');</script>
   </div>
-  <script src="/mobile-nav.js"></script>
-  <script src="/round-mode.js"></script>
-  <script src="/fit-word.js"></script>
+  <script defer src="/mobile-nav.js"></script>
+  <script defer src="/round-mode.js"></script>
+  <script defer src="/fit-word.js"></script>
 </body>
 
 </html>

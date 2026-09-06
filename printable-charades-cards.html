@@ -103,7 +103,7 @@
   <!-- The printed sheet is styled by the same file the downloadable packs use,
        so a set printed here cuts to the same size as a pack from /downloads/. -->
   <link rel="stylesheet" href="/print-cards.css">
-  <script src="/charades-words.js"></script>
+  <script defer src="/charades-words.js"></script>
   <style>
     /* On screen the sheets live inside a scaled preview; transforms do not
        affect layout metrics, so the type-fitting pass still measures true
@@ -146,8 +146,9 @@
     .opt.on { background: #4f46e5; border-color: #4f46e5; color: #fff; }
     .opt-n { opacity: .55; font-size: .75rem; margin-left: .15rem; }
   </style>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17617716104"></script>
-  <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'AW-17617716104');</script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M9TKDY0SV6"></script>
+  <script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag('js', new Date()); gtag('config', 'G-M9TKDY0SV6');</script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4601450349641821"
     crossorigin="anonymous"></script>
   <!-- Microsoft Clarity -->
@@ -531,8 +532,8 @@
     </div>
   </footer>
 
-  <script src="/mobile-nav.js"></script>
-  <script src="/printable-cards.js"></script>
+  <script defer src="/mobile-nav.js"></script>
+  <script defer src="/printable-cards.js"></script>
 </body>
 
 </html>
