@@ -98,6 +98,16 @@
       "statusCode": 301
     },
     {
+      "source": "/contact",
+      "destination": "/contact/",
+      "statusCode": 301
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/contact/",
+      "statusCode": 301
+    },
+    {
       "source": "/printable-charades-cards",
       "destination": "/printable-charades-cards/",
       "statusCode": 301

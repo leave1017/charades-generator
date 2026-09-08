@@ -120,6 +120,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://charades-generator.org/contact/</loc>
+    <lastmod>2026-09-08</lastmod>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://charades-generator.org/privacy-policy/</loc>
     <lastmod>2026-08-16</lastmod>
     <priority>0.3</priority>
